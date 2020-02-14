@@ -1,17 +1,18 @@
 html,
 body {
     height: 100%;
+    font-family: Ubuntu, Arial, Helvetica, sans-serif;
 }
 
 .wrap {
     min-height: 100%;
     height: auto;
-    margin: 0 auto -60px;
-    padding: 0 0 60px;
+    background: #2f5d38 url("../img/bg.jpg")fixed;;
 }
 
 .wrap > .container {
-    padding: 70px 15px 20px;
+    padding: 10px 15px 20px;
+    background: white;
 }
 
 .footer {
@@ -21,100 +22,144 @@ body {
     padding-top: 20px;
 }
 
-.jumbotron {
-    text-align: center;
-    background-color: transparent;
+.logo {
+    margin:20px 0px 0px 40px;
+    float:left;
 }
 
-.jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
+.header > .block-title {
+    float:left;
+    margin:25px 50px 0px 20px;
 }
 
-.not-set {
-    color: #c55;
-    font-style: italic;
+.header > .block-title > .title{
+    display:block;
+    width:635px;
 }
 
-/* add sorting icons to gridview sort links */
-a.asc:after, a.desc:after {
+.header > .block-title > .title > .text{
+    font-size:180%;
+    font-weight: bold;
+    color:green;
+}
+
+.header > .block-time{
+    float:left;
+    margin-top:55px;
+    margin-right:30px;
+    color:orange;
+    text-align:right;
+}
+
+.header > .block-contact{
+    float:left;
+    margin-top:45px;
+    text-align:right;
+    color:green
+}
+
+#header .middle-h-row, #header .catalog_menu {
+    margin: 0 auto;
     position: relative;
-    top: 1px;
-    display: inline-block;
-    font-family: 'Glyphicons Halflings';
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-    padding-left: 5px;
+    zoom: 1;
+    z-index: 3;
 }
 
-a.asc:after {
-    content: "\e151";
+.wrapper_inner {
+    padding: 0 24px;
+    max-width: 1208px;
+    margin: 0 auto;
+    background: #fff;
 }
 
-a.desc:after {
-    content: "\e152";
+.wrapper, .wrapper_inner, .wrapp {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    position: relative;
+    zoom: 1;
+    z-index: 1;
 }
 
-.sort-numerical a.asc:after {
-    content: "\e153";
+#header .catalog_menu .wrapper_middle_menu {
+    position: relative;
 }
 
-.sort-numerical a.desc:after {
-    content: "\e154";
+.colored #header .catalog_menu ul.menu>li, header .wrap_menu {
+    background: #81a732;
 }
 
-.sort-ordinal a.asc:after {
-    content: "\e155";
+header .wrap_menu {
+    position: relative;
+    height: 47px;
+    border-radius: 0px;
+    overflow: hidden;
+    background: #fff;
 }
 
-.sort-ordinal a.desc:after {
-    content: "\e156";
+header .wrapper_middle_menu *, .menu_top_block * {
+    box-sizing: border-box;
 }
 
-.grid-view td {
-    white-space: nowrap;
+ul.menu, ul.mini-menu {
+    text-align: justify;
+    list-style-type: none;
+    font-size: 0px;
+    line-height: 0;
+    zoom: 1;
 }
 
-.grid-view .filters input,
-.grid-view .filters select {
-    min-width: 50px;
+.adaptive {
+    display: none;
 }
 
-.hint-block {
+#header .catalog_menu .wrap_menu ul.menu.adaptive > li.menu_opener {
+    border: 0px;
     display: block;
-    margin-top: 5px;
-    color: #999;
+    width: 100%;
+    padding: 0px 17px;
 }
 
-.error-summary {
-    color: #a94442;
-    background: #fdf7f7;
-    border-left: 3px solid #eed3d7;
-    padding: 10px 20px;
-    margin: 0 0 15px 0;
+#header .catalog_menu ul.menu>li, #header ul.menu.adaptive:not(.opened) li.menu_opener, #header ul.menu.full.opened li:not(.search_row):hover, #header ul.menu.full.opened li.current {
+    border-bottom: 1px solid #5a7d24;
 }
 
-/* align the logout "link" (button in form) of the navbar */
-.nav li > form > button.logout {
-    padding: 15px;
-    border: none;
+.header_wrap #header .catalog_menu ul.menu.adaptive > li {
+    height: 47px;
+    line-height: 47px;
+    position: relative;
 }
 
-@media(max-width:767px) {
-    .nav li > form > button.logout {
-        display:block;
-        text-align: left;
-        width: 100%;
-        padding: 10px 15px;
-    }
+.colored #header .catalog_menu ul.menu>li, header .wrap_menu {
+    background: #81a732;
 }
 
-.nav > li > form > button.logout:focus,
-.nav > li > form > button.logout:hover {
+.header_wrap #header .catalog_menu ul.menu > li {
+    height: 47px;
+    background: none;
+}
+
+.header_wrap #header .catalog_menu ul.menu > li > a, .header_wrap #header .catalog_menu ul.menu.adaptive > li .text {
+    color: #fff;
+    border: 0px !important;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 600;
     text-decoration: none;
 }
 
-.nav > li > form > button.logout:focus {
-    outline: none;
+.left-block {
+    width: 220px;
+    float: left;
+    position: relative;
+    zoom: 1;
+    z-index: 390;
+    padding-top: 0px;
+}
+
+.right-block {
+    padding-left: 244px;
+    overflow: visible;
+    position: relative;
 }
