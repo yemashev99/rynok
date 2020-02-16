@@ -1,5 +1,5 @@
 <?php
-namespace app\assets;
+namespace backend\assets;
 
 use yii\base\Exception;
 use yii\web\AssetBundle;
