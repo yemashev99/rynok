@@ -3,8 +3,12 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
+use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 AppAsset::register($this);
 ?>
@@ -24,6 +28,7 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
+<?php Pjax::begin() ?>
 <div class="wrapper front_page basket_fly colored banner_auto">
     <div class="header_wrap ">
         <header id="header">
@@ -34,10 +39,10 @@ AppAsset::register($this);
                         <tr>
                             <td class="logo_wrapp" style="/*width:220px;*/display: block;text-align: center;">
                                 <div class="logo nofill_y">
-                                    <a>
+                                    <a href='<?=Url::to(['site/index'])?>'>
                                         <img src="<?=Yii::getAlias('@web').'/img/logo.png'?>" alt="Рынок Михайловский" title="Рынок Михайловский">
                                     </a>
-                                    <a data="1" href="" class="logo-mobile">
+                                    <a data="1" href="<?=Url::to(['site/index'])?>" class="logo-mobile">
                                         <img src="<?=Yii::getAlias('@web').'/img/logo.png'?>" alt="Рынок Михайловский" title="Рынок Михайловский">
                                     </a>
                                 </div>
@@ -49,6 +54,7 @@ AppAsset::register($this);
                                 <div class="center_block">
                                     <div class="search">
                                         <div id="title-search" class="stitle_form">
+                                            <?/*TODO: форма поиска товаров*/?>
                                             <form action="/search/">
                                                 <div class="form-control1 bg">
                                                     <input id="title-searchs-input" type="text" name="q" value="" size="40" class="text small_block" maxlength="100" autocomplete="off" placeholder="Поиск по товарам"><input name="s" type="submit" value="Поиск" class="button icon">
@@ -103,61 +109,150 @@ AppAsset::register($this);
                             </li>
                         </ul>
                         <div class="inc_menu">
-                            <ul class="menu top menu_top_block catalogfirst">
-                                <li>
-                                    <a class="icons_fa parent" href="/catalog/" style="padding-left: 34px; padding-right: 35px;">Каталог</a>
-                                </li>
-                                <li>
-                                    <a class="icons_fa parent" href="/o-rynke/" style="padding-left: 34px; padding-right: 35px;">О рынке</a>
-                                </li>
-                                <li>
-                                    <a class="icons_fa parent" href="/kak-kupit/" style="padding-left: 34px; padding-right: 35px;">Доставка и оплата</a>
-                                </li>
-                                <li>
-                                    <a class="icons_fa parent" href="/arendatoram/" style="padding-left: 34px; padding-right: 35px;">Арендаторам</a>
-                                </li>
-                                <li>
-                                    <a class="" href="/retsepty/" style="padding-left: 34px; padding-right: 35px;">Рецепты</a>
-                                </li>
-                                <li>
-                                    <a class="icons_fa parent" href="/novyy-god/" style="padding-left: 34px; padding-right: 35px;">Новый год</a>
-                                </li>
-                                <li>
-                                    <a class="icons_fa parent" href="/kontakti/" style="padding-left: 36px; padding-right: 37px;">Контакты</a>
-                                </li>
-                            </ul>
+                            <?= Nav::widget([
+                                'options' => ['class' => 'menu top menu_top_block catalogfirst'],
+                                'items' => [
+                                    [
+                                        'label' => 'Каталог',
+                                        'url' => ['catalog/index'],
+                                        'active' => in_array(Yii::$app->controller->id, ['catalog']),
+                                        'linkOptions' => [
+                                            'style' => 'padding-left: 34px; padding-right: 35px',
+                                        ],
+                                    ],
+                                    [
+                                        'label' => 'О рынке',
+                                        'url' => ['about/index'],
+                                        'active' => in_array(Yii::$app->controller->id, ['about']),
+                                        'linkOptions' => [
+                                            'style' => 'padding-left: 34px; padding-right: 35px',
+                                        ],
+                                    ],
+                                    [
+                                        'label' => 'Доставка и оплата',
+                                        'url' => ['delivery/index'],
+                                        'active' => in_array(Yii::$app->controller->id, ['delivery']),
+                                        'linkOptions' => [
+                                            'style' => 'padding-left: 34px; padding-right: 35px',
+                                        ],
+                                    ],
+                                    [
+                                        'label' => 'Арендаторам',
+                                        'url' => ['tenants/index'],
+                                        'active' => in_array(Yii::$app->controller->id, ['tenants']),
+                                        'linkOptions' => [
+                                            'style' => 'padding-left: 34px; padding-right: 35px',
+                                        ],
+                                    ],
+                                    [
+                                        'label' => 'Рецепты',
+                                        'url' => ['recipes/index'],
+                                        'active' => in_array(Yii::$app->controller->id, ['recipes']),
+                                        'linkOptions' => [
+                                            'style' => 'padding-left: 34px; padding-right: 35px',
+                                        ],
+                                    ],
+                                    [
+                                        'label' => 'Праздники',
+                                        'url' => ['holidays/index'],
+                                        'active' => in_array(Yii::$app->controller->id, ['holidays']),
+                                        'linkOptions' => [
+                                            'style' => 'padding-left: 34px; padding-right: 35px',
+                                        ],
+                                    ],
+                                    [
+                                        'label' => 'Контакты',
+                                        'url' => ['contact/index'],
+                                        'linkOptions' => [
+                                            'style' => 'padding-left: 36px; padding-right: 37px',
+                                        ],
+                                        'active' => in_array(Yii::$app->controller->id, ['contacts']),
+                                    ],
+                                ],
+                            ]) ?>
                             <div class="mobile_menu_wrapper">
-                                <ul class="mobile_menu">
-                                    <li class="icons_fa has-child ">
-                                        <a class="dark_link parent" href="/catalog/">Доставка товаров</a>
-                                    </li>
-                                    <li class="icons_fa has-child ">
-                                        <a class="dark_link parent" href="/o-rynke/">О рынке</a>
-                                    </li>
-                                    <li class="icons_fa has-child ">
-                                        <a class="dark_link parent" href="/kak-kupit/">Доставка и оплата</a>
-                                    </li>
-                                    <li class="icons_fa has-child ">
-                                        <a class="dark_link parent" href="/arendatoram/">Арендаторам</a>
-                                    </li>
-                                    <li class="icons_fa  ">
-                                        <a class="dark_link " href="/retsepty/">Рецепты</a>
-                                    </li>
-                                    <li class="icons_fa has-child ">
-                                        <a class="dark_link parent" href="/novyy-god/">Новый год</a>
-                                    </li>
-                                    <li class="icons_fa has-child ">
-                                        <a class="dark_link parent" href="/kontakti/">Контакты</a>
-                                    </li>
-                                    <li class="search">
-                                        <div class="search-input-div">
-                                            <input class="search-input" type="text" autocomplete="off" maxlength="50" size="40" placeholder="Поиск" value="" name="q">
-                                        </div>
-                                        <div class="search-button-div">
-                                            <button class="button btn-search btn-default" value="Найти" name="s" type="submit">Найти</button>
-                                        </div>
-                                    </li>
-                                </ul>
+                                <?= Nav::widget([
+                                    'options' => ['class' => 'mobile_menu'],
+                                    'items' => [
+                                        [
+                                            'label' => 'Доставка товаров',
+                                            'url' => ['catalog/index'],
+                                            'active' => in_array(Yii::$app->controller->id, ['catalog']),
+                                            'linkOptions' => [
+                                                'class' => 'dark_link parent',
+                                            ],
+                                            'options' => [
+                                                'class' => 'icons_fa has-child ',
+                                            ],
+                                        ],
+                                        [
+                                            'label' => 'О рынке',
+                                            'url' => ['about/index'],
+                                            'active' => in_array(Yii::$app->controller->id, ['about']),
+                                            'linkOptions' => [
+                                                'class' => 'dark_link parent',
+                                            ],
+                                            'options' => [
+                                                'class' => 'icons_fa has-child ',
+                                            ],
+                                        ],
+                                        [
+                                            'label' => 'Доставка и оплата',
+                                            'url' => ['delivery/index'],
+                                            'active' => in_array(Yii::$app->controller->id, ['delivery']),
+                                            'linkOptions' => [
+                                                'class' => 'dark_link parent',
+                                            ],
+                                            'options' => [
+                                                'class' => 'icons_fa has-child ',
+                                            ],
+                                        ],
+                                        [
+                                            'label' => 'Арендаторам',
+                                            'url' => ['tenants/index'],
+                                            'active' => in_array(Yii::$app->controller->id, ['tenants']),
+                                            'linkOptions' => [
+                                                'class' => 'dark_link parent',
+                                            ],
+                                            'options' => [
+                                                'class' => 'icons_fa has-child ',
+                                            ],
+                                        ],
+                                        [
+                                            'label' => 'Рецепты',
+                                            'url' => ['recipes/index'],
+                                            'active' => in_array(Yii::$app->controller->id, ['recipes']),
+                                            'linkOptions' => [
+                                                'class' => 'dark_link parent',
+                                            ],
+                                            'options' => [
+                                                'class' => 'icons_fa has-child ',
+                                            ],
+                                        ],
+                                        [
+                                            'label' => 'Праздники',
+                                            'url' => ['holidays/index'],
+                                            'active' => in_array(Yii::$app->controller->id, ['holidays']),
+                                            'linkOptions' => [
+                                                'class' => 'dark_link parent',
+                                            ],
+                                            'options' => [
+                                                'class' => 'icons_fa has-child ',
+                                            ],
+                                        ],
+                                        [
+                                            'label' => 'Контакты',
+                                            'url' => ['contact/index'],
+                                            'active' => in_array(Yii::$app->controller->id, ['contacts']),
+                                            'linkOptions' => [
+                                                'class' => 'dark_link parent',
+                                            ],
+                                            'options' => [
+                                                'class' => 'icons_fa has-child ',
+                                            ],
+                                        ],
+                                    ],
+                                ]) ?>
                             </div>
                         </div>
                     </div>
@@ -168,33 +263,87 @@ AppAsset::register($this);
     <div class="wraps" id="content" style="min-height: 542.344px;">
         <div class="wrapper_inner front">
             <div class="left_block">
-                <ul class="left_menu">
-                    <li class="item">
-                        <a data="/o-rynke/" class="icons_fa" href="/o-rynke/1-etazh/">
-                            <span>1 этаж</span>
-                        </a>
-                    </li>
-                    <li class="item">
-                        <a data="/o-rynke/" class="icons_fa" href="/o-rynke/2-etazh/">
-                            <span>2 этаж</span>
-                        </a>
-                    </li>
-                    <li class="item">
-                        <a data="/o-rynke/" class="icons_fa" href="/o-rynke/video/">
-                            <span>Видео</span>
-                        </a>
-                    </li>
-                    <li class="item">
-                        <a data="/o-rynke/" class="icons_fa" href="/o-rynke/yarmarka/">
-                            <span>Ярмарка</span>
-                        </a>
+                <?= Nav::widget([
+                    'options' => ['class' => 'left_menu'],
+                    'items' => [
+                        [
+                            'label' => 'Тест',
+                            'url' => ['recipes/index'],
+                            'linkOptions' => [
+                                'class' => 'icons_fa',
+                            ],
+                            'options' => [
+                                'class' => 'item',
+                            ],
+                        ],
+                        [
+                            'label' => 'Тест',
+                            'url' => ['holidays/index'],
+                            'linkOptions' => [
+                                'class' => 'icons_fa',
+                            ],
+                            'options' => [
+                                'class' => 'item',
+                            ],
+                        ],
+                    ],
+                ]) ?>
+                <?/*TODO: news*/?>
+                <div class="news_blocks front">
+                    <div class="top_block">
+                        <div class="title_block">Новости</div>
+                        <a data="/catalog/" href="/o-rynke/novosti/">Все новости</a>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="info_block">
+                        <div class="news_items">
+                            <div id="bx_3218110189_2225" class="item box-sizing dl">
+                                <div class="image">
+                                    <a href="/o-rynke/novosti/2020/vnimanie_3_fevralya_na_rynke_san_den/">
+                                        <img class="img-responsive" src="/upload/resize_cache/iblock/72e/60_60_2/САНИТАРНЫЙ ДЕНЬ КВАДРАТ.jpg" alt="Внимание! 3 февраля на рынке сан.день!" title="Внимание! 3 февраля на рынке сан.день!">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <div class="date">31 Января 2020</div>
+                                    <a class="name dark_link" href="/o-rynke/novosti/2020/vnimanie_3_fevralya_na_rynke_san_den/">Внимание! 3 февраля на рынке сан.день!</a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div id="bx_3218110189_2224" class="item box-sizing dl">
+                                <div class="image">
+                                    <a href="/o-rynke/novosti/2020/pozdravlyaem_/">
+                                        <img class="img-responsive" src="/upload/resize_cache/iblock/e63/60_60_2/Шилов.png" alt="Поздравляем! " title="Поздравляем! ">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <div class="date">9 Января 2020</div>
+                                    <a class="name dark_link" href="/o-rynke/novosti/2020/pozdravlyaem_/">Поздравляем! </a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div id="bx_3218110189_2223" class="item box-sizing dl">
+                                <div class="image">
+                                    <a href="/o-rynke/novosti/2019/izmenilis_usloviya_dostavki/">
+                                        <img class="img-responsive" src="/upload/resize_cache/iblock/248/60_60_2/1.jpg" alt="Изменились условия доставки!" title="Изменились условия доставки!">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <div class="date">27 Декабря 2019</div>
+                                    <a class="name dark_link" href="/o-rynke/novosti/2019/izmenilis_usloviya_dostavki/">Изменились условия доставки!</a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="right_block">
-                <?=$content?>
+                    <?=$content?>
             </div>
         </div>
     </div>
 </div>
+<?php Pjax::end() ?>
 
 <footer class="footer">
     <div class="container">
