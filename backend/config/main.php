@@ -12,6 +12,9 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
+    'aliases' => [
+        '@adminlte/widgets'=>'@vendor/adminlte/yii2-widgets'
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',

@@ -54,6 +54,8 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
+        $this->layout = 'login';
+
         $login_model = new Login();
 
         if (Yii::$app->request->post())
