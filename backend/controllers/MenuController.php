@@ -4,6 +4,7 @@
 namespace backend\controllers;
 
 
+use common\models\SubCategory;
 use common\models\Menu;
 use common\models\Category;
 use himiklab\sortablegrid\SortableGridAction;
@@ -92,5 +93,51 @@ class MenuController extends Controller
             }
         }
         return $this->render('category-update', compact('menu', 'category'));
+    }
+
+    public function actionSubCategory($id)
+    {
+        $category = Category::findOne($id);
+        $menu = Menu::findOne($category->menu_id);
+        $dataProvider = new ActiveDataProvider([
+            'query' => SubCategory::find()
+                ->where('category_id = :id', [
+                    ':id' => $id,
+                ]),
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+        return $this->render('sub-category', compact('dataProvider', 'menu', 'category'));
+    }
+
+    public function actionSubCategoryCreate($id)
+    {
+        $category = Category::findOne($id);
+        $menu = Menu::findOne($category->menu_id);
+        $subCategory = new SubCategory();
+        if ($subCategory->load(Yii::$app->request->post()))
+        {
+            if ($subCategory->save())
+            {
+                $this->redirect(['menu/sub-category', 'id' => $id]);
+            }
+        }
+        return $this->render('sub-category-create', compact('menu', 'category', 'subCategory'));
+    }
+
+    public function actionSubCategoryUpdate($id)
+    {
+        $subCategory = SubCategory::findOne($id);
+        $category = Category::findOne($subCategory->category_id);
+        $menu = Menu::findOne($category->menu_id);
+        if ($subCategory->load(Yii::$app->request->post()))
+        {
+            if ($subCategory->save())
+            {
+                $this->redirect(['menu/sub-category', 'id' => $subCategory->category_id]);
+            }
+        }
+        return $this->render('sub-category-update', compact('menu', 'category', 'subCategory'));
     }
 }

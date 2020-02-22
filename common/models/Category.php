@@ -2,12 +2,13 @@
 
 namespace common\models;
 
+use common\models\SubCategory;
 use Yii;
 
 /**
  * This is the model class for table "sidebar".
  *
- * @property int $sidebar_id
+ * @property int $category_id
  * @property int $menu_id
  * @property string $title
  * @property string $url
@@ -33,7 +34,7 @@ class Category extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'sidebar_id' => 'Код',
+            'category_id' => 'Код',
             'menu_id' => 'Пункт меню',
             'title' => 'Название',
             'url' => 'Значение в ссылке',
@@ -48,5 +49,10 @@ class Category extends \yii\db\ActiveRecord
     public function getMenu()
     {
         return $this->hasOne(Menu::className(), ['menu_id' => 'menu_id']);
+    }
+
+    public function getSubCategories()
+    {
+        return $this->hasMany(SubCategory::className(), ['category_id' => 'category_id']);
     }
 }

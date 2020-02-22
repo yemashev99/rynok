@@ -9,12 +9,13 @@ use yii\helpers\Html;
 
 $this->params['breadcrumbs'][] = ['label' => 'Пункты меню', 'url' => ['menu/index']];
 $this->params['breadcrumbs'][] = ['label' => 'Категории "'.$menu->title.'"', 'url' => ['menu/category', 'id' => $menu->menu_id]];
-$this->params['breadcrumbs'][] = 'Редактирование "'.$category->title.'"';
+$this->params['breadcrumbs'][] = ['label' => 'Подкатегории "'.$category->title.'"', 'url' => ['menu/sub-category', 'id' => $category->category_id]];
+$this->params['breadcrumbs'][] = 'Добавление новой подкатегории';
 
 ?>
 
 <div class="page-header">
-    <h1>Редактирование "<?=$category->title?>"</h1>
+    <h1>Добавление новой подкатегории</h1>
 </div>
 
-<?=$this->render('_form-category', compact('category', 'menu'))?>
+<?=$this->render('_form-sub_category', compact('category', 'subCategory'))?>

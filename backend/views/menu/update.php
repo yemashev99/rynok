@@ -2,7 +2,7 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
-$this->title = 'Управление сайтом';
+$this->title = 'Управление сайтом - Меню';
 
 $this->params['breadcrumbs'][] = ['label' => 'Пункты меню', 'url' => ['menu/index']];
 $this->params['breadcrumbs'][] = 'Редактирование';

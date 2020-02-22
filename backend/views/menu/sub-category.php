@@ -9,15 +9,16 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 $this->params['breadcrumbs'][] = ['label' => 'Пункты меню', 'url' => ['menu/index']];
-$this->params['breadcrumbs'][] = 'Категории "'.$menu->title.'"';
+$this->params['breadcrumbs'][] = ['label' => 'Категории "'.$menu->title.'"', 'url' => ['menu/category', 'id' => $menu->menu_id]];
+$this->params['breadcrumbs'][] = 'Подкатегории "'.$category->title.'"';
 
 ?>
 
-<div class="page-header">
-    <h1>Категории "<?=$menu->title?>"</h1>
-</div>
+    <div class="page-header">
+        <h1>Подкатегории "<?=$category->title?>"</h1>
+    </div>
 
-<?=Html::a('+ Добавить новую', ['menu/category-create', 'id' => $menu->menu_id], ['class' => 'btn btn-primary'])?>
+<?=Html::a('+ Добавить новую', ['menu/sub-category-create', 'id' => $category->category_id], ['class' => 'btn btn-primary'])?>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
@@ -28,22 +29,15 @@ $this->params['breadcrumbs'][] = 'Категории "'.$menu->title.'"';
         'style' => 'padding-top: 20px',
     ],
     'columns' => [
-        'category_id',
+        'sub_category_id',
         'title',
         'url',
-        [
-            'label' => 'Подкатегории',
-            'format' => 'raw',
-            'value' => function($data){
-                return Html::a('Перейти', ['menu/sub-category', 'id' => $data->category_id], ['class' => 'btn btn-primary']);
-            }
-        ],
         [
             'label'=>'Изменить',
             'format' => 'raw',
             'value' => function($data) {
                 return Html::a( '',
-                    Url::to(['menu/category-update', 'id' => $data->category_id]),
+                    Url::to(['menu/sub-category-update', 'id' => $data->sub_category_id]),
                     ['class' => 'glyphicon glyphicon-pencil']);
             }
         ],

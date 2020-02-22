@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'Управление сайтом';
+$this->title = 'Управление сайтом - Меню';
 
 use yii\grid\GridView;
 use yii\helpers\Html; ?>
