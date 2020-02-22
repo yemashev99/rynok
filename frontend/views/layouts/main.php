@@ -3,14 +3,29 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use common\models\Menu;
 use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 
 AppAsset::register($this);
+
+$menuItems = Menu::find()->all();
+$navItems = array();
+foreach ($menuItems as $key => $menuItem)
+{
+    $navItems[] = [
+        'label' => $menuItem->title,
+        'url' => [$menuItem->url],
+        'active' => in_array(Yii::$app->controller->id, [$menuItem->controller_name]),
+        'linkOptions' => [
+            'style' => 'padding-left: 34px; padding-right: 35px',
+        ],
+    ];
+}
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -111,147 +126,12 @@ AppAsset::register($this);
                         <div class="inc_menu">
                             <?= Nav::widget([
                                 'options' => ['class' => 'menu top menu_top_block catalogfirst'],
-                                'items' => [
-                                    [
-                                        'label' => 'Каталог',
-                                        'url' => ['catalog/index'],
-                                        'active' => in_array(Yii::$app->controller->id, ['catalog']),
-                                        'linkOptions' => [
-                                            'style' => 'padding-left: 34px; padding-right: 35px',
-                                        ],
-                                    ],
-                                    [
-                                        'label' => 'О рынке',
-                                        'url' => ['about/index'],
-                                        'active' => in_array(Yii::$app->controller->id, ['about']),
-                                        'linkOptions' => [
-                                            'style' => 'padding-left: 34px; padding-right: 35px',
-                                        ],
-                                    ],
-                                    [
-                                        'label' => 'Доставка и оплата',
-                                        'url' => ['delivery/index'],
-                                        'active' => in_array(Yii::$app->controller->id, ['delivery']),
-                                        'linkOptions' => [
-                                            'style' => 'padding-left: 34px; padding-right: 35px',
-                                        ],
-                                    ],
-                                    [
-                                        'label' => 'Арендаторам',
-                                        'url' => ['tenants/index'],
-                                        'active' => in_array(Yii::$app->controller->id, ['tenants']),
-                                        'linkOptions' => [
-                                            'style' => 'padding-left: 34px; padding-right: 35px',
-                                        ],
-                                    ],
-                                    [
-                                        'label' => 'Рецепты',
-                                        'url' => ['recipes/index'],
-                                        'active' => in_array(Yii::$app->controller->id, ['recipes']),
-                                        'linkOptions' => [
-                                            'style' => 'padding-left: 34px; padding-right: 35px',
-                                        ],
-                                    ],
-                                    [
-                                        'label' => 'Праздники',
-                                        'url' => ['holidays/index'],
-                                        'active' => in_array(Yii::$app->controller->id, ['holidays']),
-                                        'linkOptions' => [
-                                            'style' => 'padding-left: 34px; padding-right: 35px',
-                                        ],
-                                    ],
-                                    [
-                                        'label' => 'Контакты',
-                                        'url' => ['contact/index'],
-                                        'linkOptions' => [
-                                            'style' => 'padding-left: 36px; padding-right: 37px',
-                                        ],
-                                        'active' => in_array(Yii::$app->controller->id, ['contacts']),
-                                    ],
-                                ],
+                                'items' => $navItems,
                             ]) ?>
                             <div class="mobile_menu_wrapper">
                                 <?= Nav::widget([
                                     'options' => ['class' => 'mobile_menu'],
-                                    'items' => [
-                                        [
-                                            'label' => 'Доставка товаров',
-                                            'url' => ['catalog/index'],
-                                            'active' => in_array(Yii::$app->controller->id, ['catalog']),
-                                            'linkOptions' => [
-                                                'class' => 'dark_link parent',
-                                            ],
-                                            'options' => [
-                                                'class' => 'icons_fa has-child ',
-                                            ],
-                                        ],
-                                        [
-                                            'label' => 'О рынке',
-                                            'url' => ['about/index'],
-                                            'active' => in_array(Yii::$app->controller->id, ['about']),
-                                            'linkOptions' => [
-                                                'class' => 'dark_link parent',
-                                            ],
-                                            'options' => [
-                                                'class' => 'icons_fa has-child ',
-                                            ],
-                                        ],
-                                        [
-                                            'label' => 'Доставка и оплата',
-                                            'url' => ['delivery/index'],
-                                            'active' => in_array(Yii::$app->controller->id, ['delivery']),
-                                            'linkOptions' => [
-                                                'class' => 'dark_link parent',
-                                            ],
-                                            'options' => [
-                                                'class' => 'icons_fa has-child ',
-                                            ],
-                                        ],
-                                        [
-                                            'label' => 'Арендаторам',
-                                            'url' => ['tenants/index'],
-                                            'active' => in_array(Yii::$app->controller->id, ['tenants']),
-                                            'linkOptions' => [
-                                                'class' => 'dark_link parent',
-                                            ],
-                                            'options' => [
-                                                'class' => 'icons_fa has-child ',
-                                            ],
-                                        ],
-                                        [
-                                            'label' => 'Рецепты',
-                                            'url' => ['recipes/index'],
-                                            'active' => in_array(Yii::$app->controller->id, ['recipes']),
-                                            'linkOptions' => [
-                                                'class' => 'dark_link parent',
-                                            ],
-                                            'options' => [
-                                                'class' => 'icons_fa has-child ',
-                                            ],
-                                        ],
-                                        [
-                                            'label' => 'Праздники',
-                                            'url' => ['holidays/index'],
-                                            'active' => in_array(Yii::$app->controller->id, ['holidays']),
-                                            'linkOptions' => [
-                                                'class' => 'dark_link parent',
-                                            ],
-                                            'options' => [
-                                                'class' => 'icons_fa has-child ',
-                                            ],
-                                        ],
-                                        [
-                                            'label' => 'Контакты',
-                                            'url' => ['contact/index'],
-                                            'active' => in_array(Yii::$app->controller->id, ['contacts']),
-                                            'linkOptions' => [
-                                                'class' => 'dark_link parent',
-                                            ],
-                                            'options' => [
-                                                'class' => 'icons_fa has-child ',
-                                            ],
-                                        ],
-                                    ],
+                                    'items' => $navItems,
                                 ]) ?>
                             </div>
                         </div>
