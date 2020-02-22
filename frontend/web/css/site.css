@@ -1972,7 +1972,7 @@ body .top_slider_wrapp .flexslider .slides > li .wrapper_inner > table{width:100
 
 /*top menu*/
 #header .catalog_menu .wrapper_middle_menu{position:relative;}
-#header .catalog_menu .wrapper_middle_menu .inc_menu{padding-left: 40px;}
+#header .catalog_menu .wrapper_middle_menu .inc_menu{padding-left: 14px;}
 
 .top-h-row .menu.topest{margin:0 0 -1px;padding:0;white-space:nowrap;height:31px;font-size:0;overflow:hidden;width: 40%;}
 .top-h-row .menu.topest:hover{overflow:visible;}

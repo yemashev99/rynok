@@ -32,8 +32,8 @@ use yii\helpers\Url;
                                 [
                                     'label' => 'Меню',
                                     'icon' => 'fa fa-database',
-                                    'url' => ['site/index'],
-                                    'active' => $this->context->route == 'site/index'
+                                    'url' => ['menu/index'],
+                                    'active' => $this->context->route == 'menu/index'
                                 ],
                             ]
                         ],

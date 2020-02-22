@@ -12,7 +12,7 @@ use yii\widgets\Pjax;
 
 AppAsset::register($this);
 
-$menuItems = Menu::find()->all();
+$menuItems = Menu::find()->orderBy('sort')->all();
 $navItems = array();
 foreach ($menuItems as $key => $menuItem)
 {
