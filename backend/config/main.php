@@ -46,7 +46,8 @@ return [
             'rules' => [
                 '' => 'site/index',
                 'menu' => 'menu/index',
-                'menu/update/<id:\d+>' => 'menu/update'
+                'menu/update/<id:\d+>' => 'menu/update',
+                'menu/category/<id:\d+>' => 'menu/category',
             ],
         ],
     ],

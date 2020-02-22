@@ -36,4 +36,20 @@ class Menu extends ActiveRecord
             'url' => 'Ссылка',
         ];
     }
+
+    public function getSidebars()
+    {
+        return $this->hasMany(Category::className(), ['menu_id' => 'menu_id']);
+    }
+
+    public function getIdByControllerName($name)
+    {
+        if ($name == 'site')
+            $id = 1;
+        else {
+            $menu = Menu::findOne(['controller_name' => $name]);
+            $id = $menu->menu_id;
+        }
+        return $id;
+    }
 }

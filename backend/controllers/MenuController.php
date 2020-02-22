@@ -5,6 +5,7 @@ namespace backend\controllers;
 
 
 use common\models\Menu;
+use common\models\Category;
 use himiklab\sortablegrid\SortableGridAction;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -48,5 +49,48 @@ class MenuController extends Controller
         }
 
         return $this->render('update', compact('model'));
+    }
+
+    public function actionCategory($id)
+    {
+        $menu = Menu::findOne($id);
+        $dataProvider = new ActiveDataProvider([
+            'query' => Category::find()
+                ->where('menu_id = :id', [
+                    ':id' => $id,
+                ]),
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+        return $this->render('category', compact('dataProvider', 'menu'));
+    }
+
+    public function actionCategoryCreate($id)
+    {
+        $menu = Menu::findOne($id);
+        $category = new Category();
+        if ($category->load(Yii::$app->request->post()))
+        {
+            if ($category->save())
+            {
+                $this->redirect(['menu/category', 'id' => $id]);
+            }
+        }
+        return $this->render('category-create', compact('menu', 'category'));
+    }
+
+    public function actionCategoryUpdate($id)
+    {
+        $category = Category::findOne($id);
+        $menu = Menu::findOne($category->menu_id);
+        if ($category->load(Yii::$app->request->post()))
+        {
+            if ($category->save())
+            {
+                $this->redirect(['menu/category', 'id' => $category->menu_id]);
+            }
+        }
+        return $this->render('category-update', compact('menu', 'category'));
     }
 }

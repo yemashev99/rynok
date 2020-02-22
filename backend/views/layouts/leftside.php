@@ -33,7 +33,7 @@ use yii\helpers\Url;
                                     'label' => 'Меню',
                                     'icon' => 'fa fa-database',
                                     'url' => ['menu/index'],
-                                    'active' => $this->context->route == 'menu/index'
+                                    'active' => in_array(Yii::$app->controller->id, ['menu'])
                                 ],
                             ]
                         ],

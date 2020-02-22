@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use common\models\Menu;
+use common\models\Category;
 use yii\bootstrap\Nav;
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
@@ -22,6 +23,22 @@ foreach ($menuItems as $key => $menuItem)
         'active' => in_array(Yii::$app->controller->id, [$menuItem->controller_name]),
         'linkOptions' => [
             'style' => 'padding-left: 34px; padding-right: 35px',
+        ],
+    ];
+}
+$menu = new Menu();
+$sidebarItems = Category::find()->where('menu_id = :id', [':id' => $menu->getIdByControllerName(Yii::$app->controller->id)])->all();
+$navSideItems = array();
+foreach ($sidebarItems as $key => $sidebarItem)
+{
+    $navSideItems[] = [
+        'label' => $sidebarItem->title,
+        'url' => [$sidebarItem->menu->controller_name.'/'.$sidebarItem->url],
+        'linkOptions' => [
+            'class' => 'icons_fa',
+        ],
+        'options' => [
+            'class' => 'item',
         ],
     ];
 }
@@ -145,28 +162,7 @@ foreach ($menuItems as $key => $menuItem)
             <div class="left_block">
                 <?= Nav::widget([
                     'options' => ['class' => 'left_menu'],
-                    'items' => [
-                        [
-                            'label' => 'Тест',
-                            'url' => ['recipes/index'],
-                            'linkOptions' => [
-                                'class' => 'icons_fa',
-                            ],
-                            'options' => [
-                                'class' => 'item',
-                            ],
-                        ],
-                        [
-                            'label' => 'Тест',
-                            'url' => ['holidays/index'],
-                            'linkOptions' => [
-                                'class' => 'icons_fa',
-                            ],
-                            'options' => [
-                                'class' => 'item',
-                            ],
-                        ],
-                    ],
+                    'items' => $navSideItems,
                 ]) ?>
                 <?/*TODO: news*/?>
                 <div class="news_blocks front">
