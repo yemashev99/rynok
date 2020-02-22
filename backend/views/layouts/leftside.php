@@ -15,56 +15,34 @@ use yii\helpers\Url;
             </div>
             <div class="pull-left info">
                 <p><?=Yii::$app->user->identity->login?></p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <a href="#"><i class="fa fa-circle text-success"></i> Онлайн</a>
             </div>
         </div>
-        <!-- search form -->
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-                </span>
-            </div>
-        </form>
-        <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <?=
         Menu::widget(
                 [
                     'options' => ['class' => 'sidebar-menu'],
                     'items' => [
-                        ['label' => 'Menu', 'options' => ['class' => 'header']],
-                        ['label' => 'Dashboard', 'icon' => 'fa fa-dashboard', 
-                            'url' => ['/'], 'active' => $this->context->route == 'site/index'
-                        ],
+                        ['label' => 'Меню', 'options' => ['class' => 'header']],
                         [
-                            'label' => 'Master',
-                            'icon' => 'fa fa-database',
+                            'label' => 'Управление сайтом', 'icon' => 'fa fa-dashboard',
                             'url' => '#',
                             'items' => [
                                 [
-                                    'label' => 'Master1',
+                                    'label' => 'Меню',
                                     'icon' => 'fa fa-database',
-                                    'url' => '?r=master1/',
-				    'active' => $this->context->route == 'master1/index'
+                                    'url' => ['site/index'],
+                                    'active' => $this->context->route == 'site/index'
                                 ],
-                                [
-                                    'label' => 'Master2',
-                                    'icon' => 'fa fa-database',
-                                    'url' => '?r=master2/',
-				    'active' => $this->context->route == 'master2/index'
-                                ]
                             ]
                         ],
                         [
-                            'label' => 'Users',
+                            'label' => 'Пользователи',
                             'icon' => 'fa fa-users',
                             'url' => ['/user'],
                             'active' => $this->context->route == 'user/index',
                         ],
-                        ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii'],],
-                        ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug'],],
                     ],
                 ]
         )
