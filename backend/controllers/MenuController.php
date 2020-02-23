@@ -30,7 +30,7 @@ class MenuController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Menu::find(),
             'pagination' => [
-                'pageSize' => 20,
+                'pageSize' => 10,
             ],
             'sort'=> ['defaultOrder' => ['sort' => SORT_ASC]]
         ]);
@@ -61,7 +61,7 @@ class MenuController extends Controller
                     ':id' => $id,
                 ]),
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => 9,
             ],
         ]);
         return $this->render('category', compact('dataProvider', 'menu'));

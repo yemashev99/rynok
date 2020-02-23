@@ -1,48 +1,55 @@
 <?php
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \common\models\LoginForm */
+/* @var $model \backend\models\Login */
 
-use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
-$this->title = 'Login';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Sign In';
+
+$fieldOptions1 = [
+    'options' => ['class' => 'form-group has-feedback'],
+    'inputTemplate' => "{input}<span class='glyphicon glyphicon-envelope form-control-feedback'></span>"
+];
+
+$fieldOptions2 = [
+    'options' => ['class' => 'form-group has-feedback'],
+    'inputTemplate' => "{input}<span class='glyphicon glyphicon-lock form-control-feedback'></span>"
+];
 ?>
-<div class="site-login">
-    <div class="row">
-        <div class="login-box">
-            <div class="col-md-12 box box-radius">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-                <?= $form->field($login_model, 'email', ['template' => '
-                        <div class="col-sm-12" style="margin-top:15px;">
-                            <div class="input-group col-sm-12">
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-user"></span>
-                                </span>
-                                {input}
-                            </div>{error}{hint}
-                        </div>'])->textInput(['autofocus' => true])
-                                ->input('text', ['placeholder'=>'Username']) ?>
-
-                <?= $form->field($login_model, 'password', ['template' => '
-                        <div class="col-sm-12" style="margin-top:15px;">
-                            <div class="input-group col-sm-12">
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-lock"></span>
-                                </span>
-                                {input}
-                            </div>{error}{hint}
-                        </div>'])->passwordInput()
-                                ->input('password', ['placeholder'=>'Password'])?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
-            </div>
-        </div>
+<div class="login-box">
+    <div class="login-logo">
+        <a href="#"><b>Admin</b>LTE</a>
     </div>
-</div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+
+        <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
+
+        <?= $form
+            ->field($login_model, 'email', $fieldOptions1)
+            ->label(false)
+            ->textInput() ?>
+
+        <?= $form
+            ->field($login_model, 'password', $fieldOptions2)
+            ->label(false)
+            ->passwordInput() ?>
+
+        <div class="row">
+            <!-- /.col -->
+            <div class="col-xs-4">
+                <?= Html::submitButton('Sign in', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
+            </div>
+            <!-- /.col -->
+        </div>
+
+
+        <?php ActiveForm::end(); ?>
+
+    </div>
+    <!-- /.login-box-body -->
+</div><!-- /.login-box -->
