@@ -59,4 +59,18 @@ class CatalogController extends Controller
             echo '<option>-</option>';
         }
     }
+
+    public function actionCreate()
+    {
+        $model = new Product();
+        $menu = new Menu();
+        $category = ArrayHelper::map(
+            Category::find()
+                ->where('menu_id = :id', [
+                    ':id' => $menu->getIdByControllerName(Yii::$app->controller->id)
+                ])
+                ->all(), 'category_id', 'title');
+        $subCategory = [];
+        return $this->render('create', compact('model', 'category', 'subCategory'));
+    }
 }

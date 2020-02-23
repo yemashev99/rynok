@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "product".
@@ -21,6 +22,12 @@ use Yii;
  */
 class Product extends \yii\db\ActiveRecord
 {
+
+    const BACKEND_PATH = '@app/backend/web/image/product/';
+    const FRONTEND_PATH = '@app/frontend/web/image/product/';
+
+    public $file;
+
     /**
      * {@inheritdoc}
      */
@@ -35,10 +42,11 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'title', 'description', 'image', 'price', 'measure'], 'required'],
+            [['category_id', 'title', 'image', 'price', 'measure'], 'required'],
             [['category_id', 'sub_category_id', 'price'], 'integer'],
             [['description', 'image'], 'string'],
             [['title', 'measure'], 'string', 'max' => 255],
+            [['file'], 'file', 'extensions' => ['png', 'jpg']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'category_id']],
             [['sub_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => SubCategory::className(), 'targetAttribute' => ['sub_category_id' => 'sub_category_id']],
         ];
@@ -58,6 +66,7 @@ class Product extends \yii\db\ActiveRecord
             'image' => 'Изображение',
             'price' => 'Цена',
             'measure' => 'Ед. измерения',
+            'file' => 'Изображение',
         ];
     }
 
@@ -79,5 +88,44 @@ class Product extends \yii\db\ActiveRecord
     public function getSubCategory()
     {
         return $this->hasOne(SubCategory::className(), ['sub_category_id' => 'sub_category_id']);
+    }
+
+    /**
+     * @param UploadedFile $file
+     * @return string
+     * @throws \yii\base\Exception
+     */
+    public function uploadImage(UploadedFile $file)
+    {
+
+        $this->deleteCurrentImage($this->image);
+
+        $fileName = Yii::$app->security->generateRandomString(12);
+        $filePath = self::BACKEND_PATH.$fileName.'.'.$file->extension;
+
+        $file->saveAs($filePath);
+
+        return $filePath;
+    }
+
+    /**
+     * @param $filePath
+     * @return bool
+     */
+    public function saveImage($filePath)
+    {
+        $this->image = $filePath;
+        return $this->save(false);
+    }
+
+    /**
+     * @param $image
+     */
+    public function deleteCurrentImage($image)
+    {
+        if (file_exists($image))
+        {
+            unlink($image);
+        }
     }
 }
