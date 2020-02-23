@@ -35,6 +35,12 @@ use yii\helpers\Url;
                                     'url' => ['menu/index'],
                                     'active' => in_array(Yii::$app->controller->id, ['menu'])
                                 ],
+                                [
+                                    'label' => 'Каталог',
+                                    'icon' => 'fa fa-shopping-cart',
+                                    'url' => ['catalog/index'],
+                                    'active' => in_array(Yii::$app->controller->id, ['catalog'])
+                                ],
                             ]
                         ],
                         [

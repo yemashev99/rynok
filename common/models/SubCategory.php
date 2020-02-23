@@ -60,4 +60,9 @@ class SubCategory extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Category::className(), ['category_id' => 'category_id']);
     }
+
+    public function getProducts()
+    {
+        return $this->hasMany(Product::className(), ['sub_category_id' => 'sub_category_id']);
+    }
 }

@@ -1,3 +1,6 @@
 <?php
 
-echo Yii::$app->controller->id;
+foreach ($categories as $category)
+{
+    echo $category->title.'</br>';
+}

@@ -53,6 +53,7 @@ return [
                 'menu/sub-category/<id:\d+>' => 'menu/sub-category',
                 'menu/sub-category-create/<id:\d+>' => 'menu/sub-category-create',
                 'menu/sub-category-update/<id:\d+>' => 'menu/sub-category-update',
+                'catalog' => 'catalog/index',
             ],
         ],
     ],
