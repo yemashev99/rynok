@@ -36,13 +36,19 @@ $this->title = 'Управление сайтом - Каталог';
             ]
         ) ?>
     </div>
-    <div class="col-md-3">
+    <div class="col-sm-1">
        <?=Html::submitButton('<i class="fa fa-search"></i> Поиск', [
            'class' => 'btn btn-primary',
            'style' => 'margin-top: 24px;',
        ])?>
     </div>
     <?php ActiveForm::end() ?>
+    <div class="col-md-1">
+        <?=Html::a('Сбросить', ['catalog/index'], [
+            'class' => 'btn btn-default',
+            'style' => 'margin-top: 24px;',
+        ])?>
+    </div>
 </div>
 
 <div class="page-header">

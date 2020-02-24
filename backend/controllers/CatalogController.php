@@ -12,7 +12,9 @@ use common\models\SubCategory;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 
 class CatalogController extends Controller
 {
@@ -30,8 +32,24 @@ class CatalogController extends Controller
         $subCategory = [];
 
         //вывод товаров
+        if (Yii::$app->request->post())
+        {
+            $sortForm->attributes = Yii::$app->request->post('SortForm');
+            if (empty($sortForm->subCategoryId))
+            {
+                $query = Product::find()
+                    ->where(['category_id' => $sortForm->categoryId]);
+            } else {
+                $query = Product::find()
+                    ->where(['category_id' => $sortForm->categoryId])
+                    ->andWhere(['sub_category_id' => $sortForm->subCategoryId]);
+            }
+        } else {
+            $query = Product::find();
+        }
+
         $dataProvider = new ActiveDataProvider([
-            'query' => Product::find(),
+            'query' => $query,
             'pagination' => [
                 'pageSize' => 10,
             ],
@@ -50,13 +68,13 @@ class CatalogController extends Controller
             ->all();
         if ($count > 0)
         {
-            echo '<option>Выберете подкатегорию</option>';
+            echo '<option value="">Выберете подкатегорию</option>';
             foreach ($subCategories as $subCategory)
             {
                 echo "<option value='".$subCategory->sub_category_id."'>".$subCategory->title."</option>";
             }
         } else {
-            echo '<option>-</option>';
+            echo '<option value="">-</option>';
         }
     }
 
@@ -71,6 +89,16 @@ class CatalogController extends Controller
                 ])
                 ->all(), 'category_id', 'title');
         $subCategory = [];
+        if ($model->load(Yii::$app->request->post()))
+        {
+            $file = UploadedFile::getInstance($model, 'file');
+
+            if ($model->save())
+            {
+                $model->saveImage($model->uploadImage($file));
+                return $this->redirect(['catalog/index']);
+            }
+        }
         return $this->render('create', compact('model', 'category', 'subCategory'));
     }
 }

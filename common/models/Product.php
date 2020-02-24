@@ -23,7 +23,7 @@ use yii\web\UploadedFile;
 class Product extends \yii\db\ActiveRecord
 {
 
-    const BACKEND_PATH = '@app/backend/web/image/product/';
+    const BACKEND_PATH = 'image/product/';
     const FRONTEND_PATH = '@app/frontend/web/image/product/';
 
     public $file;
@@ -42,7 +42,7 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'title', 'image', 'price', 'measure'], 'required'],
+            [['category_id', 'title', 'price', 'measure'], 'required'],
             [['category_id', 'sub_category_id', 'price'], 'integer'],
             [['description', 'image'], 'string'],
             [['title', 'measure'], 'string', 'max' => 255],

@@ -11,6 +11,14 @@ class SortForm extends Model
     public $categoryId;
     public $subCategoryId;
 
+    public function rules()
+    {
+        return [
+            ['categoryId', 'required'],
+            [['categoryId', 'subCategoryId'], 'integer'],
+        ];
+    }
+
     public function attributeLabels()
     {
         return [
