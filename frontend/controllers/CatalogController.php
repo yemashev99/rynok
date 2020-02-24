@@ -22,4 +22,9 @@ class CatalogController extends Controller
             ->all();
         return $this->render('index', compact('categories', 'menu', 'categoryModel'));
     }
+
+    public function actionCategory($category, $subCategory = null)
+    {
+        return $this->render('category', compact('category', 'subCategory'));
+    }
 }

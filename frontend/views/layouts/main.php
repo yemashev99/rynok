@@ -34,7 +34,7 @@ foreach ($sidebarItems as $key => $sidebarItem)
 {
     $navSideItems[] = [
         'label' => $sidebarItem->title,
-        'url' => [$sidebarItem->menu->controller_name.'/'.$sidebarItem->url],
+        'url' => Url::to(['catalog/category', 'category' => $sidebarItem->url]),
         'linkOptions' => [
             'class' => 'icons_fa',
         ],

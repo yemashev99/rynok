@@ -1,4 +1,9 @@
 <?php
+
+    use yii\helpers\Html;
+use yii\helpers\Url;
+
+$this->title = 'Каталог - Республиканский Селькохозяйственный Рынок';
     $this->params['breadcrumbs'][] = 'Продукты';
 ?>
 
@@ -11,19 +16,30 @@
                 <table class="section_item_inner">
                     <tbody><tr>
                         <td class="image">
-                            <a href="<?='/'.Yii::$app->controller->id.'/'.$category->url.'/'?>" class="thumb"><img src="<?=Yii::getAlias('@web').'/'.$category->image?>" alt="<?=$category->title?>" title="<?=$category->title?>"></a>
+                            <?=Html::a(
+                                Html::img(Yii::getAlias('@web').'/'.$category->image, [
+                                    'alt' => $category->title,
+                                    'title' => $category->title,
+                                ]),
+                                Url::to(['catalog/category', 'category' => $category->url]),
+                                ['class' => 'thumb']
+                            )?>
                         </td>
                         <td class="section_info" style="height: 196px;">
                             <ul>
                                 <li class="name">
-                                    <a href="<?='/'.Yii::$app->controller->id.'/'.$category->url.'/'?>"><span><?=$category->title?></span></a>
+                                    <?=Html::a(
+                                        '<span>'.$category->title.'</span>',
+                                        Url::to(['catalog/category', 'category' => $category->url])
+                                    )?>
                                 </li>
                                 <?php foreach ($categoryModel->getSubCategoriesList($category->category_id) as $subCategory) :?>
                                     <li class="sect">
-                                        <a href="<?='/'.Yii::$app->controller->id.'/'.$category->url.'/'.$subCategory->url.'/'?>" class="dark_link">
-                                            <?=$subCategory->title?>&nbsp;
-                                            <span><?=$categoryModel->getProductCount($category->category_id, $subCategory->sub_category_id)?></span>
-                                        </a>
+                                        <?=Html::a(
+                                            $subCategory->title.' <span>'.$categoryModel->getProductCount($category->category_id, $subCategory->sub_category_id).'</span>',
+                                            Url::to(['catalog/category', 'category' => $category->url, 'subCategory' => $subCategory->url]),
+                                            ['class' => 'dark_link']
+                                        )?>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
