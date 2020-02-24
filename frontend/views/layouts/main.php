@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
+use yii\widgets\Breadcrumbs;
 use yii\widgets\Pjax;
 
 AppAsset::register($this);
@@ -214,7 +215,13 @@ foreach ($sidebarItems as $key => $sidebarItem)
                 </div>
             </div>
             <div class="right_block">
-                    <?=$content?>
+                <?=
+                Breadcrumbs::widget(
+                    [
+                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    ]
+                ) ?>
+                <?=$content?>
             </div>
         </div>
     </div>

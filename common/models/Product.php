@@ -24,7 +24,6 @@ class Product extends \yii\db\ActiveRecord
 {
 
     const BACKEND_PATH = 'image/product/';
-    const FRONTEND_PATH = '@app/frontend/web/image/product/';
 
     public $file;
 

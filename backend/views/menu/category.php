@@ -32,6 +32,20 @@ $this->params['breadcrumbs'][] = 'Категории "'.$menu->title.'"';
         'title',
         'url',
         [
+            'label'=>'Изображение',
+            'format' => 'raw',
+            'value' => function($data) {
+                return Html::img(
+                    Yii::getAlias('@web').'/'.$data->image,
+                    [
+                        'alt' => $data->title,
+                        'width' => '150',
+                        'height' => '100'
+                    ]
+                );
+            }
+        ],
+        [
             'label' => 'Подкатегории',
             'format' => 'raw',
             'value' => function($data){

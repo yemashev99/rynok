@@ -24,7 +24,7 @@
                         'url' => '#',
                         'items' => [
                             [
-                                'label' => 'Меню',
+                                'label' => 'Меню (Категории)',
                                 'icon' => 'database',
                                 'url' => ['menu/index'],
                                 'active' => in_array(Yii::$app->controller->id, ['menu'])

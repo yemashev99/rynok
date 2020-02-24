@@ -11,6 +11,7 @@ use himiklab\sortablegrid\SortableGridAction;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 
 class MenuController extends Controller
 {
@@ -73,8 +74,12 @@ class MenuController extends Controller
         $category = new Category();
         if ($category->load(Yii::$app->request->post()))
         {
+
+            $file = UploadedFile::getInstance($category, 'file');
+
             if ($category->save())
             {
+                $category->saveImage($category->uploadImage($file));
                 $this->redirect(['menu/category', 'id' => $id]);
             }
         }
@@ -87,8 +92,12 @@ class MenuController extends Controller
         $menu = Menu::findOne($category->menu_id);
         if ($category->load(Yii::$app->request->post()))
         {
+
+            $file = UploadedFile::getInstance($category, 'file');
+
             if ($category->save())
             {
+                $category->saveImage($category->uploadImage($file));
                 $this->redirect(['menu/category', 'id' => $category->menu_id]);
             }
         }
