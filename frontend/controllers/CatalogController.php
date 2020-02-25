@@ -23,8 +23,19 @@ class CatalogController extends Controller
         return $this->render('index', compact('categories', 'menu', 'categoryModel'));
     }
 
-    public function actionCategory($category, $subCategory = null)
+    public function actionCategory($category)
     {
-        return $this->render('category', compact('category', 'subCategory'));
+        $category = Category::findOne(['url' => $category]);
+        $subCategories = SubCategory::find()
+            ->where(['category_id' => $category->category_id])
+            ->all();
+        return $this->render('category', compact('subCategories', 'category'));
+    }
+
+    public function actionItem($category, $subCategory)
+    {
+        $category = Category::findOne(['url' => $category]);
+        $subCategory = SubCategory::findOne(['url' => $subCategory]);
+        return $this->render('item', compact('category', 'subCategory'));
     }
 }

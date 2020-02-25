@@ -37,7 +37,7 @@ $this->title = 'Каталог - Республиканский Селькохо
                                     <li class="sect">
                                         <?=Html::a(
                                             $subCategory->title.' <span>'.$categoryModel->getProductCount($category->category_id, $subCategory->sub_category_id).'</span>',
-                                            Url::to(['catalog/category', 'category' => $category->url, 'subCategory' => $subCategory->url]),
+                                            Url::to(['catalog/item', 'category' => $category->url, 'subCategory' => $subCategory->url]),
                                             ['class' => 'dark_link']
                                         )?>
                                     </li>

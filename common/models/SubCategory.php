@@ -4,6 +4,7 @@ namespace common\models;
 
 use common\models\Category;
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "sub_category".
@@ -17,6 +18,11 @@ use Yii;
  */
 class SubCategory extends \yii\db\ActiveRecord
 {
+
+    const BACKEND_PATH = 'image/sub-category/';
+
+    public $file;
+
     /**
      * {@inheritdoc}
      */
@@ -34,6 +40,8 @@ class SubCategory extends \yii\db\ActiveRecord
             [['category_id', 'title', 'url'], 'required'],
             ['category_id', 'integer'],
             [['title', 'url'], 'string'],
+            [['image'], 'string'],
+            [['file'], 'file', 'extensions' => ['png', 'jpg']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'category_id']],
         ];
     }
@@ -48,6 +56,8 @@ class SubCategory extends \yii\db\ActiveRecord
             'category_id' => 'Категория',
             'title' => 'Название',
             'url' => 'Значение в ссылке',
+            'file' => 'Изображение',
+            'image' => 'Изображение',
         ];
     }
 
@@ -64,5 +74,44 @@ class SubCategory extends \yii\db\ActiveRecord
     public function getProducts()
     {
         return $this->hasMany(Product::className(), ['sub_category_id' => 'sub_category_id']);
+    }
+
+    /**
+     * @param UploadedFile $file
+     * @return string
+     * @throws \yii\base\Exception
+     */
+    public function uploadImage(UploadedFile $file)
+    {
+
+        $this->deleteCurrentImage($this->image);
+
+        $fileName = Yii::$app->security->generateRandomString(12);
+        $filePath = self::BACKEND_PATH.$fileName.'.'.$file->extension;
+
+        $file->saveAs($filePath);
+
+        return $filePath;
+    }
+
+    /**
+     * @param $filePath
+     * @return bool
+     */
+    public function saveImage($filePath)
+    {
+        $this->image = $filePath;
+        return $this->save(false);
+    }
+
+    /**
+     * @param $image
+     */
+    public function deleteCurrentImage($image)
+    {
+        if (file_exists($image))
+        {
+            unlink($image);
+        }
     }
 }

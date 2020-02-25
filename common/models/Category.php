@@ -124,4 +124,9 @@ class Category extends \yii\db\ActiveRecord
             unlink($image);
         }
     }
+
+    public function getCategoryByName($category)
+    {
+        return $category = Category::findOne(['url' => $category]);
+    }
 }

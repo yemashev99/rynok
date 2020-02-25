@@ -1,15 +1,25 @@
-<?php use yii\helpers\Html;
+<?php use kartik\file\FileInput;
+use yii\helpers\Html;
 use yii\widgets\ActiveForm; ?>
 
+<div class="col-md-6">
 
-<?php $form = ActiveForm::begin() ?>
+    <?php $form = ActiveForm::begin() ?>
 
-<?=$form->field($subCategory, 'title')->textInput(['style' => 'width:20%'])?>
+    <?=$form->field($subCategory, 'title')->textInput()?>
 
-<?=$form->field($subCategory, 'url')->textInput(['style' => 'width:20%'])?>
+    <?=$form->field($subCategory, 'url')->textInput()?>
 
-<?=$form->field($subCategory, 'category_id')->hiddenInput(['value' => $category->category_id])->label(false)?>
+    <?=$form->field($subCategory, 'category_id')->hiddenInput(['value' => $category->category_id])->label(false)?>
 
-<?=Html::submitButton('Сохранить', ['class' => 'btn btn-success'])?>
+    <?= $form->field($subCategory, 'file')->widget(FileInput::className(), [
+        'options' => [
+            'accept' => 'images/*',
+        ]
+    ])?>
 
-<?php ActiveForm::end() ?>
+    <?=Html::submitButton('Сохранить', ['class' => 'btn btn-success'])?>
+
+    <?php ActiveForm::end() ?>
+
+</div>

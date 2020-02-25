@@ -127,8 +127,12 @@ class MenuController extends Controller
         $subCategory = new SubCategory();
         if ($subCategory->load(Yii::$app->request->post()))
         {
+
+            $file = UploadedFile::getInstance($subCategory, 'file');
+
             if ($subCategory->save())
             {
+                $subCategory->saveImage($category->uploadImage($file));
                 $this->redirect(['menu/sub-category', 'id' => $id]);
             }
         }
@@ -142,8 +146,12 @@ class MenuController extends Controller
         $menu = Menu::findOne($category->menu_id);
         if ($subCategory->load(Yii::$app->request->post()))
         {
+
+            $file = UploadedFile::getInstance($subCategory, 'file');
+
             if ($subCategory->save())
             {
+                $subCategory->saveImage($category->uploadImage($file));
                 $this->redirect(['menu/sub-category', 'id' => $subCategory->category_id]);
             }
         }
