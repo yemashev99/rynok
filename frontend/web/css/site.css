@@ -1542,7 +1542,8 @@ div[id^=wait_comp], .bx-core-waitwindow{display:none;}
 .breadcrumbs {margin: 0 !important; display:block !important;}
 #panel + div[id*=bx_incl_area]{min-height: 0px !important;}
 
-body{background: /*gray*/ url('../img/back.png') repeat!important;}
+body{background: /*gray*/ url('../img/bg3-s2-20.png') repeat!important;}
+#gray-fon{background: rgba(0, 0, 50, 0.5); width: 100%; height: 100%;}
 .print body{background:#fff !important;}
 
 .title_block{display:inline-block;margin:0px 38px 0px 0px;font-size:20px;color:#1d2029;line-height:30px;font-weight:500;}
@@ -1972,7 +1973,36 @@ body .top_slider_wrapp .flexslider .slides > li .wrapper_inner > table{width:100
 
 /*top menu*/
 #header .catalog_menu .wrapper_middle_menu{position:relative;}
-#header .catalog_menu .wrapper_middle_menu .inc_menu{padding-left: 14px;}
+.d1 > form {
+  position: relative;
+  width: 420px;
+}
+.d1 input {
+  width: 100%;
+  height: 42px;
+  border: 2px solid #5cb85c;
+  border-radius: 5px;
+  outline: none;
+  background: white;
+  color: #9E9C9C;
+}
+.d1 button {
+  position: absolute; 
+  top: 0;
+  right: 0px;
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: #5cb85c;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+.d1 button:before {
+  content: "\f002";
+  font-family: FontAwesome;
+  font-size: 16px;
+  color: #F9F0DA;
+}
 
 .top-h-row .menu.topest{margin:0 0 -1px;padding:0;white-space:nowrap;height:31px;font-size:0;overflow:hidden;width: 40%;}
 .top-h-row .menu.topest:hover{overflow:visible;}
@@ -2045,7 +2075,7 @@ body .top_slider_wrapp .flexslider .slides > li .wrapper_inner > table{width:100
 
 .bx-ie #header .middle-h-row .logo_wrapp .logo{min-height:47px;line-height:47px;}
 .bx-ie .basket_fly #header .middle-h-row .logo_wrapp .logo{min-height:48px;line-height:48px;}
-#header .middle-h-row .center_block{width:300px;padding:0 45px 0 0;}
+#header .middle-h-row .center_block{width:420px;padding:0 45px 0 0;}
 .has_menu #header .middle-h-row .center_block{padding:2px 40px 0px 56px;}
 #header .middle-h-row .main-nav  ul.menu > li > a{padding:0px 10px;}
 .work-time{color: orange; font-size: 20px; font-weight: bold}
@@ -5312,9 +5342,9 @@ body{min-width:300px}ul.tabs li.stretch{display:none}@media (max-width:767px){a.
 /* a.compare_item { display: none !important;  }*/
 
 #header .middle-h-row .logo_wrapp .logo a img {
-    width: 125px;
+    width: 112px;
     margin-left: 25px;
-    margin-top: 5px;
+    margin-top: 24px;
 }
 
 .wrapper .header_wrap #header > .wrapper_inner {

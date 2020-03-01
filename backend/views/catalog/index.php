@@ -87,8 +87,8 @@ $this->title = 'Управление сайтом - Каталог';
                     Yii::getAlias('@web').'/'.$data->image,
                     [
                         'alt' => $data->title,
-                        'width' => '250',
-                        'height' => '150'
+                        'width' => '150',
+                        'height' => '100'
                     ]
                 );
             }

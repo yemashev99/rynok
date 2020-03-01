@@ -42,6 +42,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '' => 'site/index',
+                'login' => 'site/login',
                 'menu' => 'menu/index',
                 'menu/update/<id:\d+>' => 'menu/update',
                 'menu/category/<id:\d+>' => 'menu/category',

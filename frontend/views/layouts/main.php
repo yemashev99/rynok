@@ -18,14 +18,25 @@ $menuItems = Menu::find()->orderBy('sort')->all();
 $navItems = array();
 foreach ($menuItems as $key => $menuItem)
 {
-    $navItems[] = [
-        'label' => $menuItem->title,
-        'url' => [$menuItem->url],
-        'active' => in_array(Yii::$app->controller->id, [$menuItem->controller_name]),
-        'linkOptions' => [
-            'style' => 'padding-left: 34px; padding-right: 35px',
-        ],
-    ];
+    if ($menuItem->controller_name == 'catalog') {
+        $navItems[] = [
+            'label' => $menuItem->title,
+            'url' => [$menuItem->url],
+            'active' => in_array(Yii::$app->controller->id, [$menuItem->controller_name]),
+            'linkOptions' => [
+                'style' => 'padding-left: 79px; padding-right: 78px',
+            ],
+        ];
+    } else {
+        $navItems[] = [
+            'label' => $menuItem->title,
+            'url' => [$menuItem->url],
+            'active' => in_array(Yii::$app->controller->id, [$menuItem->controller_name]),
+            'linkOptions' => [
+                'style' => 'padding-left: 29px; padding-right: 30px',
+            ],
+        ];
+    }
 }
 $menu = new Menu();
 $sidebarItems = Category::find()->where('menu_id = :id', [':id' => $menu->getIdByControllerName(Yii::$app->controller->id)])->all();
@@ -63,6 +74,7 @@ foreach ($sidebarItems as $key => $sidebarItem)
 
 <?php Pjax::begin() ?>
 <div class="wrapper front_page basket_fly colored banner_auto">
+<span id="gray-fon">
     <div class="header_wrap ">
         <header id="header">
             <div class="wrapper_inner">
@@ -88,11 +100,17 @@ foreach ($sidebarItems as $key => $sidebarItem)
                                     <div class="search">
                                         <div id="title-search" class="stitle_form">
                                             <?/*TODO: форма поиска товаров*/?>
-                                            <form action="/search/">
+                                            <!--<form action="/search/">
                                                 <div class="form-control1 bg">
                                                     <input id="title-searchs-input" type="text" name="q" value="" size="40" class="text small_block" maxlength="100" autocomplete="off" placeholder="Поиск по товарам"><input name="s" type="submit" value="Поиск" class="button icon">
                                                 </div>
-                                            </form>
+                                            </form>-->
+                                            <div class="d1">
+                                                <form>
+                                                    <input type="text" placeholder="Поиск по товарам...">
+                                                    <button type="submit"></button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -225,6 +243,7 @@ foreach ($sidebarItems as $key => $sidebarItem)
             </div>
         </div>
     </div>
+</span>
 </div>
 <?php Pjax::end() ?>
 
