@@ -26,6 +26,9 @@ foreach ($menuItems as $key => $menuItem)
             'linkOptions' => [
                 'style' => 'padding-left: 79px; padding-right: 78px',
             ],
+            'options' => [
+                'class' => 'catalog icons_fa',
+            ],
         ];
     } else {
         $navItems[] = [
@@ -96,54 +99,46 @@ foreach ($sidebarItems as $key => $sidebarItem)
                                 <div class="slogan">
                                     <div class="h2" style="color: green; line-height: 1.15;">РЕСПУБЛИКАНСКИЙ СЕЛЬСКОХОЗЯЙСТВЕННЫЙ РЫНОК</div>
                                 </div>
-                                <div class="center_block">
-                                    <div class="search">
-                                        <div id="title-search" class="stitle_form">
-                                            <?/*TODO: форма поиска товаров*/?>
-                                            <!--<form action="/search/">
-                                                <div class="form-control1 bg">
-                                                    <input id="title-searchs-input" type="text" name="q" value="" size="40" class="text small_block" maxlength="100" autocomplete="off" placeholder="Поиск по товарам"><input name="s" type="submit" value="Поиск" class="button icon">
-                                                </div>
-                                            </form>-->
-                                            <div class="d1">
-                                                <form>
-                                                    <input type="text" placeholder="Поиск по товарам...">
-                                                    <button type="submit"></button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </td>
                             <td>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="call_order">
+                                                <a href="#">Заказать звонок</a>  
+                                            </td>
+                                            <td>
+                                                <div class="d1">
+                                                    <form>
+                                                        <input type="text" placeholder="Поиск по товарам...">
+                                                        <button type="submit"></button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 <div class="work-time">
-                                    Ежедневно<br/>09:00 - 19:00
+                                    <table style="width: 100%;">
+                                        <tbody>
+                                            <tr class="header_info">
+                                                <td style="width: 20%">
+                                                    <i class="fa fa-clock-o" aria-hidden="true"></i> 
+                                                    Ежедневно<br>09:00 - 19:00
+                                                </td>
+                                                <td style="width: 28%">
+                                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                    Республика Хакасия<br>Абакан, Тельмана, 92к
+                                                </td>
+                                                <td style="width: 30%">
+                                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                                    <b>+7 (913) 441-14-85</b><br>
+                                                    телефон доставки<br>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                    </table>
                                 </div>
-                            </td>
-                            <td class="basket_wrapp">
-                                <div class="middle_phone">
-                                    <div class="phones">
-												<span class="phone_wrap">
-													<span class="phone">
-														<span class="icons fa fa-phone"></span>
-														<span class="phone_text">
-															<span style="font-size: 14pt;">
-                                                                <span>
-                                                                    <b>+7 (913) 441-14-85</b>
-                                                                </span>
-                                                            </span><br>
-                                                            телефон доставки<br>
-                                                            <a style="font-size: 10pt; color: green;" href="mailto:direkciya2011@yandex.ru">direkciya2011@yandex.ru</a>
-                                                        </span>
-														<span class="address">Республика Хакасия<br>Абакан, Тельмана, 92к</span>
-													</span>
-													<span class="order_wrap_btn" style="color: green;">
-														<span class="callback_btn">Заказать звонок</span>
-													</span>
-												</span>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
                             </td>
                         </tr>
                     </tbody>

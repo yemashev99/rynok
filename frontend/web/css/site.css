@@ -1542,7 +1542,7 @@ div[id^=wait_comp], .bx-core-waitwindow{display:none;}
 .breadcrumbs {margin: 0 !important; display:block !important;}
 #panel + div[id*=bx_incl_area]{min-height: 0px !important;}
 
-body{background: /*gray*/ url('../img/bg3-s2-20.png') repeat!important;}
+body{background: /*gray*/ url('../img/background.jpg') repeat!important;}
 #gray-fon{background: rgba(0, 0, 50, 0.5); width: 100%; height: 100%;}
 .print body{background:#fff !important;}
 
@@ -1975,7 +1975,7 @@ body .top_slider_wrapp .flexslider .slides > li .wrapper_inner > table{width:100
 #header .catalog_menu .wrapper_middle_menu{position:relative;}
 .d1 > form {
   position: relative;
-  width: 420px;
+  width: 375px;
 }
 .d1 input {
   width: 100%;
@@ -2001,7 +2001,26 @@ body .top_slider_wrapp .flexslider .slides > li .wrapper_inner > table{width:100
   content: "\f002";
   font-family: FontAwesome;
   font-size: 16px;
-  color: #F9F0DA;
+  color: white;
+}
+.call_order{
+	padding: 20px 10px 0 0;
+}
+
+.call_order > a{
+	border-bottom: 1px dashed;
+}
+
+.work-time{ 
+	font-size: 14px;
+	padding-top: 10px;
+}
+
+.header_info > td > i {
+	font-size: 24px;
+	float: left;
+	color: #5cb85c;
+	padding: 7px 10px 0 0;
 }
 
 .top-h-row .menu.topest{margin:0 0 -1px;padding:0;white-space:nowrap;height:31px;font-size:0;overflow:hidden;width: 40%;}
@@ -2066,7 +2085,7 @@ body .top_slider_wrapp .flexslider .slides > li .wrapper_inner > table{width:100
 #header .middle-h-row .logo_wrapp .logo a{display:inline-block;*display:inline;display:block;zoom:1;vertical-align:middle;margin:0px 0px 0px 0px;background:none!important;}
 #header .middle-h-row .logo_wrapp .logo a img{display:block;width: 120px; height: auto;/*padding: 0 20px*/}
 #header .middle-h-row td{vertical-align:middle;box-sizing:border-box;-moz-box-sizing:border-box;-o-box-sizing:border-box;-webkit-box-sizing:border-box;}
-#header .middle-h-row td.text_wrapp{/* width: 35%; */width: 45%;/* padding: 0px 3px 0px 49px; */padding: 0 49px 0 0;}
+#header .middle-h-row td.text_wrapp{width: 42%;}
 #header .middle-h-row td.text_wrapp .slogan {margin-bottom: 15px;}
 #header .middle-h-row td.best, #header .middle-h-row td.revizorro {width: 4%; text-align: center;}
 #header .middle-h-row td.revizorro {padding-right: 70px;}
@@ -2078,7 +2097,6 @@ body .top_slider_wrapp .flexslider .slides > li .wrapper_inner > table{width:100
 #header .middle-h-row .center_block{width:420px;padding:0 45px 0 0;}
 .has_menu #header .middle-h-row .center_block{padding:2px 40px 0px 56px;}
 #header .middle-h-row .main-nav  ul.menu > li > a{padding:0px 10px;}
-.work-time{color: orange; font-size: 20px; font-weight: bold}
 
 /*header bottom menu*/
 #header .middle-h-row .logo_wrapp .logo div{line-height:61px;}
