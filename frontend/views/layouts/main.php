@@ -5,10 +5,14 @@
 
 use common\models\Menu;
 use common\models\Category;
+use common\models\Product;
+use kartik\select2\Select2;
 use yii\bootstrap\Nav;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
 use yii\widgets\Pjax;
 
@@ -88,10 +92,10 @@ foreach ($sidebarItems as $key => $sidebarItem)
                             <td class="logo_wrapp" style="/*width:220px;*/display: block;text-align: center;">
                                 <div class="logo nofill_y">
                                     <a href='<?=Url::to(['site/index'])?>'>
-                                        <img src="<?=Yii::getAlias('@web').'/img/logo.png'?>" alt="Рынок Михайловский" title="Рынок Михайловский">
+                                        <img src="<?=Yii::getAlias('@web').'/img/logo.png'?>" alt="РЕСПУБЛИКАНСКИЙ СЕЛЬСКОХОЗЯЙСТВЕННЫЙ РЫНОК" title="РЕСПУБЛИКАНСКИЙ СЕЛЬСКОХОЗЯЙСТВЕННЫЙ РЫНОК">
                                     </a>
                                     <a data="1" href="<?=Url::to(['site/index'])?>" class="logo-mobile">
-                                        <img src="<?=Yii::getAlias('@web').'/img/logo.png'?>" alt="Рынок Михайловский" title="Рынок Михайловский">
+                                        <img src="<?=Yii::getAlias('@web').'/img/logo.png'?>" alt="РЕСПУБЛИКАНСКИЙ СЕЛЬСКОХОЗЯЙСТВЕННЫЙ РЫНОК" title="РЕСПУБЛИКАНСКИЙ СЕЛЬСКОХОЗЯЙСТВЕННЫЙ РЫНОК">
                                     </a>
                                 </div>
                             </td>
@@ -109,11 +113,11 @@ foreach ($sidebarItems as $key => $sidebarItem)
                                             </td>
                                             <td>
                                                 <div class="d1">
-                                                    <form>
-                                                        <input type="text" placeholder="Поиск по товарам...">
-                                                        <button type="submit"></button>
-                                                    </form>
-                                                </div>
+                                                <form>
+                                                    <input type="text" placeholder="Поиск по товарам...">
+                                                    <button type="submit"></button>
+                                                </form>
+                                            </div>
                                             </td>
                                         </tr>
                                     </tbody>
