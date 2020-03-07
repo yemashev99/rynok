@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = 'Продукты';
 <div class="catalog_section_list rows_block items">
     <?php foreach ($categories as $category) : ?>
         <div class="item_block col-4">
-            <div class="section_item item" id="bx_1847241719_64" style="height: 148px;">
+            <div class="section_item item" id="<?=$category->category_id?>" style="height: 148px;">
                 <div>
                     <?=Html::a(
                         Html::img(Yii::getAlias('@web').'/'.$category->image, [
