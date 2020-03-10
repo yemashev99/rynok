@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
 
 /**
@@ -126,5 +127,15 @@ class Product extends \yii\db\ActiveRecord
         {
             unlink($image);
         }
+    }
+
+    public static function searchItem()
+    {
+        $products = Product::find()->all();
+        foreach ($products as $product)
+        {
+            $items[] = $product->title;
+        }
+        return $items;
     }
 }

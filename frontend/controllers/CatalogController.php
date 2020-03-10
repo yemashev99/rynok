@@ -10,6 +10,7 @@ use common\models\Product;
 use common\models\SubCategory;
 use Yii;
 use yii\data\Pagination;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 class CatalogController extends Controller
@@ -35,6 +36,10 @@ class CatalogController extends Controller
 
     public function actionItem($category, $subCategory, $sort = null, $display = 'block', $orderBy = SORT_ASC)
     {
+        if (Yii::$app->request->post())
+        {
+            var_dump(Yii::$app->request->post()); exit();
+        }
 
         switch ($orderBy) {
             case 'asc':
@@ -67,6 +72,8 @@ class CatalogController extends Controller
                 ->all();
         }
 
-        return $this->render('item', compact('category', 'subCategory', 'products', 'display', 'orderBy', 'sort', 'pages'));
+        $item = Product::find()->all();
+
+        return $this->render('item', compact('category', 'subCategory', 'products', 'display', 'orderBy', 'sort', 'pages', 'item'));
     }
 }

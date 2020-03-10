@@ -7,16 +7,21 @@ use common\models\Menu;
 use common\models\Category;
 use common\models\Product;
 use kartik\select2\Select2;
+use kartik\typeahead\Typeahead;
 use yii\bootstrap\Nav;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
+use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
 use yii\widgets\Pjax;
 
 AppAsset::register($this);
+
+$data = Product::searchItem();
+//var_dump($data); exit();
 
 $menuItems = Menu::find()->orderBy('sort')->all();
 $navItems = array();
@@ -113,8 +118,23 @@ foreach ($sidebarItems as $key => $sidebarItem)
                                             </td>
                                             <td>
                                                 <div class="d1">
-                                                <form>
-                                                    <input type="text" placeholder="Поиск по товарам...">
+                                                <form action="<?=Url::to(['catalog/item', 'category' => 'myaso', 'subCategory' => 'svinina'])?>" method="post">
+                                                    <?php
+                                                    $template = '<div><p class="repo-language">{{price}}</p>' .
+                                                        '<p class="repo-name">{{title}}</p>' .
+                                                        '<p class="repo-description">{{description}}</p></div>';
+                                                    echo Typeahead::widget([
+                                                        'name' => 'country_1',
+                                                        'options' => ['placeholder' => 'Поиск по товарам ...'],
+                                                        'scrollable' => true,
+                                                        'pluginOptions' => ['highlight'=>true],
+                                                        'dataset' => [
+                                                            [
+                                                                'local' => $data,
+                                                                'limit' => 10
+                                                            ]
+                                                        ]
+                                                    ]); ?>
                                                     <button type="submit"></button>
                                                 </form>
                                             </div>
