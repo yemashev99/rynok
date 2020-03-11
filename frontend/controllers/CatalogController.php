@@ -36,10 +36,6 @@ class CatalogController extends Controller
 
     public function actionItem($category, $subCategory, $sort = null, $display = 'block', $orderBy = SORT_ASC)
     {
-        if (Yii::$app->request->post())
-        {
-            var_dump(Yii::$app->request->post()); exit();
-        }
 
         switch ($orderBy) {
             case 'asc':
@@ -54,12 +50,14 @@ class CatalogController extends Controller
         $query = Product::find()
             ->where(['category_id' => $category->category_id])
             ->andWhere(['sub_category_id' => $subCategory->sub_category_id]);
+
         $pages = new Pagination([
             'totalCount' => $query->count(),
             'pageSize' => 20,
             'pageSizeParam' => false,
             'forcePageParam' => false,
         ]);
+
         if (is_null($sort))
         {
             $products = $query->offset($pages->offset)
@@ -72,8 +70,51 @@ class CatalogController extends Controller
                 ->all();
         }
 
-        $item = Product::find()->all();
+        return $this->render('item', compact('category', 'subCategory', 'products', 'display', 'orderBy', 'sort', 'pages'));
+    }
 
-        return $this->render('item', compact('category', 'subCategory', 'products', 'display', 'orderBy', 'sort', 'pages', 'item'));
+    public function actionSearch($sort = null, $display = 'block', $orderBy = SORT_ASC, $search = null)
+    {
+        if (Yii::$app->request->post())
+        {
+            $search = Yii::$app->request->post();
+            $search = $search["ProductSearch"]["product"];
+        }
+
+        if ($search)
+        {
+
+            switch ($orderBy) {
+                case 'asc':
+                    $orderBy = SORT_ASC;
+                    break;
+                case 'desc':
+                    $orderBy = SORT_DESC;
+            }
+
+            $query = Product::find()->where(['like', 'title', $search]);
+
+            $pages = new Pagination([
+                'totalCount' => $query->count(),
+                'pageSize' => 20,
+                'pageSizeParam' => false,
+                'forcePageParam' => false,
+            ]);
+
+            if (is_null($sort))
+            {
+                $products = $query->offset($pages->offset)
+                    ->limit($pages->limit)
+                    ->all();
+            } else {
+                $products = $query->orderBy([$sort => $orderBy])
+                    ->offset($pages->offset)
+                    ->limit($pages->limit)
+                    ->all();
+            }
+
+            return $this->render('search', compact('products', 'display', 'orderBy', 'sort', 'pages', 'search'));
+        }
+        return $this->redirect(['catalog/index']);
     }
 }

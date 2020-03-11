@@ -42,6 +42,7 @@ return [
             'rules' => [
                 '' => 'site/index',
                 'catalog' => 'catalog/index',
+                'catalog/search' => 'catalog/search',
                 'catalog/<category>/<subCategory>' => 'catalog/item',
                 'catalog/<category>' => 'catalog/category',
             ],

@@ -6,10 +6,9 @@
 use common\models\Menu;
 use common\models\Category;
 use common\models\Product;
-use kartik\select2\Select2;
+use frontend\models\ProductSearch;
 use kartik\typeahead\Typeahead;
 use yii\bootstrap\Nav;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
@@ -20,8 +19,10 @@ use yii\widgets\Pjax;
 
 AppAsset::register($this);
 
+//search product
 $data = Product::searchItem();
-//var_dump($data); exit();
+$productSearchModel = new ProductSearch();
+
 
 $menuItems = Menu::find()->orderBy('sort')->all();
 $navItems = array();
@@ -118,12 +119,13 @@ foreach ($sidebarItems as $key => $sidebarItem)
                                             </td>
                                             <td>
                                                 <div class="d1">
-                                                <form action="<?=Url::to(['catalog/item', 'category' => 'myaso', 'subCategory' => 'svinina'])?>" method="post">
                                                     <?php
                                                     $template = '<div><p class="repo-language">{{price}}</p>' .
                                                         '<p class="repo-name">{{title}}</p>' .
                                                         '<p class="repo-description">{{description}}</p></div>';
-                                                    echo Typeahead::widget([
+                                                    ?>
+                                                    <?php $form = ActiveForm::begin(['action' => Url::to(['catalog/search'])]) ?>
+                                                    <?=$form->field($productSearchModel, 'product')->widget(Typeahead::className(), [
                                                         'name' => 'country_1',
                                                         'options' => ['placeholder' => 'Поиск по товарам ...'],
                                                         'scrollable' => true,
@@ -131,13 +133,16 @@ foreach ($sidebarItems as $key => $sidebarItem)
                                                         'dataset' => [
                                                             [
                                                                 'local' => $data,
-                                                                'limit' => 10
-                                                            ]
+                                                                'limit' => 10,
+                                                                'templates' => [
+                                                                    'notFound' => '<div class="text-danger" style="padding:0 8px">Ничего не найдено.</div>',
+                                                                ],
+                                                            ],
                                                         ]
-                                                    ]); ?>
-                                                    <button type="submit"></button>
-                                                </form>
-                                            </div>
+                                                    ])->label(false)?>
+                                                    <?=Html::submitButton('', ['type' => 'submit'])?>
+                                                    <?php ActiveForm::end() ?>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
