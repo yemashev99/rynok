@@ -1696,7 +1696,7 @@ input[type="text"], input[type="password"], input[type="email"], select, textare
     -moz-box-sizing:border-box;
     -o-box-sizing:border-box;
     -webkit-box-sizing:border-box;
-    background:#f7f7f7;
+    background:white;
     border:1px solid #eaebec;
     border-radius:2px;
     box-shadow:none;
@@ -3701,7 +3701,7 @@ div[id^=smartFilterDropDown] .popup-window-top-row, div[id^=smartFilterDropDown]
 .item .child_container .child_wrapp a.title{text-decoration:none;}
 
 .wraps .item{position:relative;}
-.wraps > .wrapper_inner{padding-bottom: 50px;z-index:0;}
+.wraps > .wrapper_inner{padding-bottom: 100px;z-index:0;}
 .wraps .item .child_right_container{opacity: 0;display: block;transition: opacity .2s ease .2s, visibility .2s ease .2s;visibility: hidden;z-index: 3;top: 0px;left: 100%;margin: 0;min-width: 100%;position: absolute;background:#fff;color:#333;box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.36);}
 .wraps .item .child_right_container li.menu_item  a{color:#333;padding: 0px;}
 .wraps .item:hover .child_right_container{opacity: 1;visibility: visible;}
@@ -5636,6 +5636,19 @@ header .menu_colored .menu_top_block>li:nth-child(5).current>a {
         display:block;
         margin:5px auto 10px;
     }
+}
+
+.login > .col-md-3 {
+    font-size: 18px;
+}
+
+.login > .link {
+    padding-top: 1%;
+}
+
+.form_title{
+    border-bottom: 1px solid #5cb85c;
+    margin-bottom: 20px;
 }
 
 /*

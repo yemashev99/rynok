@@ -271,11 +271,120 @@ foreach ($sidebarItems as $key => $sidebarItem)
 </div>
 <?php Pjax::end() ?>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left"></p>
+<footer id="footer">
+    <div class="footer_inner no_fill">
 
-        <p class="pull-right"></p>
+        <div class="wrapper_inner">
+            <div class="footer_bottom_inner">
+                <div class="left_block">
+                    <div class="copyright">
+                        2020 © Рынок "Михайловский"</div>
+                    <span class="pay_system_icons">
+	<i title="MasterCard" class="mastercard"></i>
+<i title="Visa" class="visa"></i>
+<i title="Yandex" class="yandex_money"></i>
+<i title="WebMoney" class="webmoney"></i>
+<i title="Qiwi" class="qiwi"></i></span>
+                    <div id="bx-composite-banner">
+                        <a href="/policy/">Политика конфиденциальности</a>
+                        <a href="/polzovatelskoe-soglashenie/">Пользовательское соглашение</a>
+                        <div class="artena">
+                            <span>Продвижение сайта</span>
+                            <a href="https://www.artena.ru/" target="_blank" title="Продвижение сайта"><img src="/bitrix/templates/aspro_optimus/images/artena.png" alt="Продвижение сайта - Артена"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="right_block">
+                    <div class="middle">
+                        <div class="rows_block">
+                            <div class="item_block col-75 menus">
+                                <div class="submenu_top rows_block">
+                                    <div class="item_block col-3">
+                                        <div class="menu_item"><a href="/o-rynke/" class="dark_link">О рынке</a></div>
+                                    </div>
+                                    <div class="item_block col-3">
+                                        <div class="menu_item"><a href="/arendatoram/" class="dark_link">Арендаторам</a></div>
+                                    </div>
+                                    <div class="item_block col-3">
+                                        <div class="menu_item"><a href="/kak-kupit/" class="dark_link">Как купить</a></div>
+                                    </div>
+                                </div>
+                                <div class="rows_block">
+                                    <div class="item_block col-3">
+                                        <ul class="submenu">
+                                            <li class="menu_item"><a href="/o-rynke/1-etazh/" class="dark_link">1 этаж</a></li>
+                                            <li class="menu_item"><a href="/o-rynke/2-etazh/" class="dark_link">2 этаж</a></li>
+                                            <li class="menu_item"><a href="/o-rynke/novosti/" class="dark_link">Новости</a></li>
+                                            <li class="menu_item"><a href="/o-rynke/video/" class="dark_link">Видео</a></li>
+                                            <li class="menu_item"><a href="/kontakti/sotrudniki/" class="dark_link">Сотрудники</a></li>
+                                        </ul>											</div>
+                                    <div class="item_block col-3">
+                                        <ul class="submenu">
+                                            <li class="menu_item"><a href="/arendatoram/arenda/" class="dark_link">Аренда</a></li>
+                                            <li class="menu_item"><a href="/arendatoram/reklama/" class="dark_link">Реклама</a></li>
+                                        </ul>											</div>
+                                    <div class="item_block col-3">
+                                        <ul class="submenu">
+                                            <li class="menu_item"><a href="/kak-kupit/zakazat/" class="dark_link">Как заказать</a></li>
+                                            <li class="menu_item"><a href="/kak-kupit/oplata/" class="dark_link">Как оплатить</a></li>
+                                            <li class="menu_item"><a href="/kak-kupit/dostavka/" class="dark_link">Доставка продукции</a></li>
+                                            <li class="menu_item"><a href="/kak-kupit/garantii/" class="dark_link">Гарантии</a></li>
+                                            <li class="menu_item"><a href="/kak-kupit/vozvrat/" class="dark_link">Возврат товара</a></li>
+                                        </ul>											</div>
+                                </div>
+                            </div>
+                            <div class="item_block col-4 soc">
+                                <div class="soc_wrapper">
+                                    <div class="phones">
+                                        <div class="phone_block">
+													<span class="phone_wrap">
+														<span class="icons fa fa-phone"></span>
+														<span>
+															<span style="font-size: 14pt;"><span><b>+7 (3452) 99-56-59</b></span></span><br>
+ телефон доставки<br>
+ <a style="font-size: 10pt; color: #7ba02e;" href="mailto:administrator@rynok72.ru">administrator@rynok72.ru</a>														</span>
+													</span>
+                                            <span class="order_wrap_btn">
+														<span class="callback_btn">Заказать звонок</span>
+													</span>
+                                        </div>
+                                    </div>
+                                    <div class="social_wrapper">
+                                        <div class="social">
+
+                                            <div class="small_title">Мы в социальных сетях:</div>
+                                            <div class="links rows_block soc_icons">
+                                                <div class="item_block">
+                                                    <a href="/go.php?url=https://vk.com/rynok_mikhaylovsky " target="_blank" title="ВКонтакте" class="vk"></a>
+                                                </div>
+                                                <div class="item_block">
+                                                    <a href="/go.php?url=https://ok.ru/profile/561006126537" target="_blank" title="Одноклассники" class="odn"></a>
+                                                </div>
+                                                <div class="item_block">
+                                                    <a href="/go.php?url=https://ru-ru.facebook.com/people/%D0%9D%D0%B8%D0%BA%D0%B8%D1%82%D0%B0-%D0%9C%D0%B8%D1%85%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2/100012609671202" target="_blank" title="Facebook" class="fb"></a>
+                                                </div>
+                                                <div class="item_block">
+                                                    <a href="/go.php?url=https://www.instagram.com/rynok_mikhaylovsky/" target="_blank" title="Instagram" class="inst"></a>
+                                                </div>
+                                            </div>												</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mobile_copy">
+                <div class="copyright">
+                    2020 © Рынок "Михайловский"</div>
+                <span class="pay_system_icons">
+	<i title="MasterCard" class="mastercard"></i>
+<i title="Visa" class="visa"></i>
+<i title="Yandex" class="yandex_money"></i>
+<i title="WebMoney" class="webmoney"></i>
+<i title="Qiwi" class="qiwi"></i></span>					</div>
+        </div>
     </div>
 </footer>
 
