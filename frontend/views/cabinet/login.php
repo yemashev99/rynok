@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = 'Авторизация';
 
 <?php $form = ActiveForm::begin() ?>
 
-<?=$form->field($login_model, 'email')->textInput(['placeholder' => 'Введите свой E-mail'])->label(false)?>
+<?=$form->field($login_model, 'email')->textInput(['placeholder' => 'Введите свой E-mail (логин)'])->label(false)?>
 
 <?=$form->field($login_model, 'password')->passwordInput(['placeholder' => 'Введите свой пароль'])->label(false)?>
 

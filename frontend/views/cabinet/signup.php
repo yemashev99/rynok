@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = 'Регистрация';
     <h3>Данные для входа</h3>
 </div>
 
-<?=$form->field($model, 'email')->textInput(['placeholder' => 'E-mail *'])->label(false)?>
+<?=$form->field($model, 'email')->textInput(['placeholder' => 'E-mail (логин)*'])->label(false)?>
 
 <?=$form->field($model, 'password')->passwordInput(['placeholder' => 'Пароль *'])->label(false)?>
 

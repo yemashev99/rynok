@@ -4,6 +4,7 @@
 namespace frontend\controllers;
 
 
+use frontend\models\Customer;
 use frontend\models\Login;
 use frontend\models\Signup;
 use Yii;
@@ -18,7 +19,9 @@ class CabinetController extends Controller
             return $this->redirect(['cabinet/login']);
         }
 
-        return $this->render('index');
+        $customer = Customer::findOne(['customer_id' => Yii::$app->user->identity->customer_id]);
+
+        return $this->render('index', compact('customer'));
     }
 
     public function actionLogout()
@@ -26,7 +29,7 @@ class CabinetController extends Controller
         if (!Yii::$app->user->isGuest)
         {
             Yii::$app->user->logout();
-            return $this->redirect(['site/login']);
+            return $this->redirect(['cabinet/login']);
         }
     }
 
@@ -55,6 +58,11 @@ class CabinetController extends Controller
 
     public function actionSignup()
     {
+        if (!Yii::$app->user->isGuest)
+        {
+            return $this->goHome();
+        }
+
         $model = new Signup();
 
         if (Yii::$app->request->post())
