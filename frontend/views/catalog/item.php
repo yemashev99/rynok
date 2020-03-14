@@ -1,7 +1,9 @@
 <?php
 
+use common\models\Product;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 use yii\widgets\LinkPager;
 
 $this->title = 'Каталог - Республиканский Селькохозяйственный Рынок';
@@ -16,6 +18,12 @@ if ($orderBy == SORT_ASC)
 } else {
     $orderBy = 'asc';
     $classOrderBy = 'desc';
+}
+if (Yii::$app->user->isGuest)
+{
+    $customer_id = 0;
+} else {
+    $customer_id = Yii::$app->user->identity->customer_id;
 }
 ?>
 
@@ -113,15 +121,37 @@ if ($orderBy == SORT_ASC)
                                                 </div>
                                                 <div class="hover_block1 footer_button">
                                                     <div class="counter_wrapp ">
-                                                        <div class="counter_block" data-offers="N" data-item="<?=$product->product_id?>">
-                                                            <span class="minus" id="product_<?=$product->product_id?>_quant_down">-</span>
-                                                            <input type="text" class="text" id="product_<?=$product->product_id?>_quantity" name="quantity" value="1">
-                                                            <span class="plus" id="product_<?=$product->product_id?>_quant_up">+</span>
-                                                        </div>
-                                                        <div id="product_<?=$product->product_id?>_basket_actions" class="button_block ">
-                                                            <!--noindex-->
-                                                            <span class="small to-cart button"><i></i><span>В корзину</span></span><a rel="nofollow" href="/basket/" class="small in-cart button" data-item="<?=$product->product_id?>" style="display:none;"><i></i><span>В корзине</span></a>												<!--/noindex-->
-                                                        </div>
+                                                        <?php if(Product::inCart($customer_id, $product->product_id)) : ?>
+                                                            <?php $form = ActiveForm::begin(['fieldConfig' => [
+                                                                'options' => ['tag' => false],
+                                                            ]]) ?>
+                                                            <div class="counter_block" data-offers="N" data-item="<?=$product->product_id?>">
+                                                                <span class="minus" id="product_<?=$product->product_id?>_quant_down">-</span>
+                                                                <?=$form->field($cartForm, 'quantity', ['template' => "{label}\n{input}"])->textInput([
+                                                                    'type' => 'text',
+                                                                    'class' => 'text',
+                                                                    'id' => 'cartform-quantity-'.$product->product_id,
+                                                                    'value' =>  1
+                                                                ])->label(false)?>
+                                                                <span class="plus" id="product_<?=$product->product_id?>_quant_up">+</span>
+                                                            </div>
+                                                            <div id="product_<?=$product->product_id?>_basket_actions" class="button_block ">
+                                                                <!--noindex-->
+                                                                <?=Html::submitButton('<i></i><span>В корзину</span>', ['class' => 'small to-cart button'])?>
+                                                                <!--/noindex-->
+                                                            </div>
+                                                            <?=$form->field($cartForm, 'product_id')->hiddenInput([
+                                                                'value' => $product->product_id,
+                                                                'id' => 'cartform-product_id-'.$product->product_id,
+                                                                ])->label(false)?>
+                                                            <?=$form->field($cartForm, 'customer_id')->hiddenInput([
+                                                                'value' => $customer_id,
+                                                                'id' => 'cartform-customer_id-'.$product->product_id,
+                                                            ])->label(false)?>
+                                                            <?php ActiveForm::end() ?>
+                                                        <?php else: ?>
+                                                            <?=Html::a('<i></i><span>В корзине</span>', ['cabinet/index'], ['class' => 'small in-cart button'])?>
+                                                        <?php endif; ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -295,4 +325,14 @@ if ($orderBy == SORT_ASC)
             return false;
         });
     });
+    var customer_id = <?=$customer_id?>;
+    $('.to-cart').on('click', function (e) {
+        if (customer_id === 0)
+        {
+            alert('Для добавления в корзину, необходимо авторизоваться');
+            var url = "<?=Url::to(['cabinet/login', 'from' => 'catalog', 'category' => $category->url, 'subCategory' => $subCategory->url, 'display' => $display])?>";
+            $(location).attr('href',url);
+            e.preventDefault();
+        }
+    })
 </script>

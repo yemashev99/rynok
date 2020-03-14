@@ -1,10 +1,11 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use common\models\Customer;
 use common\models\Product;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "cart".
@@ -32,13 +33,23 @@ class Cart extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['customer_id', 'product_id', 'quantity', 'comment', 'payed', 'created_at', 'updated_at'], 'required'],
-            [['customer_id', 'product_id', 'quantity', 'created_at', 'updated_at'], 'integer'],
+            [['customer_id', 'product_id', 'quantity', 'payed'], 'required'],
+            [['customer_id', 'product_id', 'quantity'], 'integer'],
             [['comment'], 'string', 'max' => 255],
             [['payed'], 'string', 'max' => 1],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'customer_id']],

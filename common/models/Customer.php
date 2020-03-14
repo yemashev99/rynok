@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use app\models\Cart;
+use common\models\Cart;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;

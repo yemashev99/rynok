@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use app\models\Cart;
+use common\models\Cart;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
@@ -143,5 +143,15 @@ class Product extends \yii\db\ActiveRecord
     public function getCart()
     {
         return $this->hasOne(Cart::className(), ['product_id' => 'product_id']);
+    }
+
+    public static function inCart($customer_id, $product_id)
+    {
+        $cartItem = Cart::findOne(['customer_id' => $customer_id, 'product_id' => $product_id]);
+        if (is_null($cartItem) || $cartItem->payed == "Y"){
+            return true;
+        } else {
+            return false;
+        }
     }
 }

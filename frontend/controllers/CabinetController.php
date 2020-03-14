@@ -41,7 +41,7 @@ class CabinetController extends Controller
         }
     }
 
-    public function actionLogin()
+    public function actionLogin($from = null, $category = null, $subCategory = null, $display = 'block')
     {
         if (!Yii::$app->user->isGuest)
         {
@@ -57,7 +57,12 @@ class CabinetController extends Controller
             if($login_model->validate())
             {
                 Yii::$app->user->login($login_model->getCustomer());
-                return $this->redirect(['cabinet/index']);
+                if(!is_null($from))
+                {
+                    return $this->redirect(['catalog/item', 'display' => $display, 'category' => $category, 'subCategory' => $subCategory]);
+                } else {
+                    return $this->redirect(['cabinet/index']);
+                }
             }
         }
 

@@ -8,6 +8,7 @@ use common\models\Category;
 use common\models\Menu;
 use common\models\Product;
 use common\models\SubCategory;
+use frontend\models\CartForm;
 use Yii;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
@@ -36,6 +37,16 @@ class CatalogController extends Controller
 
     public function actionItem($category, $subCategory, $sort = null, $display = 'block', $orderBy = SORT_ASC)
     {
+
+        $cartForm = new CartForm();
+        if (Yii::$app->request->post())
+        {
+            $cartForm->attributes = Yii::$app->request->post('CartForm');
+            if ($cartForm->validate() && $cartForm->save())
+            {
+                return $this->redirect(['catalog/item', 'category' => $category, 'subCategory' => $subCategory, 'display' => $display]);
+            }
+        }
 
         switch ($orderBy) {
             case 'asc':
@@ -70,7 +81,7 @@ class CatalogController extends Controller
                 ->all();
         }
 
-        return $this->render('item', compact('category', 'subCategory', 'products', 'display', 'orderBy', 'sort', 'pages'));
+        return $this->render('item', compact('category', 'subCategory', 'products', 'display', 'orderBy', 'sort', 'pages', 'cartForm'));
     }
 
     public function actionSearch($sort = null, $display = 'block', $orderBy = SORT_ASC, $search = null)

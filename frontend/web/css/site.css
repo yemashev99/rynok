@@ -1774,7 +1774,7 @@ label.error{color:#e62222 !important;font-size:10px;position:absolute;top:0;righ
 .captcha_reload{border:1px solid transparent;cursor:pointer;height:35px;left:179px;position:absolute;top:0;width:36px;}
 .captcha_reload::before, .captcha_reload::after{content:"";display:block;position:absolute;}
 .captcha_reload::before{border-radius:25px;height:25px;left:5px;top:5px;width:25px;}
-.captcha_reload::after{background:rgba(0, 0, 0, 0) url("/bitrix/templates/aspro_optimus/images/icons_wish.png") repeat scroll -67px -82px;height:13px;left:10px;top:11px;transition:background 0.7s ease-in-out 0s;width:15px;}
+.captcha_reload::after{background:rgba(0, 0, 0, 0) url("../img/icons_wish.png") repeat scroll -67px -82px;height:13px;left:10px;top:11px;transition:background 0.7s ease-in-out 0s;width:15px;}
 .captcha_reload:hover:before{background:#383838;}
 .captcha_reload.loading:after{-webkit-animation:spinner .5s linear infinite !important;animation:spinner .5s linear infinite !important;-webkit-transform-style:preserve-3d;-moz-transform-style:preserve-3d; -ms-transform-style:preserve-3d; -o-transform-style:preserve-3d;transform-style:preserve-3d;}
 .captcha_reload:hover:after{-webkit-animation:spinner .5s ease-out 1;animation:spinner .5s ease 1;-webkit-transform-style:preserve-3d;-moz-transform-style:preserve-3d; -ms-transform-style:preserve-3d;-o-transform-style:preserve-3d;transform-style:preserve-3d;}
@@ -2352,11 +2352,11 @@ body table.title-search-result td.title-search-all a:hover span.text{border-bott
 #header .middle-h-row .center_block .stitle_form .button:hover, .top-h-row.form_mobile_block .button:hover{opacity:0.8;}
 #header .middle-h-row .center_block .stitle_form .text{padding:10px 45px 9px 13px;background:#eee;border-color:transparent;height:41px;}
 .stitle_form .form-control{margin-bottom:0px;padding:0px;border: 0px;height: auto;}
-.top-h-row .search #search-submit-button i, .middle-h-row .search #search-submit-button i, #header ul.menu.full > li.search_row #search-submit-button i{background:url('/bitrix/templates/aspro_optimus/images/icons_wish.png') -60px -173px no-repeat;}
+.top-h-row .search #search-submit-button i, .middle-h-row .search #search-submit-button i, #header ul.menu.full > li.search_row #search-submit-button i{background:url('../img/icons_wish.png') -60px -173px no-repeat;}
 #header ul.menu.full > li.search_row #search-submit-button i {background-position-y:-173px;}
 .top-h-row .search #search-submit-button:hover i, .middle-h-row .search #search-submit-button:hover i, #header ul.menu.full > li.search_row #search-submit-button:hover i{background-position:-138px -132px;}
 .center_block .search_block{float:right;}
-.center_block .search_block .icon{display:inline-block;width:18px;height:20px;background:url('/bitrix/templates/aspro_optimus/images/icons_wish.png') -66px -177px no-repeat;position:relative;top:10px;cursor:pointer;}
+.center_block .search_block .icon{display:inline-block;width:18px;height:20px;background:url('../img/icons_wish.png') -66px -177px no-repeat;position:relative;top:10px;cursor:pointer;}
 .center_block .search_block .icon:hover, .basket_wrapp .wraps_icon_block:hover:before, .basket_wrapp .basket_block .link:hover + .wraps_icon_block:before{opacity:0.8;}
 .basket_wrapp .wraps_icon_block.ndelay:hover:before{opacity:1;}
 .top-h-row .form_mobile_block .search_middle_block{display:none;}
@@ -2398,7 +2398,7 @@ body table.title-search-result td.title-search-all a:hover span.text{border-bott
 .coupons_list .bx_ordercart_coupon{clear:both;position:relative;margin:14px 0px 0px;}
 .coupons_list .bx_ordercart_coupon + .bx_ordercart_coupon{margin-top:9px;}
 .coupons_list .bx_ordercart_coupon .coupon_text{background:#fff;display:inline-block;position:relative;padding:0px 10px 0px 0px;}
-.coupons_list .bx_ordercart_coupon .coupon_text:before{content:"";display:inline-block;height:9px;width:11px;background:url('/bitrix/templates/aspro_optimus/images/icons_wish.png') -19px -3px no-repeat;margin:0px 6px 0px 0px;}
+.coupons_list .bx_ordercart_coupon .coupon_text:before{content:"";display:inline-block;height:9px;width:11px;background:url('../img/icons_wish.png') -19px -3px no-repeat;margin:0px 6px 0px 0px;}
 .coupons_list .bx_ordercart_coupon:before{content:"";width:100%;display:block;height:1px;border-bottom:1px dotted #C3C3C3;top:50%;position:absolute;}
 .coupons_list .bx_ordercart_coupon.not_found .coupon_text:before{background-position:-102px -86px;}
 .coupons_list .bx_ordercart_coupon.not_apply .coupon_text:before{background-position:-4px -3px;}
@@ -2491,13 +2491,13 @@ body table.title-search-result td.title-search-all a:hover span.text{border-bott
 .button_block{display:inline-block;vertical-align:top;}
 .counter_wrapp .button_block.wide{display:block;margin:0px;width:100%;}
 .counter_wrapp .button_block.wide .button{display:block;}
-.button.in-cart i{display:inline-block;width:11px;height:13px;background:url('/bitrix/templates/aspro_optimus/images/icons_wish.png') -49px -5px no-repeat;vertical-align:middle;margin:0px 8px 0px 0px;}
+.button.in-cart i{display:inline-block;width:11px;height:13px;background:url('../img/icons_wish.png') -49px -5px no-repeat;vertical-align:middle;margin:0px 8px 0px 0px;}
 
 
 .count-cell div.error *, .count-cell div.error{line-height:15px;font-size:12px;margin:6px 0px 10px;}
 #header .count-cell div.error *, #header .count-cell div.error{font-size:11px;}
 
-.catalog_detail a.wish_item i, .catalog_detail a.compare_item i, .display_list a.wish_item i, .display_list a.compare_item i, .module-cart a.wish_item .icon i{background:url('/bitrix/templates/aspro_optimus/images/icons_wish.png') 0px 0px no-repeat;}
+.catalog_detail a.wish_item i, .catalog_detail a.compare_item i, .display_list a.wish_item i, .display_list a.compare_item i, .module-cart a.wish_item .icon i{background:url('../img/icons_wish.png') 0px 0px no-repeat;}
 .module-cart a.wish_item  .icon i{background-position:5px -14px;}
 .module-cart a.wish_item.to_basket  .icon i{background-position:-31px -200px;}
 .catalog_detail .big_btn.slide_offer{margin: 0px 0px 20px;}
@@ -2871,7 +2871,7 @@ body .stickers .sticker_recommend:before{background-position:-3px -135px;}
 .like_icons span {display:block;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;background:#fff;opacity:0;visibility:hidden;transition:opacity 0.3s ease;margin:0px 0px 5px;overflow: hidden;}
 .like_icons span.added{opacity:0.6;visibility:visible;}
 .catalog_item:not(.touch):hover .image_wrapper_block .like_icons span, .catalog_item.hover .image_wrapper_block .like_icons span{opacity:1;visibility:visible;}
-.like_icons span i{width:26px;height:26px;display:block;background:url('/bitrix/templates/aspro_optimus/images/icons_wish.png') 0px 0px no-repeat;}
+.like_icons span i{width:26px;height:26px;display:block;background:url('../img/icons_wish.png') 0px 0px no-repeat;}
 .like_icons .wish_item i{background-position:3px -18px;}
 .like_icons .compare_item i{background-position:-20px -18px;}
 .like_icons .wish_item.added i{background-position:3px -46px;}
@@ -3043,8 +3043,8 @@ body .wrapper .catalog_item .item_info .buttons_block{margin-top:17px;text-align
 .stores .stores_list .item a {text-decoration:none;display:inline-block;margin:0px 0px 8px;}
 .stores .stores_list .item a span{font-size:14px;line-height:22px;font-weight:600;border-bottom-width:0px;}
 .block_wr.dark .stores .stores_list .item a:hover span{color:#333;}
-.stores .stores_list .item a .icon{display:inline-block;width:8px;height:10px;background:url('/bitrix/templates/aspro_optimus/images/icons_wish.png') -2px -182px no-repeat;float:left;margin:6px 0px 0px;}
-.block_wr.dark .stores .stores_list .item a .icon{background:url('/bitrix/templates/aspro_optimus/images/icons_wish.png') -13px -182px no-repeat;}
+.stores .stores_list .item a .icon{display:inline-block;width:8px;height:10px;background:url('../img/icons_wish.png') -2px -182px no-repeat;float:left;margin:6px 0px 0px;}
+.block_wr.dark .stores .stores_list .item a .icon{background:url('../img/icons_wish.png') -13px -182px no-repeat;}
 .stores .stores_list .item a .text{padding:0px 0px 0px 23px;display:block;}
 .stores .stores_list .item .store_text{margin:0px 0px 3px;font-size:12px;}
 .stores .stores_list .item .store_text:last-child{margin-bottom:0px;}
@@ -3056,8 +3056,8 @@ body .wrapper .catalog_item .item_info .buttons_block{margin-top:17px;text-align
 .stores .all_map a{display:block;padding:24px 30px 31px 42px;text-decoration:none;font-weight:600;font-size:0px;}
 .stores .all_map a.wrapp_block{display:table-cell;vertical-align:middle;padding-bottom:20px;padding-top:20px;}
 .stores .all_map a  > div{display:inline-block;vertical-align:middle;}
-.stores .all_map a .icon{width:53px;height:58px;background:url('/bitrix/templates/aspro_optimus/images/icons_wish.png') -61px -4px no-repeat;margin:0px 30px 0px 0px;}
-.block_wr.dark .stores .all_map a .icon{background:url('/bitrix/templates/aspro_optimus/images/icons_wish.png') -128px -4px no-repeat;}
+.stores .all_map a .icon{width:53px;height:58px;background:url('../img/icons_wish.png') -61px -4px no-repeat;margin:0px 30px 0px 0px;}
+.block_wr.dark .stores .all_map a .icon{background:url('../img/icons_wish.png') -128px -4px no-repeat;}
 .stores .all_map a .text{font-size:14px;line-height:18px;width:105px;}
 .light .stores .all_map a{color:#fff;}
 
@@ -3248,7 +3248,7 @@ div[id^=wait_comp]{display:none;}
 .registraion-page .form-block{padding:0px 44px;}
 .registraion-page .main_info{width:73%;padding:38px 61px 25px 0px;border-right:1px solid #e5e5e5;}
 .registraion-page .top p{position:relative;padding:0px 0px 17px 42px;}
-.registraion-page .top p:before{content:"";display:inline-block;width:13px;height:9px;background:url('/bitrix/templates/aspro_optimus/images/icons_wish.png') -36px -4px no-repeat;vertical-align:top;margin:12px 21px 0px -35px;position:relative;z-index:2;}
+.registraion-page .top p:before{content:"";display:inline-block;width:13px;height:9px;background:url('../img/icons_wish.png') -36px -4px no-repeat;vertical-align:top;margin:12px 21px 0px -35px;position:relative;z-index:2;}
 .registraion-page .top p:after{content:"";display:inline-block;width:26px;height:26px;position:absolute;top:3px;left:0px;border-radius:26px;}
 .iblock.label_block{width:59%;position:relative;vertical-align:top;}
 .iblock.label_block label{padding:0px;margin-bottom:4px;}
@@ -3415,7 +3415,7 @@ div.item-title a span {padding:0px 0px 0px;}
 .bx_filter_vertical .bx_filter_block.limited_block{max-height:250px;overflow-y:auto;}
 
 .button_block .to-order.button{border-color:#888888; color:#888888;}
-.button.in-cart, .button.in-cart:hover{background:#4fad00;}
+.button.in-cart, .button.in-cart:hover{background:#5cb85c;}
 
 .bx_filter_vertical input[type="checkbox"]:checked + label:before, .bx_filter_vertical input[type="checkbox"] + label:not(.disabled):hover:before, .filter input[type="checkbox"]:checked + label:before, .filter input[type="checkbox"] + label:hover:before, .filter input[type="radio"]:checked + label:before,.filter input[type="radio"] + label:hover:before{display:inline-block;z-index:3;}
 .bx_filter_vertical input[type="checkbox"]:checked + label:before, .bx_filter_vertical input[type="checkbox"]:checked + label:not(.disabled):hover:before, .filter  input[type="checkbox"]:checked + label:before, .filter input[type="checkbox"]:checked + label:hover:before, .filter input[type="radio"]:checked + label:before, .filter input[type="radio"]:checked + label:hover:before{z-index:-1;}
@@ -3429,7 +3429,7 @@ div.item-title a span {padding:0px 0px 0px;}
 .filter input[type="radio"] + label:after, .bg_block1:after{font-size:0;content:".";display:block;height:13px;width:13px;position:absolute;left:0px;top:0px;background:#ffffff;z-index:2;border-radius:100%;-moz-border-radius:100%;-webkit-border-radius:100%;box-shadow:0px 0px 0px 1px #cccccc inset;-moz-box-shadow:0px 0px 0px 1px #cccccc inset;-webkit-box-shadow:0px 0px 0px 1px #cccccc inset;}
 .filter input[type="radio"] + label:before, .bg_block:before{height:13px;width:13px;border-radius:100%;-moz-border-radius:100%;-webkit-border-radius:100%;top:0px;}
 .bg_block:before, .bg_block:after{width:26px;height:26px;display:inline-block;}
-.bg_block:after{background:url('/bitrix/templates/aspro_optimus/images/icons_wish.png') -36px -5px no-repeat;width:12px;height:8px;left:-36px;top:12px;}
+.bg_block:after{background:url('../img/icons_wish.png') -36px -5px no-repeat;width:12px;height:8px;left:-36px;top:12px;}
 .bg_block:before{z-index:2;top:3px;left:-44px;}
 .filter.radio input[type="radio"] + label:after, .filter.radio input[type="radio"] + label:before{width:13px;height:13px;}
 .filter.radio input[type="radio"] + label.disabled:hover:before, .filter.radio input[type="radio"] + label.disabled:after{background:#cccccc;}
@@ -4236,7 +4236,7 @@ body .contacts_right blockquote{margin:39px 0 34px;}
 .module-map .infoBox .title{font-size:13px;font-weight:bold;line-height:20px;margin-bottom:11px;}
 .module-map .infoBox .metro, .module-map .infoBox .schedule, .module-map .infoBox .phone, .module-map .infoBox .email{margin-bottom:5px;}
 .module-map .infoBox .button{margin-top:10px;}
-.module-map .infoBox .metro > i, .shops.list .item .metro i, .store_property.metro .value i, .stores_list .store_text.metro .value i{background:rgba(0, 0, 0, 0) url("/bitrix/templates/aspro_optimus/images/icons_wish.png") no-repeat scroll -1px -237px;display:block;float:left;height:9px;margin:5px 6px 0 0;width:14px;}
+.module-map .infoBox .metro > i, .shops.list .item .metro i, .store_property.metro .value i, .stores_list .store_text.metro .value i{background:rgba(0, 0, 0, 0) url("../img/icons_wish.png") no-repeat scroll -1px -237px;display:block;float:left;height:9px;margin:5px 6px 0 0;width:14px;}
 
 /* STORES - SHOPS */
 .shops.list .item{position:relative;overflow:hidden;min-height:69px;padding:30px 0;border-top:1px solid #e5e5e5;color:#383838;}
@@ -4524,11 +4524,11 @@ body .bx_item_list_you_looked_horizontal{border-bottom-width:0px;}
 .bx_ordercart tbody td.control a:first-of-type, .bx_ordercart #basket_items_subscribed  tbody td.control a:first-of-type, .bx_ordercart #basket_items_not_available  tbody td.control a:last-of-type{position:absolute;right:9px;top:9px;width:17px;height:17px;border-radius:100%;}
 .bx_ordercart tbody td.control a:first-of-type:before, .bx_ordercart #basket_items_subscribed  tbody td.control a:first-of-type:before, .bx_ordercart #basket_items_not_available  tbody td.control a:last-of-type:before{content:"";position:absolute;left:50%;top:50%;margin:-5px 0 0 -5px;width:10px;height:10px;background: url('/bitrix/templates/aspro_optimus/images/close_icons.png') 0px -27px no-repeat;}
 .bx_ordercart tbody td.control a:first-of-type:hover:before, .bx_ordercart #basket_items_subscribed  tbody td.control a:first-of-type:hover:before, .bx_ordercart #basket_items_not_available  tbody td.control a:last-of-type:hover:before{background-position:-21px -27px;}
-.bx_ordercart tbody td.control a:last-of-type{display:inline-block;width:25px;height:25px;background:url(/bitrix/templates/aspro_optimus/images/icons_wish.png) 3px -17px no-repeat;}
+.bx_ordercart tbody td.control a:last-of-type{display:inline-block;width:25px;height:25px;background:url('../img/icons_wish.png') 3px -17px no-repeat;}
 .bx_ordercart #basket_items_subscribed  tbody td.control a:last-of-type, .bx_ordercart #basket_items_not_available tbody td.control a:last-of-type{background-image:none;}
 .bx_ordercart #basket_items_not_available  tbody td.control a:first-of-type{display:none;}
 .bx_ordercart tbody td.control a:last-of-type:hover{background-position:3px -73px;}
-.bx_ordercart #basket_items_delayed  tbody td.control a:first-of-type{position:relative;right:auto;top:auto;display:inline-block;width:25px;height:25px;background:url(/bitrix/templates/aspro_optimus/images/icons_wish.png) -31px -201px no-repeat;}
+.bx_ordercart #basket_items_delayed  tbody td.control a:first-of-type{position:relative;right:auto;top:auto;display:inline-block;width:25px;height:25px;background:url('../img/icons_wish.png') -31px -201px no-repeat;}
 .bx_ordercart #basket_items_delayed tbody td.control a:first-of-type:hover{background-position:-147px -175px;}
 .bx_ordercart #basket_items_delayed tbody td.control a:first-of-type:before{display:none;}
 .bx_ordercart #basket_items_delayed tbody td.control a:last-of-type{position:absolute;right:9px;top:9px;width:17px;height:17px;background:none;border-radius:100%;}
@@ -4549,7 +4549,7 @@ body .bx_item_list_you_looked_horizontal{border-bottom-width:0px;}
 .bx_ordercart .bx_ordercart_order_pay .bx_bt_button:before{content:"";position:absolute;left:50%;top:50%;margin:-6px 0 0 -7px;width:14px;height:12px;background:url("../img/ai.png") -33px -49px no-repeat;cursor:pointer;}
 .bx_ordercart .bx_ordercart_order_pay .bx_bt_button:active{box-shadow:none;}
 .bx_ordercart .bx_ordercart_coupon:not(:first-of-type){position:relative;margin-left:100px;padding:0 0 0 30px;}
-.bx_ordercart .bx_ordercart_coupon:not(:first-of-type):before{content:"";position:absolute;top:6px;left:8px;width:11px;height:11px;background:url(/bitrix/templates/aspro_optimus/images/icons_wish.png) -102px -86px no-repeat;}
+.bx_ordercart .bx_ordercart_coupon:not(:first-of-type):before{content:"";position:absolute;top:6px;left:8px;width:11px;height:11px;background:url('../img/icons_wish.png') -102px -86px no-repeat;}
 .bx_ordercart .bx_ordercart_coupon:not(:first-of-type).good:before{background-position:-19px -3px;}
 .bx_ordercart .bx_ordercart_coupon .bx_ordercart_coupon_notes{float:right;margin:0;padding:0;border:none;box-shadow:none;border-radius:0;display:block;opacity:1;position:relative;top:auto;left:auto;font-size:14px;line-height:20px;color:#333;background:none;}
 .bx_ordercart .bx_ordercart_coupon .bx_ordercart_coupon_notes:first-letter{text-transform:uppercase;}
@@ -5738,7 +5738,6 @@ header .menu_colored .menu_top_block>li:nth-child(5).current>a {
         padding: 15px;
     }
 }
-
 
 /*
 @media (max-width: 600px) {
