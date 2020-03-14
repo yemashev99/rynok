@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use app\models\Cart;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
@@ -137,5 +138,10 @@ class Product extends \yii\db\ActiveRecord
             $items[] = $product->title;
         }
         return $items;
+    }
+
+    public function getCart()
+    {
+        return $this->hasOne(Cart::className(), ['product_id' => 'product_id']);
     }
 }

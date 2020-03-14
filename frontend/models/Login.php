@@ -4,6 +4,7 @@
 namespace frontend\models;
 
 
+use common\models\Customer;
 use yii\base\Model;
 
 class Login extends Model

@@ -4,7 +4,7 @@
 namespace frontend\controllers;
 
 
-use frontend\models\Customer;
+use common\models\Customer;
 use frontend\models\Login;
 use frontend\models\Signup;
 use Yii;

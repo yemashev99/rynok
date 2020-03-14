@@ -1,7 +1,8 @@
 <?php
 
-namespace frontend\models;
+namespace common\models;
 
+use app\models\Cart;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
@@ -30,7 +31,7 @@ class Customer extends ActiveRecord implements IdentityInterface
             [['email', 'password', 'fio', 'address'], 'string', 'max' => 255],
             [['postcode'], 'string', 'max' => 9],
             [['phone'], 'string', 'max' => 20],
-            ['email', 'unique', 'targetClass' => 'frontend\models\Customer'],
+            ['email', 'unique', 'targetClass' => 'common\models\Customer'],
         ];
     }
 
@@ -83,5 +84,10 @@ class Customer extends ActiveRecord implements IdentityInterface
     public function validateAuthKey($authKey)
     {
 
+    }
+
+    public function getCart()
+    {
+        return $this->hasOne(Cart::className(), ['customer_id' => 'customer_id']);
     }
 }

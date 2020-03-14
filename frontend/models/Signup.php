@@ -4,6 +4,7 @@
 namespace frontend\models;
 
 
+use common\models\Customer;
 use yii\base\Model;
 
 class Signup extends Model
@@ -33,7 +34,7 @@ class Signup extends Model
                     }
                 }
             ],
-            ['email', 'unique', 'targetClass' => 'frontend\models\Customer'],
+            ['email', 'unique', 'targetClass' => 'common\models\Customer'],
         ];
     }
 
