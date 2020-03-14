@@ -21,6 +21,14 @@ class CabinetController extends Controller
 
         $customer = Customer::findOne(['customer_id' => Yii::$app->user->identity->customer_id]);
 
+        if ($customer->load(Yii::$app->request->post()))
+        {
+            if ($customer->save())
+            {
+                return $this->redirect(['cabinet/index']);
+            }
+        }
+
         return $this->render('index', compact('customer'));
     }
 

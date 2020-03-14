@@ -19,6 +19,37 @@ use yii\web\IdentityInterface;
  */
 class Customer extends ActiveRecord implements IdentityInterface
 {
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['email', 'password', 'fio', 'address', 'phone'], 'required'],
+            [['email', 'password', 'fio', 'address'], 'string', 'max' => 255],
+            [['postcode'], 'string', 'max' => 9],
+            [['phone'], 'string', 'max' => 20],
+            ['email', 'unique', 'targetClass' => 'frontend\models\Customer'],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'customer_id' => 'Customer ID',
+            'email' => 'Email',
+            'password' => 'Пароль',
+            'fio' => 'Ф.И.О.',
+            'postcode' => 'Индекс',
+            'address' => 'Адрес',
+            'phone' => 'Контактный телефон',
+        ];
+    }
+
     public function setPassword($password)
     {
         $this->password = sha1($password);
