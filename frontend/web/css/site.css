@@ -2008,9 +2008,10 @@ body .top_slider_wrapp .flexslider .slides > li .wrapper_inner > table{width:100
   color: #9E9C9C;
 }
 .d1 button {
-  position: absolute; 
+  position: absolute;
   top: 0;
   right: 0px;
+  z-index: 2;
   width: 42px;
   height: 42px;
   border: none;

@@ -113,14 +113,14 @@ if ($orderBy == SORT_ASC)
                                                 </div>
                                                 <div class="hover_block1 footer_button">
                                                     <div class="counter_wrapp ">
-                                                        <div class="counter_block" data-offers="N" data-item="1894">
-                                                            <span class="minus" id="bx_3966226736_1894_quant_down">-</span>
-                                                            <input type="text" class="text" id="bx_3966226736_1894_quantity" name="quantity" value="1">
-                                                            <span class="plus" id="bx_3966226736_1894_quant_up">+</span>
+                                                        <div class="counter_block" data-offers="N" data-item="<?=$product->product_id?>">
+                                                            <span class="minus" id="product_<?=$product->product_id?>_quant_down">-</span>
+                                                            <input type="text" class="text" id="product_<?=$product->product_id?>_quantity" name="quantity" value="1">
+                                                            <span class="plus" id="product_<?=$product->product_id?>_quant_up">+</span>
                                                         </div>
-                                                        <div id="bx_3966226736_1894_basket_actions" class="button_block ">
+                                                        <div id="product_<?=$product->product_id?>_basket_actions" class="button_block ">
                                                             <!--noindex-->
-                                                            <span class="small to-cart button"><i></i><span>В корзину</span></span><a rel="nofollow" href="/basket/" class="small in-cart button" data-item="1894" style="display:none;"><i></i><span>В корзине</span></a>												<!--/noindex-->
+                                                            <span class="small to-cart button"><i></i><span>В корзину</span></span><a rel="nofollow" href="/basket/" class="small in-cart button" data-item="<?=$product->product_id?>" style="display:none;"><i></i><span>В корзине</span></a>												<!--/noindex-->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -185,14 +185,14 @@ if ($orderBy == SORT_ASC)
                                             </div>
 
                                             <div class="counter_wrapp ">
-                                                <div class="counter_block" data-offers="N" data-item="1892">
-                                                    <span class="minus" id="bx_3966226736_1892_quant_down">-</span>
-                                                    <input type="text" class="text" id="bx_3966226736_1892_quantity" name="quantity" value="1">
-                                                    <span class="plus" id="bx_3966226736_1892_quant_up">+</span>
+                                                <div class="counter_block" data-offers="N" data-item="<?=$product->product_id?>">
+                                                    <span class="minus" id="quant_down">-</span>
+                                                    <input type="text" class="text" name="quantity" value="1">
+                                                    <span class="plus" id="quant_up">+</span>
                                                 </div>
-                                                <div id="bx_3966226736_1892_basket_actions" class="button_block ">
+                                                <div id="product_<?=$product->product_id?>_basket_actions" class="button_block ">
                                                     <!--noindex-->
-                                                    <span class="small to-cart button transition_bg" data-item="1892" data-float_ratio="" data-ratio="1" data-bakset_div="bx_basket_div_1892" data-props="" data-part_props="Y" data-add_props="Y" data-empty_props="Y" data-offers="" data-iblockid="14" data-quantity="1"><i></i><span>В корзину</span></span><a rel="nofollow" href="/basket/" class="small in-cart button transition_bg" data-item="1892" style="display:none;"><i></i><span>В корзине</span></a>										<!--/noindex-->
+                                                    <span class="small to-cart button transition_bg" data-item="<?=$product->product_id?>" data-float_ratio="" data-ratio="1" data-bakset_div="bx_basket_div_<?=$product->product_id?>" data-props="" data-part_props="Y" data-add_props="Y" data-empty_props="Y" data-offers="" data-iblockid="14" data-quantity="1"><i></i><span>В корзину</span></span><a rel="nofollow" href="/basket/" class="small in-cart button transition_bg" data-item="<?=$product->product_id?>" style="display:none;"><i></i><span>В корзине</span></a>										<!--/noindex-->
                                                 </div>
                                             </div>
                                         </div>
@@ -235,23 +235,23 @@ if ($orderBy == SORT_ASC)
 
                                     </div>
 
-                                    <div class="basket_props_block" id="bx_basket_div_1892" style="display: none;">
+                                    <div class="basket_props_block" id="bx_basket_div_<?=$product->product_id?>" style="display: none;">
                                     </div>
                                     <div class="adaptive_button_buy">
                                         <!--noindex-->
-                                        <span class="small to-cart button transition_bg" data-item="1892" data-float_ratio="" data-ratio="1" data-bakset_div="bx_basket_div_1892" data-props="" data-part_props="Y" data-add_props="Y" data-empty_props="Y" data-offers="" data-iblockid="14" data-quantity="1"><i></i><span>В корзину</span></span><a rel="nofollow" href="/basket/" class="small in-cart button transition_bg" data-item="1892" style="display:none;"><i></i><span>В корзине</span></a>							<!--/noindex-->
+                                        <span class="small to-cart button transition_bg" data-item="<?=$product->product_id?>" data-float_ratio="" data-ratio="1" data-bakset_div="bx_basket_div_<?=$product->product_id?>" data-props="" data-part_props="Y" data-add_props="Y" data-empty_props="Y" data-offers="" data-iblockid="14" data-quantity="1"><i></i><span>В корзину</span></span><a rel="nofollow" href="/basket/" class="small in-cart button transition_bg" data-item="<?=$product->product_id?>" style="display:none;"><i></i><span>В корзине</span></a>							<!--/noindex-->
                                     </div>
                                 </td>
-                                <td class="but-cell item_1892">
+                                <td class="but-cell item_<?=$product->product_id?>">
                                     <div class="counter_wrapp">
-                                        <div class="counter_block" data-item="1892">
+                                        <div class="counter_block" data-item="<?=$product->product_id?>">
                                             <span class="minus">-</span>
                                             <input type="text" class="text" name="count_items" value="1">
                                             <span class="plus">+</span>
                                         </div>
                                         <div class="button_block ">
                                             <!--noindex-->
-                                            <span class="small to-cart button transition_bg" data-item="1892" data-float_ratio="" data-ratio="1" data-bakset_div="bx_basket_div_1892" data-props="" data-part_props="Y" data-add_props="Y" data-empty_props="Y" data-offers="" data-iblockid="14" data-quantity="1"><i></i><span>В корзину</span></span><a rel="nofollow" href="/basket/" class="small in-cart button transition_bg" data-item="1892" style="display:none;"><i></i><span>В корзине</span></a>								<!--/noindex-->
+                                            <span class="small to-cart button transition_bg" data-item="<?=$product->product_id?>" data-float_ratio="" data-ratio="1" data-bakset_div="bx_basket_div_<?=$product->product_id?>" data-props="" data-part_props="Y" data-add_props="Y" data-empty_props="Y" data-offers="" data-iblockid="14" data-quantity="1"><i></i><span>В корзину</span></span><a rel="nofollow" href="/basket/" class="small in-cart button transition_bg" data-item="<?=$product->product_id?>" style="display:none;"><i></i><span>В корзине</span></a>								<!--/noindex-->
                                         </div>
                                     </div>
                                 </td>
@@ -277,3 +277,22 @@ if ($orderBy == SORT_ASC)
         <?php endif; ?>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.minus').on('click',function () {
+            var $input = $(this).parent().find('input');
+            var count = parseInt($input.val()) - 1;
+            count = count < 1 ? 1 : count;
+            $input.val(count);
+            $input.change();
+            return false;
+        });
+        $('.plus').on('click',function () {
+            var $input = $(this).parent().find('input');
+            $input.val(parseInt($input.val()) + 1);
+            $input.change();
+            return false;
+        });
+    });
+</script>
