@@ -4,6 +4,7 @@
 namespace frontend\controllers;
 
 
+use common\models\Cart;
 use common\models\Customer;
 use frontend\models\Login;
 use frontend\models\Signup;
@@ -29,7 +30,21 @@ class CabinetController extends Controller
             }
         }
 
-        return $this->render('index', compact('customer'));
+        $cartItems = Cart::find()
+            ->where([
+                'customer_id' => Yii::$app->user->identity->customer_id,
+                'payed' => 'N'
+            ])
+            ->all();
+
+        $total = 0;
+        foreach ($cartItems as $cartItem)
+        {
+            $total += $cartItem->quantity * $cartItem->product->price;
+        }
+        $total = number_format($total, 0, '.', ' ');
+
+        return $this->render('index', compact('customer', 'cartItems', 'total'));
     }
 
     public function actionLogout()
@@ -89,5 +104,72 @@ class CabinetController extends Controller
         }
 
         return $this->render('signup', compact('model'));
+    }
+
+    public function actionDelete($product_id)
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->goHome();
+        }
+        $cartItem = Cart::findOne([
+            'product_id' => $product_id,
+            'customer_id' => Yii::$app->user->identity->customer_id,
+            'payed' => 'N'
+        ]);
+        $cartItem->delete();
+        return $this->redirect(['cabinet/index']);
+    }
+
+    public function actionDown($product_id)
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->goHome();
+        }
+
+        $cartItem = Cart::findOne([
+            'product_id' => $product_id,
+            'customer_id' => Yii::$app->user->identity->customer_id,
+            'payed' => 'N'
+        ]);
+
+        $quantity = $cartItem->quantity;
+        if ($quantity > 1)
+        {
+            $quantity--;
+            $cartItem->quantity = $quantity;
+
+            if ($cartItem->save())
+            {
+                return $this->redirect(['cabinet/index']);
+            }
+        } else {
+            $this->actionDelete($product_id);
+        }
+        return false;
+    }
+
+    public function actionUp($product_id)
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->goHome();
+        }
+
+        $cartItem = Cart::findOne([
+            'product_id' => $product_id,
+            'customer_id' => Yii::$app->user->identity->customer_id,
+            'payed' => 'N'
+        ]);
+
+        $quantity = $cartItem->quantity;
+        $quantity++;
+        $cartItem->quantity = $quantity;
+
+        if ($cartItem->save())
+        {
+            return $this->redirect(['cabinet/index']);
+        }
     }
 }
