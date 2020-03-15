@@ -136,9 +136,7 @@ if (Yii::$app->user->isGuest)
                                                                 <span class="plus" id="product_<?=$product->product_id?>_quant_up">+</span>
                                                             </div>
                                                             <div id="product_<?=$product->product_id?>_basket_actions" class="button_block ">
-                                                                <!--noindex-->
                                                                 <?=Html::submitButton('<i></i><span>В корзину</span>', ['class' => 'small to-cart button'])?>
-                                                                <!--/noindex-->
                                                             </div>
                                                             <?=$form->field($cartForm, 'product_id')->hiddenInput([
                                                                 'value' => $product->product_id,
@@ -214,17 +212,39 @@ if (Yii::$app->user->isGuest)
                                             <div class="basket_props_block" id="bx_basket_div_1892" style="display: none;">
                                             </div>
 
+                                            <?php if(Product::inCart($customer_id, $product->product_id)) : ?>
+                                            <?php $form = ActiveForm::begin(['fieldConfig' => [
+                                                'options' => ['tag' => false],
+                                            ]]) ?>
                                             <div class="counter_wrapp ">
                                                 <div class="counter_block" data-offers="N" data-item="<?=$product->product_id?>">
-                                                    <span class="minus" id="quant_down">-</span>
-                                                    <input type="text" class="text" name="quantity" value="1">
-                                                    <span class="plus" id="quant_up">+</span>
+                                                    <span class="minus" id="product_<?=$product->product_id?>_quant_down">-</span>
+                                                    <?=$form->field($cartForm, 'quantity', ['template' => "{label}\n{input}"])->textInput([
+                                                        'type' => 'text',
+                                                        'class' => 'text',
+                                                        'id' => 'cartform-quantity-'.$product->product_id,
+                                                        'value' =>  1
+                                                    ])->label(false)?>
+                                                    <span class="plus" id="product_<?=$product->product_id?>_quant_up">+</span>
                                                 </div>
                                                 <div id="product_<?=$product->product_id?>_basket_actions" class="button_block ">
                                                     <!--noindex-->
-                                                    <span class="small to-cart button transition_bg" data-item="<?=$product->product_id?>" data-float_ratio="" data-ratio="1" data-bakset_div="bx_basket_div_<?=$product->product_id?>" data-props="" data-part_props="Y" data-add_props="Y" data-empty_props="Y" data-offers="" data-iblockid="14" data-quantity="1"><i></i><span>В корзину</span></span><a rel="nofollow" href="/basket/" class="small in-cart button transition_bg" data-item="<?=$product->product_id?>" style="display:none;"><i></i><span>В корзине</span></a>										<!--/noindex-->
+                                                    <?=Html::submitButton('<i></i><span>В корзину</span>', ['class' => 'small to-cart button transition_bg'])?>
+                                                    <?=$form->field($cartForm, 'product_id')->hiddenInput([
+                                                        'value' => $product->product_id,
+                                                        'id' => 'cartform-product_id-'.$product->product_id,
+                                                    ])->label(false)?>
+                                                    <?=$form->field($cartForm, 'customer_id')->hiddenInput([
+                                                        'value' => $customer_id,
+                                                        'id' => 'cartform-customer_id-'.$product->product_id,
+                                                    ])->label(false)?>
+                                                    <?php ActiveForm::end(); ?>
+                                                    <?php else: ?>
+                                                        <?=Html::a('<i></i><span>В корзине</span>', ['cabinet/index'], ['class' => 'small in-cart button transition_bg', 'style' => 'margin-top: 10%'])?>
+                                                    <?php endif; ?> <!--/noindex-->
                                                 </div>
                                             </div>
+
                                         </div>
                                     </td></tr>
                                 </tbody>
@@ -273,17 +293,40 @@ if (Yii::$app->user->isGuest)
                                     </div>
                                 </td>
                                 <td class="but-cell item_<?=$product->product_id?>">
+
+                                    <?php if(Product::inCart($customer_id, $product->product_id)) : ?>
+                                    <?php $form = ActiveForm::begin(['fieldConfig' => [
+                                        'options' => ['tag' => false],
+                                    ]]) ?>
                                     <div class="counter_wrapp">
                                         <div class="counter_block" data-item="<?=$product->product_id?>">
-                                            <span class="minus">-</span>
-                                            <input type="text" class="text" name="count_items" value="1">
-                                            <span class="plus">+</span>
+                                            <span class="minus" id="product_<?=$product->product_id?>_quant_down">-</span>
+                                            <?=$form->field($cartForm, 'quantity', ['template' => "{label}\n{input}"])->textInput([
+                                                'type' => 'text',
+                                                'class' => 'text',
+                                                'id' => 'cartform-quantity-'.$product->product_id,
+                                                'value' =>  1
+                                            ])->label(false)?>
+                                            <span class="plus" id="product_<?=$product->product_id?>_quant_up">+</span>
                                         </div>
                                         <div class="button_block ">
                                             <!--noindex-->
-                                            <span class="small to-cart button transition_bg" data-item="<?=$product->product_id?>" data-float_ratio="" data-ratio="1" data-bakset_div="bx_basket_div_<?=$product->product_id?>" data-props="" data-part_props="Y" data-add_props="Y" data-empty_props="Y" data-offers="" data-iblockid="14" data-quantity="1"><i></i><span>В корзину</span></span><a rel="nofollow" href="/basket/" class="small in-cart button transition_bg" data-item="<?=$product->product_id?>" style="display:none;"><i></i><span>В корзине</span></a>								<!--/noindex-->
+                                            <?=Html::submitButton('<i></i><span>В корзину</span>', ['class' => 'small to-cart button transition_bg'])?>
+                                            <?=$form->field($cartForm, 'product_id')->hiddenInput([
+                                                'value' => $product->product_id,
+                                                'id' => 'cartform-product_id-'.$product->product_id,
+                                            ])->label(false)?>
+                                            <?=$form->field($cartForm, 'customer_id')->hiddenInput([
+                                                'value' => $customer_id,
+                                                'id' => 'cartform-customer_id-'.$product->product_id,
+                                            ])->label(false)?>
+                                            <?php ActiveForm::end(); ?>
+                                            <?php else: ?>
+                                                <?=Html::a('<i></i><span>В корзине</span>', ['cabinet/index'], ['class' => 'small in-cart button transition_bg'])?>
+                                            <?php endif; ?><!--/noindex-->
                                         </div>
                                     </div>
+
                                 </td>
                                 <td class="like_icons ">
                                     <div class="wrapp_stockers">

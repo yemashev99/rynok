@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                                     <div class="basket-checkout-block basket-checkout-block-total-price">
                                         <div class="basket-checkout-block-total-price-inner">
                                             <div class="basket-coupon-block-total-price-current">
-                                                <?=$total?> ₽
+                                                <span class="total"><?=$total?></span> ₽
                                             </div>
                                         </div>
                                     </div>
@@ -118,11 +118,14 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                                                 </td>
                                                 <td class="basket-items-list-item-amount">
                                                     <div class="basket-item-block-amount">
-                                                        <?=Html::a('', ['cabinet/down', 'product_id' => $cartItem->product_id], ['class' => 'basket-item-amount-btn-minus'])?>
+                                                        <?=Html::a('', ['cabinet/down', 'product_id' => $cartItem->product_id], ['class' => 'basket-item-amount-btn-minus minus', 'id' => $cartItem->product_id])?>
                                                         <div class="basket-item-amount-filed-block">
-                                                            <?=Html::input('text', 'quantity', $cartItem->quantity, ['class' => 'basket-item-amount-filed', 'readonly' => 'readonly'])?>
+                                                            <?=Html::input('text', 'quantity', $cartItem->quantity, [
+                                                                'class' => 'basket-item-amount-filed',
+                                                                'readonly' => 'readonly',
+                                                            ])?>
                                                         </div>
-                                                        <?=Html::a('', ['cabinet/up', 'product_id' => $cartItem->product_id], ['class' => 'basket-item-amount-btn-plus'])?>
+                                                        <?=Html::a('', ['cabinet/up', 'product_id' => $cartItem->product_id], ['class' => 'basket-item-amount-btn-plus plus', 'id' => $cartItem->product_id])?>
                                                         <div class="basket-item-amount-field-description">
                                                             <?=$cartItem->product->measure?>
                                                         </div>
@@ -203,3 +206,26 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
     </section>
 
 </main>
+
+<!--<script type="text/javascript">
+    $('.minus').on('click',function (e) {
+        var $input = $(this).parent().find('input');
+        var $total = $('.total');
+        $.post('/cabinet/down?product_id='+$(this).attr('id'), function (data) {
+            $input.val(data);
+            $input.change();
+            return false;
+        });
+        e.preventDefault();
+    });
+    $('.plus').on('click',function (e) {
+        var $input = $(this).parent().find('input');
+        $.post('/cabinet/up?product_id='+$(this).attr('id'), function (data) {
+            $input.val(data);
+            $input.change();
+            return false;
+        });
+        e.preventDefault();
+    });
+</script>-->
+

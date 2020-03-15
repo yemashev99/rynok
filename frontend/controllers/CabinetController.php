@@ -142,6 +142,7 @@ class CabinetController extends Controller
 
             if ($cartItem->save())
             {
+                //return $quantity;
                 return $this->redirect(['cabinet/index']);
             }
         } else {
@@ -169,6 +170,7 @@ class CabinetController extends Controller
 
         if ($cartItem->save())
         {
+            //return $quantity;
             return $this->redirect(['cabinet/index']);
         }
     }
