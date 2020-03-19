@@ -47,7 +47,7 @@ class Product extends \yii\db\ActiveRecord
             [['category_id', 'sub_category_id', 'price'], 'integer'],
             [['description', 'image'], 'string'],
             [['title', 'measure'], 'string', 'max' => 255],
-            [['file'], 'file', 'extensions' => ['png', 'jpg']],
+            [['file'], 'file', 'extensions' => ['png', 'jpg', 'jpeg']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'category_id']],
             [['sub_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => SubCategory::className(), 'targetAttribute' => ['sub_category_id' => 'sub_category_id']],
         ];

@@ -9,7 +9,7 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
 
 ?>
 
-<h1 id="pagetitle">Личный кабинет</h1>
+<h1 id="pagetitle">Личный кабинет <?=Html::a('Выйти', ['cabinet/logout'], ['style' => 'color: rgba(255, 0, 0, 0.8); font-size: 14px; font-weight: normal; border-bottom: 1px dashed;'])?></h1>
 
 <main class="my-tabs">
 
@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                                     <div class="basket-checkout-block basket-checkout-block-total-price">
                                         <div class="basket-checkout-block-total-price-inner">
                                             <div class="basket-coupon-block-total-price-current">
-                                                <span class="total"><?=$total?></span> ₽
+                                                <span class="total"><?=Cart::cartPrice(Yii::$app->user->identity->customer_id)?></span> ₽
                                             </div>
                                         </div>
                                     </div>

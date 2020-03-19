@@ -31,7 +31,7 @@ class Category extends \yii\db\ActiveRecord
             [['menu_id'], 'integer'],
             [['title', 'url'], 'string', 'max' => 255],
             [['image'], 'string'],
-            [['file'], 'file', 'extensions' => ['png', 'jpg']],
+            [['file'], 'file', 'extensions' => ['png', 'jpg', 'jpeg']],
             [['menu_id'], 'exist', 'skipOnError' => true, 'targetClass' => Menu::className(), 'targetAttribute' => ['menu_id' => 'menu_id']],
         ];
     }

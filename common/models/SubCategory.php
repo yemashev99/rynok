@@ -41,7 +41,7 @@ class SubCategory extends \yii\db\ActiveRecord
             ['category_id', 'integer'],
             [['title', 'url'], 'string'],
             [['image'], 'string'],
-            [['file'], 'file', 'extensions' => ['png', 'jpg']],
+            [['file'], 'file', 'extensions' => ['png', 'jpg', 'jpeg']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'category_id']],
         ];
     }

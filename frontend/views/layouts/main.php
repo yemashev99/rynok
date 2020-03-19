@@ -3,6 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use common\models\Cart;
 use common\models\Menu;
 use common\models\Category;
 use common\models\Product;
@@ -12,7 +13,6 @@ use yii\bootstrap\Nav;
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
-use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
 use yii\widgets\Pjax;
@@ -388,6 +388,21 @@ foreach ($sidebarItems as $key => $sidebarItem)
         </div>
     </div>
 </footer>
+
+<?php if(!Yii::$app->user->isGuest) :?>
+    <?php if(Cart::inCart(Yii::$app->user->identity->customer_id)) : ?>
+        <a href="<?=Url::to(['cabinet/index'])?>" class="cart floating" style="display: inline;">
+            <p class="cart-img">
+                <span class="count"><?=Cart::productCount(Yii::$app->user->identity->customer_id)?></span>
+            </p>
+
+            <p class="cart-text">
+                <span class="cart-title">Ваша корзина</span>
+                <span> <span class="cart-sum"><?=Cart::cartPrice(Yii::$app->user->identity->customer_id)?></span> руб.</span>
+            </p>
+        </a>
+    <?php endif; ?>
+<?php endif; ?>
 
 <?php $this->endBody() ?>
 </body>

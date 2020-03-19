@@ -37,14 +37,7 @@ class CabinetController extends Controller
             ])
             ->all();
 
-        $total = 0;
-        foreach ($cartItems as $cartItem)
-        {
-            $total += $cartItem->quantity * $cartItem->product->price;
-        }
-        $total = number_format($total, 0, '.', ' ');
-
-        return $this->render('index', compact('customer', 'cartItems', 'total'));
+        return $this->render('index', compact('customer', 'cartItems'));
     }
 
     public function actionLogout()

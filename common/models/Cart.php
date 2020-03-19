@@ -99,8 +99,44 @@ class Cart extends \yii\db\ActiveRecord
         return number_format($quantity * $price, 0, '.', ' ');
     }
 
-    public static function declensionWords($n){
+    public static function declensionWords($n)
+    {
         $words = ['товар', 'товара', 'товаров'];
         return ($words[($n=($n=$n%100)>19?($n%10):$n)==1?0 : (($n>1&&$n<=4)?1:2)]);
+    }
+
+    public static function productCount($id)
+    {
+        $count = Cart::find()->where(['customer_id' => $id, 'payed' => 'N'])->count();
+        return $count;
+    }
+
+    public static function inCart($id)
+    {
+        $count = Cart::productCount($id);
+        if ($count > 0)
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function cartPrice($id)
+    {
+        $cartItems = Cart::find()
+            ->where([
+                'customer_id' => $id,
+                'payed' => 'N'
+            ])
+            ->all();
+
+        $total = 0;
+        foreach ($cartItems as $cartItem)
+        {
+            $total += $cartItem->quantity * $cartItem->product->price;
+        }
+        $total = number_format($total, 0, '.', ' ');
+        return $total;
     }
 }
