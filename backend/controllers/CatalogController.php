@@ -101,4 +101,31 @@ class CatalogController extends Controller
         }
         return $this->render('create', compact('model', 'category', 'subCategory'));
     }
+
+    public function actionUpdate($id)
+    {
+        $model = Product::findOne(['product_id' => $id]);
+        $menu = new Menu();
+        $category = ArrayHelper::map(
+            Category::find()
+                ->where('menu_id = :id', [
+                    ':id' => $menu->getIdByControllerName(Yii::$app->controller->id)
+                ])
+                ->all(), 'category_id', 'title');
+        $subCategory = [];
+        if ($model->load(Yii::$app->request->post()))
+        {
+            $file = UploadedFile::getInstance($model, 'file');
+
+            if ($model->save())
+            {
+                if (!is_null($file))
+                {
+                    $model->saveImage($model->uploadImage($file));
+                }
+                return $this->redirect(['catalog/index']);
+            }
+        }
+        return $this->render('update', compact('model', 'category', 'subCategory'));
+    }
 }

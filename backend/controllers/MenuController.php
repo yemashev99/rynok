@@ -97,7 +97,10 @@ class MenuController extends Controller
 
             if ($category->save())
             {
-                $category->saveImage($category->uploadImage($file));
+                if (!is_null($file))
+                {
+                    $category->saveImage($category->uploadImage($file));
+                }
                 $this->redirect(['menu/category', 'id' => $category->menu_id]);
             }
         }
@@ -151,7 +154,10 @@ class MenuController extends Controller
 
             if ($subCategory->save())
             {
-                $subCategory->saveImage($category->uploadImage($file));
+                if (!is_null($file))
+                {
+                    $subCategory->saveImage($category->uploadImage($file));
+                }
                 $this->redirect(['menu/sub-category', 'id' => $subCategory->category_id]);
             }
         }
