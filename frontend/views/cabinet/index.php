@@ -91,15 +91,12 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                                                             <h2 class="basket-item-info-name">
                                                                 <?=Html::a('<span>'.$cartItem->product->title.'</span>', '#', ['class' => 'basket-item-info-name-link'])?>
                                                             </h2>
-                                                            <div class="basket-item-block-properties">
-                                                                <div class="basket-item-property-custom basket-item-property-custom-text">
-                                                                    <div class="basket-item-property-custom-name">
-                                                                        Тип цены
-                                                                    </div>
-                                                                    <div class="basket-item-property-custom-value">
-                                                                        Розничная цена
-                                                                    </div>
+                                                            <div class="basket-item-block-comment">
+                                                                <div class="basket-item-property-custom-name">
+                                                                    Комментарий к заказу
                                                                 </div>
+
+                                                                <textarea class="comment" id="<?=$cartItem->product_id?>" style="width: 90%; min-height: 65px;"><?=$cartItem->comment?></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -206,6 +203,26 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
     </section>
 
 </main>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        var input = $( '.comment' ), timeOut;
+        input.on( 'keyup', function () {
+            clearTimeout( timeOut );
+            timeOut = setTimeout( myfunc, 2000, $( this ).val(), $( this ).attr('id') );
+        });
+        input.on( 'keydown', function () {
+            clearTimeout( timeOut );
+        });
+
+        function myfunc( value, id ) {
+            $.post('/cabinet/save-comment?comment='+value+'&product_id='+id, function (data) {
+                return false;
+            });
+        }
+
+    });
+</script>
 
 <!--<script type="text/javascript">
     $('.minus').on('click',function (e) {

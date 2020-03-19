@@ -167,4 +167,20 @@ class CabinetController extends Controller
             return $this->redirect(['cabinet/index']);
         }
     }
+
+    public function actionSaveComment($comment, $product_id)
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->goHome();
+        }
+
+        $cartItem = Cart::findOne([
+            'product_id' => $product_id,
+            'customer_id' => Yii::$app->user->identity->customer_id,
+            'payed' => 'N'
+        ]);
+        $cartItem->comment = $comment;
+        $cartItem->save();
+    }
 }
