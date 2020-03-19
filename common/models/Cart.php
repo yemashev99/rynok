@@ -139,4 +139,15 @@ class Cart extends \yii\db\ActiveRecord
         $total = number_format($total, 0, '.', ' ');
         return $total;
     }
+
+    public function sendMail()
+    {
+        $result = Yii::$app->mailer->compose()
+            ->setFrom('easy.crm@yandex.ru')
+            ->setTo('yemashev99@yandex.ru')
+            ->setSubject('Новый заказ!')
+            ->setHtmlBody('TEST1TEST')
+            ->send();
+        return $result;
+    }
 }

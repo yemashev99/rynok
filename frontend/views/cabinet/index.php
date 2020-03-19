@@ -54,9 +54,7 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                                         </div>
                                     </div>
                                     <div class="basket-checkout-block basket-checkout-block-btn">
-                                        <button class="btn btn-lg btn-default basket-btn-checkout">
-                                            Оформить заказ
-                                        </button>
+                                        <?=Html::a('Оформить заказ', ['cabinet/order'], ['class' => 'btn btn-lg btn-default basket-btn-checkout'])?>
                                     </div>
                                 </div>
                             </div>
