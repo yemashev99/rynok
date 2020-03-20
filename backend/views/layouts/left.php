@@ -38,6 +38,31 @@
                         ]
                     ],
                     [
+                        'label' => 'Заказы',
+                        'icon' => 'shopping-basket',
+                        'url' => '#',
+                        'items' => [
+                            [
+                                'label' => 'Новые',
+                                'icon' => 'envelope-open-o',
+                                'url' => ['order/new'],
+                                'active' => $this->context->route == 'order/new',
+                            ],
+                            [
+                                'label' => 'Отправленные',
+                                'icon' => 'truck',
+                                'url' => ['order/delivered'],
+                                'active' => $this->context->route == 'order/delivered',
+                            ],
+                            [
+                                'label' => 'Завершенные',
+                                'icon' => 'check-square-o',
+                                'url' => ['order/done'],
+                                'active' => $this->context->route == 'order/done',
+                            ],
+                        ],
+                    ],
+                    [
                         'label' => 'Пользователи',
                         'icon' => 'users',
                         'url' => ['/user'],

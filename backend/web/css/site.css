@@ -119,3 +119,13 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.contact-info {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.contact-data {
+    font-size: 20px;
+    margin: 20px 0 5% 0;
+}

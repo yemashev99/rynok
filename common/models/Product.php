@@ -148,7 +148,7 @@ class Product extends \yii\db\ActiveRecord
     public static function inCart($customer_id, $product_id)
     {
         $cartItem = Cart::findOne(['customer_id' => $customer_id, 'product_id' => $product_id]);
-        if (is_null($cartItem) || $cartItem->payed == "Y"){
+        if (is_null($cartItem) || $cartItem->order_status_id != 1){
             return true;
         } else {
             return false;

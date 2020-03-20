@@ -41,7 +41,7 @@ class Customer extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'customer_id' => 'Customer ID',
+            'customer_id' => 'Код клиента',
             'email' => 'Email',
             'password' => 'Пароль',
             'fio' => 'Ф.И.О.',

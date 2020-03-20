@@ -20,6 +20,12 @@ class CatalogController extends Controller
 {
     public function actionIndex()
     {
+
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+
         //сортировка по категориям
         $menu = new Menu();
         $sortForm = new SortForm();
@@ -60,6 +66,12 @@ class CatalogController extends Controller
 
     public function actionList($id)
     {
+
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+
         $count = SubCategory::find()
             ->where(['category_id' => $id])
             ->count();
@@ -80,6 +92,12 @@ class CatalogController extends Controller
 
     public function actionCreate()
     {
+
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+
         $model = new Product();
         $menu = new Menu();
         $category = ArrayHelper::map(
@@ -104,6 +122,12 @@ class CatalogController extends Controller
 
     public function actionUpdate($id)
     {
+
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+
         $model = Product::findOne(['product_id' => $id]);
         $menu = new Menu();
         $category = ArrayHelper::map(

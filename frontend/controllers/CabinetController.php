@@ -33,7 +33,7 @@ class CabinetController extends Controller
         $cartItems = Cart::find()
             ->where([
                 'customer_id' => Yii::$app->user->identity->customer_id,
-                'payed' => 'N'
+                'order_status_id' => 1
             ])
             ->all();
 
@@ -108,7 +108,7 @@ class CabinetController extends Controller
         $cartItem = Cart::findOne([
             'product_id' => $product_id,
             'customer_id' => Yii::$app->user->identity->customer_id,
-            'payed' => 'N'
+            'order_status_id' => 1
         ]);
         $cartItem->delete();
         return $this->redirect(['cabinet/index']);
@@ -124,7 +124,7 @@ class CabinetController extends Controller
         $cartItem = Cart::findOne([
             'product_id' => $product_id,
             'customer_id' => Yii::$app->user->identity->customer_id,
-            'payed' => 'N'
+            'order_status_id' => 1
         ]);
 
         $quantity = $cartItem->quantity;
@@ -154,7 +154,7 @@ class CabinetController extends Controller
         $cartItem = Cart::findOne([
             'product_id' => $product_id,
             'customer_id' => Yii::$app->user->identity->customer_id,
-            'payed' => 'N'
+            'order_status_id' => 1
         ]);
 
         $quantity = $cartItem->quantity;
@@ -178,7 +178,7 @@ class CabinetController extends Controller
         $cartItem = Cart::findOne([
             'product_id' => $product_id,
             'customer_id' => Yii::$app->user->identity->customer_id,
-            'payed' => 'N'
+            'order_status_id' => 1
         ]);
         $cartItem->comment = $comment;
         $cartItem->save();
@@ -194,14 +194,19 @@ class CabinetController extends Controller
         $items = Cart::find()
             ->where([
                 'customer_id' => Yii::$app->user->identity->customer_id,
-                'payed' => 'N'
+                'order_status_id' => 1
             ])
             ->all();
 
         $model = new Cart();
         if($model->sendMail())
         {
-            return $this->redirect(['cabinet/index']);
+            foreach ($items as $item)
+            {
+                $item->order_status_id = 2;
+                $item->save();
+            }
+            return $this->render('send');
         }
     }
 }
