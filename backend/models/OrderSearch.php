@@ -64,4 +64,24 @@ class OrderSearch extends Model
 
         return $dataProvider;
     }
+
+    public static function orderCount($status)
+    {
+        $query = Customer::find()
+            ->join("INNER JOIN", "cart", "cart.customer_id = customer.customer_id");
+
+        switch ($status){
+            case 'new':
+                $query = $query->where('cart.order_status_id = 2');
+                break;
+            case 'delivered':
+                $query = $query->where('cart.order_status_id = 3');
+                break;
+            case 'done':
+                $query = $query->where('cart.order_status_id = 4');
+                break;
+        }
+        $count = $query->groupBy('fio')->count();
+        return $count;
+    }
 }

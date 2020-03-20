@@ -1,3 +1,8 @@
+<?php
+
+use backend\models\OrderSearch;
+
+?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -43,19 +48,19 @@
                         'url' => '#',
                         'items' => [
                             [
-                                'label' => 'Новые',
+                                'label' => 'Новые ('.OrderSearch::orderCount('new').')',
                                 'icon' => 'envelope-open-o',
                                 'url' => ['order/new'],
                                 'active' => $this->context->route == 'order/new',
                             ],
                             [
-                                'label' => 'Отправленные',
+                                'label' => 'Отправленные ('.OrderSearch::orderCount('delivered').')',
                                 'icon' => 'truck',
                                 'url' => ['order/delivered'],
                                 'active' => $this->context->route == 'order/delivered',
                             ],
                             [
-                                'label' => 'Завершенные',
+                                'label' => 'Завершенные ('.OrderSearch::orderCount('done').')',
                                 'icon' => 'check-square-o',
                                 'url' => ['order/done'],
                                 'active' => $this->context->route == 'order/done',
