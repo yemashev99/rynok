@@ -88,6 +88,6 @@ class OrderController extends Controller
 
         $searchModel = new OrderSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 'done');
-        return $this->render('delivered', compact('dataProvider', 'searchModel'));
+        return $this->render('done', compact('dataProvider', 'searchModel'));
     }
 }

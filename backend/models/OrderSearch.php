@@ -36,13 +36,13 @@ class OrderSearch extends Model
 
         switch ($status){
             case 'new':
-                $query = $query->where('cart.order_status_id = 2');
+                $query = $query->where('cart.order_status_id = 2')->orderBy('cart.created_at');
                 break;
             case 'delivered':
-                $query = $query->where('cart.order_status_id = 3');
+                $query = $query->where('cart.order_status_id = 3')->orderBy('cart.created_at');
                 break;
             case 'done':
-                $query = $query->where('cart.order_status_id = 4');
+                $query = $query->where('cart.order_status_id = 4')->orderBy('cart.created_at');
                 break;
         }
 
