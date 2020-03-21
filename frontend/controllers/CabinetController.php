@@ -13,7 +13,7 @@ use yii\web\Controller;
 
 class CabinetController extends Controller
 {
-    public function actionIndex()
+    public function actionIndex($cabinet = 'cart')
     {
         if (Yii::$app->user->isGuest)
         {
@@ -37,7 +37,7 @@ class CabinetController extends Controller
             ])
             ->all();
 
-        return $this->render('index', compact('customer', 'cartItems'));
+        return $this->render('index', compact('customer', 'cartItems', 'cabinet'));
     }
 
     public function actionLogout()
@@ -191,6 +191,16 @@ class CabinetController extends Controller
             return $this->goHome();
         }
 
+        return $this->render('send');
+    }
+
+    public function actionSendMail()
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->goHome();
+        }
+
         $items = Cart::find()
             ->where([
                 'customer_id' => Yii::$app->user->identity->customer_id,
@@ -206,7 +216,7 @@ class CabinetController extends Controller
                 $item->order_status_id = 2;
                 $item->save();
             }
-            return $this->render('send');
+            return $this->redirect(['cabinet/order']);
         }
     }
 }

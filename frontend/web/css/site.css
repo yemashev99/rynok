@@ -6302,6 +6302,21 @@ h2.basket-item-info-name {
     padding-left: 71px;
 }
 
+.icon-done {
+    text-align: center;
+}
+
+.icon-done > h2 {
+    margin-top: 10px;
+    font-size: 40px;
+}
+
+.icon-done > .row {
+    padding-top: 2%;
+    padding-left: 10%;
+    font-size: 14px;
+}
+
 /*
 @media (max-width: 600px) {
     #footer .footer_bottom_inner .phones .order_wrap_btn {
