@@ -24,6 +24,7 @@ class Menu extends ActiveRecord
             ['title', 'required'],
             ['title', 'string'],
             ['sort', 'integer'],
+            ['content', 'string']
         ];
     }
 
@@ -34,6 +35,7 @@ class Menu extends ActiveRecord
             'sort' => 'Порядковый номер',
             'title' => 'Название',
             'url' => 'Ссылка',
+            'content' => 'Страница',
         ];
     }
 

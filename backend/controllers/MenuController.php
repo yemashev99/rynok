@@ -79,7 +79,10 @@ class MenuController extends Controller
 
             if ($category->save())
             {
-                $category->saveImage($category->uploadImage($file));
+                if (!is_null($file))
+                {
+                    $category->saveImage($category->uploadImage($file));
+                }
                 $this->redirect(['menu/category', 'id' => $id]);
             }
         }

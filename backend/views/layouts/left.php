@@ -1,6 +1,26 @@
 <?php
 
 use backend\models\OrderSearch;
+use common\models\Category;
+use common\models\Menu;
+
+$menu = new Menu();
+$items = Category::find()->where(['menu_id' => $menu->getIdByControllerName('about')])->all();
+$aboutItems[] = [
+    'label' => 'Основная информация',
+    'icon' => 'file-text-o',
+    'url' => ['about/index'],
+    'active' => in_array('index', explode('/', Yii::$app->request->pathInfo))
+];
+foreach ($items as $item)
+{
+    $aboutItems[] = [
+        'label' => $item->title,
+        'icon' => 'file-text-o',
+        'url' => ['about/'.$item->url],
+        'active' => in_array($item->url, explode('/', Yii::$app->request->pathInfo))
+    ];
+}
 
 ?>
 <aside class="main-sidebar">
@@ -39,6 +59,12 @@ use backend\models\OrderSearch;
                                 'icon' => 'shopping-cart',
                                 'url' => ['catalog/index'],
                                 'active' => in_array(Yii::$app->controller->id, ['catalog'])
+                            ],
+                            [
+                                'label' => 'О рынке',
+                                'icon' => 'info',
+                                'url' => '#',
+                                'items' => $aboutItems,
                             ],
                         ]
                     ],
