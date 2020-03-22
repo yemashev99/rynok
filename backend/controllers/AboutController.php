@@ -72,15 +72,14 @@ class AboutController extends Controller
         {
 
             $file = UploadedFile::getInstance($model, 'file');
+            $model->date = date('d.m.Y');
 
             if ($model->save())
             {
-
                 if (!is_null($file))
                 {
                     $model->saveImage($model->uploadImage($file));
                 }
-
                 return $this->redirect(['about/news']);
             }
         }

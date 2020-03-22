@@ -6317,6 +6317,47 @@ h2.basket-item-info-name {
     font-size: 14px;
 }
 
+.main-content article.hentry {
+    background-color: #ffffff;
+    margin-bottom: 30px;
+    -webkit-box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+    -moz-box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+}
+
+article .padding-content {
+    padding: 26px;
+    background-color: #ffffff;
+}
+
+h1.entry-title {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.entry-content p {
+    margin: 0 0 20px;
+}
+
+.masonry-brick {
+    border: 2px solid #f5f5f5;
+    margin: 10px 20px;
+}
+
+.header-image {
+    text-align: center;
+    width: 750px;
+    height: 450px;
+}
+
+.content-title {
+    font-size: 44px;
+    color: #5cb85c;
+}
+
 /*
 @media (max-width: 600px) {
     #footer .footer_bottom_inner .phones .order_wrap_btn {

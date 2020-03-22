@@ -39,6 +39,9 @@ class NewsSearch extends Model
             'pagination' => [
                 'pageSize' => 11
             ],
+            'sort' => [
+                'defaultOrder' => ['news_id' => SORT_DESC]
+            ]
         ]);
 
         $this->load($params);

@@ -14,6 +14,7 @@ use yii\web\UploadedFile;
  * @property string $description
  * @property string $content
  * @property string $url
+ * @property string $date
  */
 class News extends \yii\db\ActiveRecord
 {
@@ -38,7 +39,7 @@ class News extends \yii\db\ActiveRecord
         return [
             [['title', 'description', 'url'], 'required'],
             [['description', 'content'], 'string'],
-            [['title', 'image', 'url'], 'string', 'max' => 255],
+            [['title', 'image', 'url', 'date'], 'string', 'max' => 255],
             [['file'], 'file', 'extensions' => ['png', 'jpg', 'jpeg']],
         ];
     }
@@ -56,6 +57,7 @@ class News extends \yii\db\ActiveRecord
             'content' => 'Контент',
             'url' => 'Ссылка',
             'file' => 'Изображение',
+            'date' => 'Дата',
         ];
     }
 

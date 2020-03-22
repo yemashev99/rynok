@@ -60,6 +60,7 @@ return [
                 'catalog/search' => 'catalog/search',
                 'catalog/<category>/<subCategory>' => 'catalog/item',
                 'catalog/<category>' => 'catalog/category',
+                'about/news/<news>' => 'about/news-content',
             ],
         ],
     ],

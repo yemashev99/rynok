@@ -228,53 +228,55 @@ switch (Yii::$app->controller->id) {
                     'items' => $navSideItems,
                 ]) ?>
                 <?/*TODO: news*/?>
-                <div class="news_blocks front">
-                    <div class="top_block">
-                        <div class="title_block">Новости</div>
-                        <a data="/catalog/" href="/o-rynke/novosti/">Все новости</a>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="info_block">
-                        <div class="news_items">
-                            <div id="bx_3218110189_2225" class="item box-sizing dl">
-                                <div class="image">
-                                    <a href="/o-rynke/novosti/2020/vnimanie_3_fevralya_na_rynke_san_den/">
-                                        <img class="img-responsive" src="/upload/resize_cache/iblock/72e/60_60_2/САНИТАРНЫЙ ДЕНЬ КВАДРАТ.jpg" alt="Внимание! 3 февраля на рынке сан.день!" title="Внимание! 3 февраля на рынке сан.день!">
-                                    </a>
+                <?php if (!in_array('news', explode('/', Yii::$app->request->pathInfo))) : ?>
+                    <div class="news_blocks front">
+                        <div class="top_block">
+                            <div class="title_block">Новости</div>
+                            <a data="/catalog/" href="/o-rynke/novosti/">Все новости</a>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="info_block">
+                            <div class="news_items">
+                                <div id="bx_3218110189_2225" class="item box-sizing dl">
+                                    <div class="image">
+                                        <a href="/o-rynke/novosti/2020/vnimanie_3_fevralya_na_rynke_san_den/">
+                                            <img class="img-responsive" src="/upload/resize_cache/iblock/72e/60_60_2/САНИТАРНЫЙ ДЕНЬ КВАДРАТ.jpg" alt="Внимание! 3 февраля на рынке сан.день!" title="Внимание! 3 февраля на рынке сан.день!">
+                                        </a>
+                                    </div>
+                                    <div class="info">
+                                        <div class="date">31 Января 2020</div>
+                                        <a class="name dark_link" href="/o-rynke/novosti/2020/vnimanie_3_fevralya_na_rynke_san_den/">Внимание! 3 февраля на рынке сан.день!</a>
+                                    </div>
+                                    <div class="clearfix"></div>
                                 </div>
-                                <div class="info">
-                                    <div class="date">31 Января 2020</div>
-                                    <a class="name dark_link" href="/o-rynke/novosti/2020/vnimanie_3_fevralya_na_rynke_san_den/">Внимание! 3 февраля на рынке сан.день!</a>
+                                <div id="bx_3218110189_2224" class="item box-sizing dl">
+                                    <div class="image">
+                                        <a href="/o-rynke/novosti/2020/pozdravlyaem_/">
+                                            <img class="img-responsive" src="/upload/resize_cache/iblock/e63/60_60_2/Шилов.png" alt="Поздравляем! " title="Поздравляем! ">
+                                        </a>
+                                    </div>
+                                    <div class="info">
+                                        <div class="date">9 Января 2020</div>
+                                        <a class="name dark_link" href="/o-rynke/novosti/2020/pozdravlyaem_/">Поздравляем! </a>
+                                    </div>
+                                    <div class="clearfix"></div>
                                 </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div id="bx_3218110189_2224" class="item box-sizing dl">
-                                <div class="image">
-                                    <a href="/o-rynke/novosti/2020/pozdravlyaem_/">
-                                        <img class="img-responsive" src="/upload/resize_cache/iblock/e63/60_60_2/Шилов.png" alt="Поздравляем! " title="Поздравляем! ">
-                                    </a>
+                                <div id="bx_3218110189_2223" class="item box-sizing dl">
+                                    <div class="image">
+                                        <a href="/o-rynke/novosti/2019/izmenilis_usloviya_dostavki/">
+                                            <img class="img-responsive" src="/upload/resize_cache/iblock/248/60_60_2/1.jpg" alt="Изменились условия доставки!" title="Изменились условия доставки!">
+                                        </a>
+                                    </div>
+                                    <div class="info">
+                                        <div class="date">27 Декабря 2019</div>
+                                        <a class="name dark_link" href="/o-rynke/novosti/2019/izmenilis_usloviya_dostavki/">Изменились условия доставки!</a>
+                                    </div>
+                                    <div class="clearfix"></div>
                                 </div>
-                                <div class="info">
-                                    <div class="date">9 Января 2020</div>
-                                    <a class="name dark_link" href="/o-rynke/novosti/2020/pozdravlyaem_/">Поздравляем! </a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div id="bx_3218110189_2223" class="item box-sizing dl">
-                                <div class="image">
-                                    <a href="/o-rynke/novosti/2019/izmenilis_usloviya_dostavki/">
-                                        <img class="img-responsive" src="/upload/resize_cache/iblock/248/60_60_2/1.jpg" alt="Изменились условия доставки!" title="Изменились условия доставки!">
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <div class="date">27 Декабря 2019</div>
-                                    <a class="name dark_link" href="/o-rynke/novosti/2019/izmenilis_usloviya_dostavki/">Изменились условия доставки!</a>
-                                </div>
-                                <div class="clearfix"></div>
                             </div>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
             </div>
             <div class="right_block">
                 <?=
