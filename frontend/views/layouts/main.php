@@ -54,18 +54,37 @@ foreach ($menuItems as $key => $menuItem)
 $menu = new Menu();
 $sidebarItems = Category::find()->where('menu_id = :id', [':id' => $menu->getIdByControllerName(Yii::$app->controller->id)])->all();
 $navSideItems = array();
-foreach ($sidebarItems as $key => $sidebarItem)
-{
-    $navSideItems[] = [
-        'label' => $sidebarItem->title,
-        'url' => Url::to(['catalog/category', 'category' => $sidebarItem->url]),
-        'linkOptions' => [
-            'class' => 'icons_fa',
-        ],
-        'options' => [
-            'class' => 'item',
-        ],
-    ];
+switch (Yii::$app->controller->id) {
+    case 'catalog':
+        foreach ($sidebarItems as $key => $sidebarItem)
+        {
+            $navSideItems[] = [
+                'label' => $sidebarItem->title,
+                'url' => Url::to(['catalog/category', 'category' => $sidebarItem->url]),
+                'linkOptions' => [
+                    'class' => 'icons_fa',
+                ],
+                'options' => [
+                    'class' => 'item',
+                ],
+            ];
+        }
+        break;
+    case 'about':
+        foreach ($sidebarItems as $key => $sidebarItem)
+        {
+            $navSideItems[] = [
+                'label' => $sidebarItem->title,
+                'url' => Url::to(['about/'.$sidebarItem->url]),
+                'linkOptions' => [
+                    'class' => 'icons_fa',
+                ],
+                'options' => [
+                    'class' => 'item',
+                ],
+            ];
+        }
+        break;
 }
 
 ?>

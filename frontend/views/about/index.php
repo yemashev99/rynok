@@ -1,8 +1,5 @@
 <?php
 
-use yii\helpers\Html;
-use yii\helpers\Url;
-
 $this->title = $menu->title.' - Республиканский Селькохозяйственный Рынок';
 $this->params['breadcrumbs'][] = $menu->title;
 

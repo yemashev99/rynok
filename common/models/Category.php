@@ -33,6 +33,7 @@ class Category extends \yii\db\ActiveRecord
             [['image'], 'string'],
             [['file'], 'file', 'extensions' => ['png', 'jpg', 'jpeg']],
             [['menu_id'], 'exist', 'skipOnError' => true, 'targetClass' => Menu::className(), 'targetAttribute' => ['menu_id' => 'menu_id']],
+            ['content', 'string']
         ];
     }
 
@@ -48,6 +49,7 @@ class Category extends \yii\db\ActiveRecord
             'url' => 'Значение в ссылке',
             'file' => 'Изображение',
             'image' => 'Изображение',
+            'content' => 'Страница',
         ];
     }
 
