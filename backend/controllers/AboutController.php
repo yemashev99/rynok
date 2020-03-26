@@ -4,11 +4,15 @@
 namespace backend\controllers;
 
 
+use backend\models\GallerySearch;
 use backend\models\NewsSearch;
 use common\models\Category;
+use common\models\Gallery;
+use common\models\GalleryItem;
 use common\models\Menu;
 use common\models\News;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 
@@ -131,6 +135,116 @@ class AboutController extends Controller
 
     public function actionGallery()
     {
-        return $this->render('gallery');
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        $searchModel = new GallerySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('gallery', compact('dataProvider', 'searchModel'));
+    }
+
+    public function actionGalleryCreate()
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        $model = new Gallery();
+        if ($model->load(Yii::$app->request->post()))
+        {
+
+            $file = UploadedFile::getInstance($model, 'file');
+
+            if ($model->save())
+            {
+                if (!is_null($file))
+                {
+                    $model->saveImage($model->uploadImage($file));
+                }
+                return $this->redirect(['about/gallery']);
+            }
+        }
+        return $this->render('gallery-create', compact('model'));
+    }
+
+    public function actionGalleryUpdate($id)
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        $model = Gallery::findOne(['gallery_id' => $id]);
+        if ($model->load(Yii::$app->request->post()))
+        {
+
+            $file = UploadedFile::getInstance($model, 'file');
+
+            if ($model->save())
+            {
+
+                if (!is_null($file))
+                {
+                    $model->saveImage($model->uploadImage($file));
+                }
+
+                return $this->redirect(['about/gallery']);
+            }
+        }
+        return $this->render('gallery-update', compact('model'));
+    }
+
+    public function actionGalleryContent($id)
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        $model = Gallery::findOne(['gallery_id' => $id]);
+        if ($model->load(Yii::$app->request->post()))
+        {
+            if ($model->save())
+            {
+                return $this->redirect(['about/gallery']);
+            }
+        }
+        $query = GalleryItem::find()->where(['gallery_id' => $id]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 11
+            ],
+            'sort' => [
+                'defaultOrder' => ['gallery_item_id' => SORT_DESC]
+            ]
+        ]);
+        return $this->render('gallery-content', compact('model', 'dataProvider'));
+    }
+
+    public function actionGalleryItemCreate($id, $type)
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        $model = new GalleryItem();
+        if ($model->load(Yii::$app->request->post()))
+        {
+
+            $file = UploadedFile::getInstance($model, 'file');
+
+            if ($model->save())
+            {
+
+                if (!is_null($file))
+                {
+                    $model->saveContent($model->uploadImage($file));
+                }
+
+                return $this->redirect(['about/gallery-content', 'id' => $id]);
+            }
+        }
+        $gallery = Gallery::findOne(['gallery_id' => $id]);
+        return $this->render('gallery-item-create', compact('model', 'gallery', 'type'));
     }
 }
