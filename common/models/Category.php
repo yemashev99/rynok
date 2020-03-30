@@ -131,4 +131,9 @@ class Category extends \yii\db\ActiveRecord
     {
         return $category = Category::findOne(['url' => $category]);
     }
+
+    public function getFirstPageIcon()
+    {
+        return $this->hasMany(FirstPageIcon::className(), ['category_id' => 'category_id']);
+    }
 }

@@ -6362,6 +6362,11 @@ h1.entry-title {
     text-align: center;
 }
 
+.main-category-block{
+	padding: 0 10% 3% 10%;
+}
+
+
 /*
 @media (max-width: 600px) {
     #footer .footer_bottom_inner .phones .order_wrap_btn {

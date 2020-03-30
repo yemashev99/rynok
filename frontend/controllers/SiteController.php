@@ -2,10 +2,9 @@
 namespace frontend\controllers;
 
 use common\models\FirstPageGallery;
-use common\models\Menu;
+use common\models\FirstPageIcon;
+use common\models\News;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
  * Site controller
@@ -20,6 +19,8 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $gallery = FirstPageGallery::find()->orderBy(['sort' => SORT_ASC])->all();
-        return $this->render('index', compact('gallery'));
+        $icons = FirstPageIcon::find()->orderBy(['first_page_icon_id' => SORT_ASC])->all();
+        $newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(6)->all();
+        return $this->render('index', compact('gallery', 'newsItems', 'icons'));
     }
 }
