@@ -247,4 +247,31 @@ class AboutController extends Controller
         $gallery = Gallery::findOne(['gallery_id' => $id]);
         return $this->render('gallery-item-create', compact('model', 'gallery', 'type'));
     }
+
+    public function actionGalleryItemUpdate($id, $type, $item_id)
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        $model = GalleryItem::findOne(['gallery_item_id' => $item_id]);
+        if ($model->load(Yii::$app->request->post()))
+        {
+
+            $file = UploadedFile::getInstance($model, 'file');
+
+            if ($model->save())
+            {
+
+                if (!is_null($file))
+                {
+                    $model->saveContent($model->uploadImage($file));
+                }
+
+                return $this->redirect(['about/gallery-content', 'id' => $id]);
+            }
+        }
+        $gallery = Gallery::findOne(['gallery_id' => $id]);
+        return $this->render('gallery-item-update', compact('model', 'gallery', 'type'));
+    }
 }

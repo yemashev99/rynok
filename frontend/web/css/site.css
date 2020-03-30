@@ -1586,7 +1586,7 @@ a:hover{text-decoration:none !important;}
 .wrapper_inner1.wides.float_banners{margin: 0px 0px 0px;}
 
 .left_block{width: 220px;float: left;position: relative;zoom: 1;z-index: 390;padding-top:0px;}
-.right_block{padding-top: 24px;padding-left: 244px;overflow:visible;position:relative;}
+.right_block{padding-top: 1px;padding-left: 244px;overflow:visible;position:relative;}
 
 .news-list{overflow: hidden;}
 
@@ -6356,6 +6356,10 @@ h1.entry-title {
 .content-title {
     font-size: 44px;
     color: #5cb85c;
+}
+
+.center-title{
+    text-align: center;
 }
 
 /*

@@ -55,6 +55,12 @@ foreach ($items as $item)
                                 'active' => in_array(Yii::$app->controller->id, ['menu'])
                             ],
                             [
+                                'label' => 'Главная',
+                                'icon' => 'file-text-o',
+                                'url' => ['first/index'],
+                                'active' => in_array(Yii::$app->controller->id, ['first'])
+                            ],
+                            [
                                 'label' => 'Каталог',
                                 'icon' => 'shopping-cart',
                                 'url' => ['catalog/index'],

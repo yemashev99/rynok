@@ -6,6 +6,8 @@ namespace frontend\controllers;
 
 
 use common\models\Category;
+use common\models\Gallery;
+use common\models\GalleryItem;
 use common\models\Menu;
 use common\models\News;
 use Yii;
@@ -40,5 +42,22 @@ class AboutController extends Controller
         $path = explode('/', Yii::$app->request->pathInfo);
         $category = Category::findOne(['url' => $path[1]]);
         return $this->render('news-content', compact('news', 'category'));
+    }
+
+    public function actionGallery()
+    {
+        $galleryItems = Gallery::find()->orderBy(['gallery_id' => SORT_DESC])->all();
+        $path = explode('/', Yii::$app->request->pathInfo);
+        $category = Category::findOne(['url' => $path[1]]);
+        return $this->render('gallery', compact('galleryItems', 'category'));
+    }
+
+    public function actionGalleryContent($item)
+    {
+        $gallery = Gallery::findOne(['url' => $item]);
+        $path = explode('/', Yii::$app->request->pathInfo);
+        $category = Category::findOne(['url' => $path[1]]);
+        $items = GalleryItem::find()->where(['gallery_id' => $gallery->gallery_id])->all();
+        return $this->render('gallery-content', compact('gallery', 'category', 'items'));
     }
 }

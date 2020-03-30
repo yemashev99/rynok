@@ -80,5 +80,11 @@ $this->params['breadcrumbs'][] = 'Контент';
                 }
             }
         ],
+        [
+            'format' => 'raw',
+            'value' => function($data) {
+                return Html::a('', ['about/gallery-item-update', 'id' => $data->gallery_id, 'type' => $data->gallery->type, 'item_id' => $data->gallery_item_id], ['class' => 'glyphicon glyphicon-pencil']);
+            }
+        ],
     ],
 ]); ?>

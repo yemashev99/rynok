@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\FirstPageGallery;
 use common\models\Menu;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -18,7 +19,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $menu = Menu::find()->all();
-        return $this->render('index', compact('menu'));
+        $gallery = FirstPageGallery::find()->orderBy(['sort' => SORT_ASC])->all();
+        return $this->render('index', compact('gallery'));
     }
 }
