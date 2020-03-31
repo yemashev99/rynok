@@ -6,6 +6,7 @@
 use common\models\Cart;
 use common\models\Menu;
 use common\models\Category;
+use common\models\News;
 use common\models\Product;
 use frontend\models\ProductSearch;
 use kartik\typeahead\Typeahead;
@@ -54,22 +55,20 @@ foreach ($menuItems as $key => $menuItem)
 $menu = new Menu();
 $sidebarItems = Category::find()->where('menu_id = :id', [':id' => $menu->getIdByControllerName(Yii::$app->controller->id)])->all();
 $navSideItems = array();
+foreach ($sidebarItems as $key => $sidebarItem)
+{
+    $navSideItems[] = [
+        'label' => $sidebarItem->title,
+        'url' => Url::to(['catalog/category', 'category' => $sidebarItem->url]),
+        'linkOptions' => [
+            'class' => 'icons_fa',
+        ],
+        'options' => [
+            'class' => 'item',
+        ],
+    ];
+}
 switch (Yii::$app->controller->id) {
-    case 'catalog':
-        foreach ($sidebarItems as $key => $sidebarItem)
-        {
-            $navSideItems[] = [
-                'label' => $sidebarItem->title,
-                'url' => Url::to(['catalog/category', 'category' => $sidebarItem->url]),
-                'linkOptions' => [
-                    'class' => 'icons_fa',
-                ],
-                'options' => [
-                    'class' => 'item',
-                ],
-            ];
-        }
-        break;
     case 'about':
         foreach ($sidebarItems as $key => $sidebarItem)
         {
@@ -86,7 +85,7 @@ switch (Yii::$app->controller->id) {
         }
         break;
 }
-
+$newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(3)->all();
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -227,52 +226,38 @@ switch (Yii::$app->controller->id) {
                     'options' => ['class' => 'left_menu'],
                     'items' => $navSideItems,
                 ]) ?>
+                <div id="main-left-0">
+                    <b>
+                        <a class="main-link" href="<?=Url::to(['about/gallery'])?>">Видео: ярмарки, производители, новости</a>
+                    </b>
+                </div>
+                <div id="main-left-1">
+                    <iframe width="195" height="110" src="https://www.youtube.com/embed/ppsYaWWtod8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                </div>
                 <?/*TODO: news*/?>
                 <?php if (!in_array('news', explode('/', Yii::$app->request->pathInfo))) : ?>
                     <div class="news_blocks front">
                         <div class="top_block">
                             <div class="title_block">Новости</div>
-                            <a data="/catalog/" href="/o-rynke/novosti/">Все новости</a>
+                            <a href="<?=Url::to(['about/news'])?>">Все новости</a>
                             <div class="clearfix"></div>
                         </div>
                         <div class="info_block">
                             <div class="news_items">
-                                <div id="bx_3218110189_2225" class="item box-sizing dl">
-                                    <div class="image">
-                                        <a href="/o-rynke/novosti/2020/vnimanie_3_fevralya_na_rynke_san_den/">
-                                            <img class="img-responsive" src="/upload/resize_cache/iblock/72e/60_60_2/САНИТАРНЫЙ ДЕНЬ КВАДРАТ.jpg" alt="Внимание! 3 февраля на рынке сан.день!" title="Внимание! 3 февраля на рынке сан.день!">
-                                        </a>
+                                <?php foreach ($newsItems as $item) : ?>
+                                    <div id="<?=$item->news_id?>" class="item box-sizing dl">
+                                        <div class="image">
+                                            <a href="<?=Url::to(['about/news-content', 'news' => $item->url])?>">
+                                                <img class="img-responsive" src="<?=Yii::getAlias('@web').'/'.$item->image?>" alt="<?=$item->title?>" title="<?=$item->title?>">
+                                            </a>
+                                        </div>
+                                        <div class="info">
+                                            <div class="date"><?=$item->date?></div>
+                                            <a class="name dark_link" href="<?=Url::to(['about/news-content', 'news' => $item->url])?>"><?=$item->title?></a>
+                                        </div>
+                                        <div class="clearfix"></div>
                                     </div>
-                                    <div class="info">
-                                        <div class="date">31 Января 2020</div>
-                                        <a class="name dark_link" href="/o-rynke/novosti/2020/vnimanie_3_fevralya_na_rynke_san_den/">Внимание! 3 февраля на рынке сан.день!</a>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div id="bx_3218110189_2224" class="item box-sizing dl">
-                                    <div class="image">
-                                        <a href="/o-rynke/novosti/2020/pozdravlyaem_/">
-                                            <img class="img-responsive" src="/upload/resize_cache/iblock/e63/60_60_2/Шилов.png" alt="Поздравляем! " title="Поздравляем! ">
-                                        </a>
-                                    </div>
-                                    <div class="info">
-                                        <div class="date">9 Января 2020</div>
-                                        <a class="name dark_link" href="/o-rynke/novosti/2020/pozdravlyaem_/">Поздравляем! </a>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div id="bx_3218110189_2223" class="item box-sizing dl">
-                                    <div class="image">
-                                        <a href="/o-rynke/novosti/2019/izmenilis_usloviya_dostavki/">
-                                            <img class="img-responsive" src="/upload/resize_cache/iblock/248/60_60_2/1.jpg" alt="Изменились условия доставки!" title="Изменились условия доставки!">
-                                        </a>
-                                    </div>
-                                    <div class="info">
-                                        <div class="date">27 Декабря 2019</div>
-                                        <a class="name dark_link" href="/o-rynke/novosti/2019/izmenilis_usloviya_dostavki/">Изменились условия доставки!</a>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
+                                 <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
