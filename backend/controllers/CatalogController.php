@@ -11,6 +11,7 @@ use common\models\Product;
 use common\models\SubCategory;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\db\StaleObjectException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\Controller;
@@ -151,5 +152,37 @@ class CatalogController extends Controller
             }
         }
         return $this->render('update', compact('model', 'category', 'subCategory'));
+    }
+
+    public function actionDelete($id)
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        $model = Product::findOne(['product_id' => $id]);
+        if ($model->delete())
+        {
+            return $this->redirect(['catalog/index']);
+        }
+    }
+
+    public function actionVisible($id)
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        $model = Product::findOne(['product_id' => $id]);
+        if ($model->visible == "Y")
+        {
+            $model->visible = 'N';
+        } else {
+            $model->visible = 'Y';
+        }
+        if ($model->save())
+        {
+            return $this->redirect(['catalog/index']);
+        }
     }
 }

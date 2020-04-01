@@ -68,6 +68,17 @@ $this->title = 'Управление сайтом - Каталог';
     'columns' => [
         'product_id',
         [
+            'label' => 'Активность',
+            'format' => 'raw',
+            'value' => function($data) {
+                if ($data->visible == 'Y') {
+                    return Html::a('', ['catalog/visible', 'id' => $data->product_id], ['class' => 'fa fa-eye fa-1x']);
+                } else {
+                    return Html::a('', ['catalog/visible', 'id' => $data->product_id], ['class' => 'fa fa-eye-slash fa-1x']);
+                }
+            }
+        ],
+        [
             'attribute' => 'categoryId',
             'label' => 'Категория',
             'value' => 'category.title'
@@ -103,7 +114,7 @@ $this->title = 'Управление сайтом - Каталог';
         'measure',
         [
             'class' => 'yii\grid\ActionColumn',
-            'template' => '{update}',
+            'template' => '{update} {delete}',
         ],
     ],
 ]); ?>

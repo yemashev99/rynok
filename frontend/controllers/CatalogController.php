@@ -60,7 +60,8 @@ class CatalogController extends Controller
         $subCategory = SubCategory::findOne(['url' => $subCategory]);
         $query = Product::find()
             ->where(['category_id' => $category->category_id])
-            ->andWhere(['sub_category_id' => $subCategory->sub_category_id]);
+            ->andWhere(['sub_category_id' => $subCategory->sub_category_id])
+            ->andWhere(['visible' => 'Y']);
 
         $pages = new Pagination([
             'totalCount' => $query->count(),
