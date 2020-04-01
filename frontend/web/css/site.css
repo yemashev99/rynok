@@ -3135,7 +3135,7 @@ body .wrapper .catalog_item .item_info .buttons_block{margin-top:17px;text-align
 
 #footer .footer_bottom_inner .small_title{color:#888888;font-size:13px;font-weight:500;margin: 0px 0px 3px;font-weight: 400;}
 
-.soc_icons .item_block a, .bx-authform-social ul li .bx-authform-social-icon{width:31px;height:31px;display:block;background:url('/bitrix/templates/aspro_optimus/images/social_icons.png') -2px -2px no-repeat;transition:opacity ease 0.5s;}
+.soc_icons .item_block a, .bx-authform-social ul li .bx-authform-social-icon{width:31px;height:31px;display:block;background:url('../img/social_icons.png') -2px -2px no-repeat;transition:opacity ease 0.5s;}
 .soc_icons .item_block a:hover{opacity:0.8;}
 .soc_icons .item_block .odn{background-position: -42px -2px;}
 .soc_icons .item_block .fb{background-position: -82px -2px;}
@@ -3192,7 +3192,7 @@ div[id^=wait_comp]{display:none;}
 .soc-avt.inline{padding:0px;}
 .soc-avt .row{margin:12px 0px 0px;}
 .soc-avt .row .auth span{display:none;}
-.soc-avt .row a i.soc-icon, .soc-serv-main .row a i, .catalog_detail .b-share a span {width:31px;height:31px;display:inline-block;background:url('/bitrix/templates/aspro_optimus/images/social_icons.png') -2px -2px no-repeat;transition:opacity 0.5s ease;}
+.soc-avt .row a i.soc-icon, .soc-serv-main .row a i, .catalog_detail .b-share a span {width:31px;height:31px;display:inline-block;background:url('../img/social_icons.png') -2px -2px no-repeat;transition:opacity 0.5s ease;}
 .soc-avt .row a, .catalog_detail .b-share a{height:31px;width:31px;float:left;line-height:32px;box-sizing:border-box;-moz-box-sizing:border-box;-o-box-sizing:border-box;-webkit-box-sizing:border-box;text-decoration:none;cursor:pointer;padding:0px;}
 .authorization-cols .col.authorization .soc-avt .row a, .soc-serv-main .row a, .soc-avt .row a, .catalog_detail .b-share a{margin:0px 5px 5px 0;}
 .soc-avt .row .button.short{font-size:10px;line-height:16px;text-transform:uppercase;width:auto;}

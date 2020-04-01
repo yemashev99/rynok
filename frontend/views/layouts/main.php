@@ -70,6 +70,24 @@ foreach ($sidebarItems as $key => $sidebarItem)
 }
 switch (Yii::$app->controller->id) {
     case 'about':
+        $navSideItems = array();
+        foreach ($sidebarItems as $key => $sidebarItem)
+        {
+            $navSideItems[] = [
+                'label' => $sidebarItem->title,
+                'url' => Url::to(['about/'.$sidebarItem->url]),
+                'linkOptions' => [
+                    'class' => 'icons_fa',
+                ],
+                'options' => [
+                    'class' => 'item',
+                ],
+            ];
+        }
+        break;
+    case 'cabinet':
+        $navSideItems = array();
+        $sidebarItems = Category::find()->where('menu_id = :id', [':id' => $menu->getIdByControllerName('catalog')])->all();
         foreach ($sidebarItems as $key => $sidebarItem)
         {
             $navSideItems[] = [
@@ -285,20 +303,10 @@ $newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(3)->all();
             <div class="footer_bottom_inner">
                 <div class="left_block">
                     <div class="copyright">
-                        2020 © Рынок "Михайловский"</div>
-                    <span class="pay_system_icons">
-	<i title="MasterCard" class="mastercard"></i>
-<i title="Visa" class="visa"></i>
-<i title="Yandex" class="yandex_money"></i>
-<i title="WebMoney" class="webmoney"></i>
-<i title="Qiwi" class="qiwi"></i></span>
+                        <?=date('Y')?> © Республиканский рынок</div>
                     <div id="bx-composite-banner">
                         <a href="/policy/">Политика конфиденциальности</a>
                         <a href="/polzovatelskoe-soglashenie/">Пользовательское соглашение</a>
-                        <div class="artena">
-                            <span>Продвижение сайта</span>
-                            <a href="https://www.artena.ru/" target="_blank" title="Продвижение сайта"><img src="/bitrix/templates/aspro_optimus/images/artena.png" alt="Продвижение сайта - Артена"></a>
-                        </div>
                     </div>
                 </div>
                 <div class="right_block">
@@ -319,11 +327,9 @@ $newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(3)->all();
                                 <div class="rows_block">
                                     <div class="item_block col-3">
                                         <ul class="submenu">
-                                            <li class="menu_item"><a href="/o-rynke/1-etazh/" class="dark_link">1 этаж</a></li>
-                                            <li class="menu_item"><a href="/o-rynke/2-etazh/" class="dark_link">2 этаж</a></li>
-                                            <li class="menu_item"><a href="/o-rynke/novosti/" class="dark_link">Новости</a></li>
-                                            <li class="menu_item"><a href="/o-rynke/video/" class="dark_link">Видео</a></li>
-                                            <li class="menu_item"><a href="/kontakti/sotrudniki/" class="dark_link">Сотрудники</a></li>
+                                            <?php foreach ($about = Category::find()->where(['menu_id' => $menu->getIdByControllerName('about')])->all() as $item) : ?>
+                                                <li class="menu_item"><a href="<?=Url::to(['about/'.$item->url])?>" class="dark_link"><?=$item->title?></a></li>
+                                            <?php endforeach; ?>
                                         </ul>											</div>
                                     <div class="item_block col-3">
                                         <ul class="submenu">
@@ -347,9 +353,9 @@ $newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(3)->all();
 													<span class="phone_wrap">
 														<span class="icons fa fa-phone"></span>
 														<span>
-															<span style="font-size: 14pt;"><span><b>+7 (3452) 99-56-59</b></span></span><br>
+															<span style="font-size: 14pt;"><span><b>+7 (913) 441-14-85</b></span></span><br>
  телефон доставки<br>
- <a style="font-size: 10pt; color: #7ba02e;" href="mailto:administrator@rynok72.ru">administrator@rynok72.ru</a>														</span>
+ <a style="font-size: 10pt; color: #7ba02e;" href="mailto:administrator@rynok72.ru">direkciya2011@yandex.ru</a>														</span>
 													</span>
                                             <span class="order_wrap_btn">
 														<span class="callback_btn">Заказать звонок</span>
