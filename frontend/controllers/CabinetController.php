@@ -37,7 +37,14 @@ class CabinetController extends Controller
             ])
             ->all();
 
-        return $this->render('index', compact('customer', 'cartItems', 'cabinet'));
+        $inProcessingCartItems = Cart::find()
+            ->where([
+                'customer_id' => Yii::$app->user->identity->customer_id,
+                'order_status_id' => 2
+            ])
+            ->all();
+
+        return $this->render('index', compact('customer', 'cartItems', 'cabinet', 'inProcessingCartItems'));
     }
 
     public function actionLogout()

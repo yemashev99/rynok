@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row position-fix">
                     <div class="col-xs-12">
                         <div class="basket-items-list-wrapper basket-items-list-wrapper-height-fixed">
                             <div class="basket-items-list-header">
@@ -164,7 +164,7 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                             <div class="basket-items-list-container">
                                 <table class="basket-items-list-table">
                                     <tbody>
-                                    <?php foreach ($cartItems as $cartItem) : ?>
+                                    <?php foreach ($inProcessingCartItems as $cartItem) : ?>
                                         <tr class="basket-items-list-item-container">
                                             <td class="basket-items-list-item-descriptions">
                                                 <div class="basket-items-list-item-descriptions-inner">
@@ -236,7 +236,7 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                     </div>
                 </div>
             </div>
-            <div class="form_title">
+            <div class="form_title position-fix">
                 <h3>Все заказы</h3>
             </div>
         </div>

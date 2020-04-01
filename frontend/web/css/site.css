@@ -6382,6 +6382,14 @@ h1.entry-title {
     margin-bottom: 20px;
 }
 
+*:before, *:after {
+    display: inline;
+}
+
+.position-fix{
+    margin-top: -120%;
+}
+
 
 /*
 @media (max-width: 600px) {
