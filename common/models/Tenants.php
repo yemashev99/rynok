@@ -6,20 +6,20 @@ use Yii;
 use yii\web\UploadedFile;
 
 /**
- * This is the model class for table "manufacturer".
+ * This is the model class for table "tenants".
  *
- * @property int $manufacturer_id
+ * @property int $tenants_id
  * @property string $title
  * @property string|null $image
  * @property string $description
- * @property string $content
+ * @property string|null $content
  * @property string|null $date
  * @property string $url
  */
-class Manufacturer extends \yii\db\ActiveRecord
+class Tenants extends \yii\db\ActiveRecord
 {
 
-    const BACKEND_PATH = 'image/manufacturer/';
+    const BACKEND_PATH = 'image/tenants/';
 
     public $file;
 
@@ -28,7 +28,7 @@ class Manufacturer extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'manufacturer';
+        return 'tenants';
     }
 
     /**
@@ -37,9 +37,9 @@ class Manufacturer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['url'], 'required'],
-            [['image', 'description', 'content'], 'string'],
-            [['title', 'date', 'url'], 'string', 'max' => 255],
+            [['title', 'description', 'url'], 'required'],
+            [['image', 'content'], 'string'],
+            [['title', 'description', 'date', 'url'], 'string', 'max' => 255],
             [['file'], 'file', 'extensions' => ['png', 'jpg', 'jpeg']],
         ];
     }
@@ -50,7 +50,7 @@ class Manufacturer extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'manufacturer_id' => 'Код',
+            'tenants_id' => 'Код',
             'title' => 'Заголовок',
             'image' => 'Изображение',
             'description' => 'Описание',

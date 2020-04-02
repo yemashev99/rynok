@@ -60,6 +60,7 @@ return [
                 'about/gallery/update/<id:\d+>' => 'about/gallery-update',
                 'about/gallery/<id:\d+>/content' => 'about/gallery-content',
                 'main' => 'first/index',
+                'tenants' => 'tenants/index',
             ],
         ],
     ],

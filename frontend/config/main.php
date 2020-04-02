@@ -63,6 +63,8 @@ return [
                 'about/news/<news>' => 'about/news-content',
                 'about/manufacturers/<manufacturer>' => 'about/manufacturers-content',
                 'about/gallery/<item>' => 'about/gallery-content',
+                'tenants' => 'tenants/index',
+                'tenants/<tenant>' => 'tenants/content',
             ],
         ],
     ],
