@@ -14,31 +14,37 @@ $this->params['breadcrumbs'][] = $category->title;
     <?php foreach ($manufacturers as $manufacturer) : ?>
         <div class="col-md-5 masonry-brick">
             <article id="<?=$manufacturer->manufacturer_id?>" class="post-<?=$manufacturer->manufacturer_id?> post type-post status-publish format-standard has-post-thumbnail hentry category-1">
-                <div class="thumbnails">
-                    <?=Html::a(
-                        Html::img(Yii::getAlias('@web').'/'.$manufacturer->image,
-                            [
-                                'width' => '750',
-                                'height' => '450',
-                                'class' => 'post-thumbnail img-responsive wp-post-image',
-                                'alt' => '',
-                            ]
-                        ),
-                        ['about/manufacturers-content', 'manufacturer' => $manufacturer->url],
-                        ['title' => $manufacturer->title]
-                    )?>
-                </div>
-                <div class="padding-content">
-                    <header class="entry-header">
-                        <h1 class="entry-title text-uppercase">
-                            <?=Html::a($manufacturer->title, ['about/manufacturers-content', 'manufacturer' => $manufacturer->url], ['rel' => 'bookmark'])?>
-                        </h1>
-                    </header>
-                    <div class="entry-content">
-                        <p>
-                            <?=$manufacturer->description?>
-                        </p>
+                <?php if ($manufacturer->image) : ?>
+                    <div class="thumbnails">
+                        <?=Html::a(
+                            Html::img(Yii::getAlias('@web').'/'.$manufacturer->image,
+                                [
+                                    'width' => '750',
+                                    'height' => '450',
+                                    'class' => 'post-thumbnail img-responsive wp-post-image',
+                                    'alt' => '',
+                                ]
+                            ),
+                            ['about/manufacturers-content', 'manufacturer' => $manufacturer->url],
+                            ['title' => $manufacturer->title]
+                        )?>
                     </div>
+                <?php endif; ?>
+                <div class="padding-content">
+                    <?php if ($manufacturer->title) : ?>
+                        <header class="entry-header">
+                            <h1 class="entry-title text-uppercase">
+                                <?=Html::a($manufacturer->title, ['about/manufacturers-content', 'manufacturer' => $manufacturer->url], ['rel' => 'bookmark'])?>
+                            </h1>
+                        </header>
+                    <?php endif; ?>
+                    <?php if ($manufacturer->description) : ?>
+                        <div class="entry-content">
+                            <p>
+                                <?=$manufacturer->description?>
+                            </p>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </article>
         </div>
