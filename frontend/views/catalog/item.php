@@ -116,7 +116,7 @@ if (Yii::$app->user->isGuest)
                                                 </div>
                                                 <div class="cost prices clearfix" style="height: 30px;">
                                                     <div class="price only_price">
-                                                        <?=$product->price?> ₽/<?=$product->measure?>
+                                                        <?=$product->price?> ₽/<?=$product->count?><?=$product->measure?>
                                                     </div>
                                                 </div>
                                                 <div class="hover_block1 footer_button">
@@ -206,7 +206,7 @@ if (Yii::$app->user->isGuest)
                                         <div class="information">
                                             <div class="cost prices clearfix">
                                                 <div class="price" id="<?=$product->product_id?>">
-                                                    <?=$product->price?> ₽/<?=$product->measure?>																									</div>
+                                                    <?=$product->price?> ₽/<?=$product->count?><?=$product->measure?>																									</div>
                                             </div>
 
                                             <div class="basket_props_block" id="bx_basket_div_1892" style="display: none;">
@@ -280,7 +280,7 @@ if (Yii::$app->user->isGuest)
                                 <td class="price-cell">
                                     <div class="cost prices clearfix">
                                         <div class="price">
-                                            <?=$product->price?> ₽/<?=$product->measure?>
+                                            <?=$product->price?> ₽/<?=$product->count?><?=$product->measure?>
                                         </div>
 
                                     </div>

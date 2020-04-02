@@ -17,6 +17,7 @@ use yii\web\UploadedFile;
  * @property string $description
  * @property string $image
  * @property int $price
+ * @property int $count
  * @property string $measure
  *
  * @property Category $category
@@ -44,7 +45,7 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             [['category_id', 'title', 'price', 'measure'], 'required'],
-            [['category_id', 'sub_category_id', 'price'], 'integer'],
+            [['category_id', 'sub_category_id', 'price', 'count'], 'integer'],
             [['description', 'image'], 'string'],
             [['title', 'measure'], 'string', 'max' => 255],
             [['file'], 'file', 'extensions' => ['png', 'jpg', 'jpeg']],
@@ -66,6 +67,7 @@ class Product extends \yii\db\ActiveRecord
             'description' => 'Описание',
             'image' => 'Изображение',
             'price' => 'Цена',
+            'count' => 'Кол-во',
             'measure' => 'Ед. измерения',
             'file' => 'Изображение',
         ];

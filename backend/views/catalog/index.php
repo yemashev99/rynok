@@ -111,6 +111,7 @@ $this->title = 'Управление сайтом - Каталог';
                 return $data->price.' ₽';
             }
         ],
+        'count',
         'measure',
         [
             'class' => 'yii\grid\ActionColumn',

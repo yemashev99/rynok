@@ -38,7 +38,10 @@ use yii\widgets\ActiveForm;
         <div class="col-md-6">
             <?=$form->field($model, 'price')->textInput()?>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
+            <?=$form->field($model, 'count')->textInput()?>
+        </div>
+        <div class="col-md-3">
             <?= $form->field($model, 'measure')->dropDownList(
                 [
                     'кг' => 'кг',
