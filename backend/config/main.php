@@ -61,6 +61,7 @@ return [
                 'about/gallery/<id:\d+>/content' => 'about/gallery-content',
                 'main' => 'first/index',
                 'tenants' => 'tenants/index',
+                'contact' => 'contact/index',
             ],
         ],
     ],

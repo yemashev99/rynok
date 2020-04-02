@@ -65,6 +65,7 @@ return [
                 'about/gallery/<item>' => 'about/gallery-content',
                 'tenants' => 'tenants/index',
                 'tenants/<tenant>' => 'tenants/content',
+                'contact' => 'contact/index',
             ],
         ],
     ],

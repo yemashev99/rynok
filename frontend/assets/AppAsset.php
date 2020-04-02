@@ -19,7 +19,8 @@ class AppAsset extends AssetBundle
         'js/site.js',
         'js/jquery.masonry.min.js',
         'js/init.js',
-        'js/mobilyslider.js'
+        'js/mobilyslider.js',
+        'js/map.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
