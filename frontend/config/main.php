@@ -61,6 +61,7 @@ return [
                 'catalog/<category>/<subCategory>' => 'catalog/item',
                 'catalog/<category>' => 'catalog/category',
                 'about/news/<news>' => 'about/news-content',
+                'about/manufacturers/<manufacturer>' => 'about/manufacturers-content',
                 'about/gallery/<item>' => 'about/gallery-content',
             ],
         ],

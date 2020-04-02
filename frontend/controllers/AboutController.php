@@ -8,6 +8,7 @@ namespace frontend\controllers;
 use common\models\Category;
 use common\models\Gallery;
 use common\models\GalleryItem;
+use common\models\Manufacturer;
 use common\models\Menu;
 use common\models\News;
 use Yii;
@@ -63,8 +64,17 @@ class AboutController extends Controller
 
     public function actionManufacturers()
     {
+        $manufacturers = Manufacturer::find()->orderBy(['manufacturer_id' => SORT_DESC])->all();
         $path = explode('/', Yii::$app->request->pathInfo);
-        $manufacturers = Category::findOne(['url' => $path[1]]);
-        return $this->render('manufacturers', compact('manufacturers'));
+        $category = Category::findOne(['url' => $path[1]]);
+        return $this->render('manufacturers', compact('manufacturers', 'category'));
+    }
+
+    public function actionManufacturersContent($manufacturer)
+    {
+        $manufacturer = Manufacturer::findOne(['url' => $manufacturer]);
+        $path = explode('/', Yii::$app->request->pathInfo);
+        $category = Category::findOne(['url' => $path[1]]);
+        return $this->render('manufacturers-content', compact('manufacturer', 'category'));
     }
 }
