@@ -60,4 +60,11 @@ class AboutController extends Controller
         $items = GalleryItem::find()->where(['gallery_id' => $gallery->gallery_id])->all();
         return $this->render('gallery-content', compact('gallery', 'category', 'items'));
     }
+
+    public function actionManufacturers()
+    {
+        $path = explode('/', Yii::$app->request->pathInfo);
+        $manufacturers = Category::findOne(['url' => $path[1]]);
+        return $this->render('manufacturers', compact('manufacturers'));
+    }
 }

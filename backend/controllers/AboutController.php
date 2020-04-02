@@ -5,10 +5,12 @@ namespace backend\controllers;
 
 
 use backend\models\GallerySearch;
+use backend\models\ManufacturersSearch;
 use backend\models\NewsSearch;
 use common\models\Category;
 use common\models\Gallery;
 use common\models\GalleryItem;
+use common\models\Manufacturer;
 use common\models\Menu;
 use common\models\News;
 use Yii;
@@ -52,6 +54,85 @@ class AboutController extends Controller
             }
         }
         return $this->render('control', compact('model'));
+    }
+
+    public function actionManufacturers()
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        $searchModel = new ManufacturersSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('manufacturers', compact('dataProvider', 'searchModel'));
+    }
+
+    public function actionManufacturersCreate()
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        $model = new Manufacturer();
+        if ($model->load(Yii::$app->request->post()))
+        {
+
+            $file = UploadedFile::getInstance($model, 'file');
+            $model->date = date('d.m.Y');
+
+            if ($model->save())
+            {
+                if (!is_null($file))
+                {
+                    $model->saveImage($model->uploadImage($file));
+                }
+                return $this->redirect(['about/manufacturers']);
+            }
+        }
+        return $this->render('manufacturers-create', compact('model'));
+    }
+
+    public function actionManufacturersUpdate($id)
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        $model = Manufacturer::findOne(['manufacturer_id' => $id]);
+        if ($model->load(Yii::$app->request->post()))
+        {
+
+            $file = UploadedFile::getInstance($model, 'file');
+
+            if ($model->save())
+            {
+
+                if (!is_null($file))
+                {
+                    $model->saveImage($model->uploadImage($file));
+                }
+
+                return $this->redirect(['about/manufacturers']);
+            }
+        }
+        return $this->render('manufacturers-update', compact('model'));
+    }
+
+    public function actionManufacturersContent($id)
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        $model = Manufacturer::findOne(['manufacturer_id' => $id]);
+        if ($model->load(Yii::$app->request->post()))
+        {
+            if ($model->save())
+            {
+                return $this->redirect(['about/manufacturers']);
+            }
+        }
+        return $this->render('manufacturers-content', compact('model'));
     }
 
     public function actionNews()
