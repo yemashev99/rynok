@@ -85,6 +85,22 @@ switch (Yii::$app->controller->id) {
             ];
         }
         break;
+    case 'delivery':
+        $navSideItems = array();
+        foreach ($sidebarItems as $key => $sidebarItem)
+        {
+            $navSideItems[] = [
+                'label' => $sidebarItem->title,
+                'url' => Url::to(['delivery/'.$sidebarItem->url]),
+                'linkOptions' => [
+                    'class' => 'icons_fa',
+                ],
+                'options' => [
+                    'class' => 'item',
+                ],
+            ];
+        }
+        break;
     case 'cabinet':
         $navSideItems = array();
         $sidebarItems = Category::find()->where('menu_id = :id', [':id' => $menu->getIdByControllerName('catalog')])->all();

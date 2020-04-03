@@ -3,14 +3,14 @@
 use backend\models\OrderSearch;
 use common\models\Category;
 use common\models\Menu;
-
 $menu = new Menu();
 $items = Category::find()->where(['menu_id' => $menu->getIdByControllerName('about')])->all();
+$arrayUrl[] = Yii::$app->request->pathInfo;
 $aboutItems[] = [
     'label' => 'Основная информация',
     'icon' => 'file-text-o',
     'url' => ['about/index'],
-    'active' => in_array('index', explode('/', Yii::$app->request->pathInfo))
+    'active' => in_array('about/index', $arrayUrl)
 ];
 foreach ($items as $item)
 {
@@ -18,6 +18,22 @@ foreach ($items as $item)
         'label' => $item->title,
         'icon' => 'file-text-o',
         'url' => ['about/'.$item->url],
+        'active' => in_array($item->url, explode('/', Yii::$app->request->pathInfo))
+    ];
+}
+$deliveryObjects = Category::find()->where(['menu_id' => $menu->getIdByControllerName('delivery')])->all();
+$deliveryItems[] = [
+    'label' => 'Основная информация',
+    'icon' => 'file-text-o',
+    'url' => ['delivery/index'],
+    'active' => in_array('delivery/index', $arrayUrl)
+];
+foreach ($deliveryObjects as $item)
+{
+    $deliveryItems[] = [
+        'label' => $item->title,
+        'icon' => 'file-text-o',
+        'url' => ['delivery/'.$item->url],
         'active' => in_array($item->url, explode('/', Yii::$app->request->pathInfo))
     ];
 }
@@ -73,10 +89,16 @@ foreach ($items as $item)
                                 'items' => $aboutItems,
                             ],
                             [
+                                'label' => 'Доставка и оплата',
+                                'icon' => 'truck',
+                                'url' => '#',
+                                'items' => $deliveryItems,
+                            ],
+                            [
                                 'label' => 'Праздники',
                                 'icon' => 'star',
-                                'url' => ['holidays/index'],
-                                'active' => in_array(Yii::$app->controller->id, ['holidays'])
+                                'url' => ['holiday/index'],
+                                'active' => in_array(Yii::$app->controller->id, ['holiday'])
                             ],
                             [
                                 'label' => 'Арендаторам',
