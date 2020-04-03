@@ -2,6 +2,7 @@
         use kartik\file\FileInput;
         use yii\helpers\Html;
         use yii\widgets\ActiveForm;
+        $path = explode('/', Yii::$app->request->pathInfo);
     ?>
 
 
@@ -14,11 +15,26 @@
 
         <?=$form->field($category, 'menu_id')->hiddenInput(['value' => $menu->menu_id])->label(false)?>
 
-        <?= $form->field($category, 'file')->widget(FileInput::className(), [
-            'options' => [
-                'accept' => 'images/*',
-            ]
-        ])?>
+        <?php if ($path[1] == 'category-update') : ?>
+            <?= $form->field($category, 'file')->widget(FileInput::className(), [
+                'pluginOptions' => [
+                    'showUpload' => false,
+                    'initialPreview'=>[
+                        Yii::getAlias('@web').'/'.$category->image
+                    ],
+                    'initialPreviewAsData'=>true,
+                ],
+                'options' => [
+                    'accept' => 'images/*',
+                ]
+            ])?>
+        <?php else: ?>
+            <?= $form->field($category, 'file')->widget(FileInput::className(), [
+                'options' => [
+                    'accept' => 'images/*',
+                ]
+            ])?>
+        <?php endif; ?>
 
         <?=Html::submitButton('Сохранить', ['class' => 'btn btn-success'])?>
 

@@ -18,12 +18,12 @@ class CatalogController extends Controller
 {
     public function actionIndex()
     {
-        $menuModel = new Menu(); $categoryModel = new Category();
+        $menuModel = new Menu();
         $menu = Menu::findOne(['controller_name' => Yii::$app->controller->id]);
         $categories = Category::find()
             ->where(['menu_id' => $menuModel->getIdByControllerName(Yii::$app->controller->id)])
             ->all();
-        return $this->render('index', compact('categories', 'menu', 'categoryModel'));
+        return $this->render('index', compact('categories', 'menu'));
     }
 
     public function actionCategory($category)

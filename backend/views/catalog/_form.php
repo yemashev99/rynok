@@ -4,6 +4,8 @@ use kartik\file\FileInput;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+$path = explode('/', Yii::$app->request->pathInfo);
+
 ?>
 
 <?php $form = ActiveForm::begin(); ?>
@@ -14,7 +16,7 @@ use yii\widgets\ActiveForm;
                 [
                     'prompt' => 'Выберете категорию',
                     'onchange' => '
-                    $.post("/catalog/list?id='.'"+$(this).val(), function (data) {
+                    $.post("/admin/catalog/list?id='.'"+$(this).val(), function (data) {
                         $("select#product-sub_category_id").removeAttr("disabled");
                         $("select#product-sub_category_id").html(data);
                     });
@@ -59,11 +61,31 @@ use yii\widgets\ActiveForm;
 
     <?=Html::submitButton('Добавить', ['class' => 'btn btn-success', 'style' => 'margin-top: 30px;'])?>
 </div>
-<div class="col-md-6">
-    <?= $form->field($model, 'file')->widget(FileInput::className(), [
-        'options' => [
-            'accept' => 'images/*',
-        ]
-    ])?>
-</div>
+<?php if ($path[1] == 'update') : ?>
+    <div class="col-md-6">
+        <?= $form->field($model, 'file')->widget(FileInput::className(), [
+            'pluginOptions' => [
+                'showUpload' => false,
+                'initialPreview'=>[
+                    Yii::getAlias('@web').'/'.$model->image
+                ],
+                'initialPreviewAsData'=>true,
+            ],
+            'options' => [
+                'accept' => 'images/*',
+            ]
+        ])?>
+    </div>
+<?php else: ?>
+    <div class="col-md-6">
+        <?= $form->field($model, 'file')->widget(FileInput::className(), [
+            'pluginOptions' => [
+                'showUpload' => false,
+            ],
+            'options' => [
+                'accept' => 'images/*',
+            ]
+        ])?>
+    </div>
+<?php endif; ?>
 <?php ActiveForm::end(); ?>
