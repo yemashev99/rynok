@@ -6,15 +6,15 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 mihaildev\elfinder\Assets::noConflict($this);
 
-$this->title = 'Управление сайтом - Арендаторам';
+$this->title = 'Управление сайтом - Праздники';
 
-$this->params['breadcrumbs'][] = ['label' => 'Арендаторам', 'url' => ['tenants/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Праздники', 'url' => ['holidays/index']];
 $this->params['breadcrumbs'][] = 'Контент';
 
 ?>
 
 <div class="page-header">
-    <h2>Объект № <?=$model->tenants_id?>: "<?=$model->title?>"</h2>
+    <h2>Объект № <?=$model->holiday_id?>: "<?=$model->title?>"</h2>
 </div>
 
 <?php $form = ActiveForm::begin() ?>

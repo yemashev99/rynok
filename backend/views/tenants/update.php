@@ -4,7 +4,7 @@
 
 $this->title = 'Управление сайтом - Арендаторам';
 
-$this->params['breadcrumbs'][] = ['label' => 'Арендаторам', 'url' => ['about/manufacturers']];
+$this->params['breadcrumbs'][] = ['label' => 'Арендаторам', 'url' => ['tenants/index']];
 $this->params['breadcrumbs'][] = 'Редактирование объекта';
 
 ?>

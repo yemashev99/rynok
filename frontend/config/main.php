@@ -66,6 +66,8 @@ return [
                 'tenants' => 'tenants/index',
                 'tenants/<tenant>' => 'tenants/content',
                 'contact' => 'contact/index',
+                'holidays/<id>' => 'holidays/content',
+                'holidays' => 'holidays/index',
             ],
         ],
     ],

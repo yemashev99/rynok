@@ -73,6 +73,12 @@ foreach ($items as $item)
                                 'items' => $aboutItems,
                             ],
                             [
+                                'label' => 'Праздники',
+                                'icon' => 'star',
+                                'url' => ['holidays/index'],
+                                'active' => in_array(Yii::$app->controller->id, ['holidays'])
+                            ],
+                            [
                                 'label' => 'Арендаторам',
                                 'icon' => 'usd',
                                 'url' => ['tenants/index'],

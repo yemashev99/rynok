@@ -62,6 +62,7 @@ return [
                 'main' => 'first/index',
                 'tenants' => 'tenants/index',
                 'contact' => 'contact/index',
+                'holidays' => 'holidays/index',
             ],
         ],
     ],

@@ -4,9 +4,7 @@
 namespace frontend\controllers;
 
 
-use common\models\Category;
 use common\models\Tenants;
-use Yii;
 use yii\web\Controller;
 
 class TenantsController extends Controller
