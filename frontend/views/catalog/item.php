@@ -101,7 +101,7 @@ if (Yii::$app->user->isGuest)
                         <?php foreach ($products as $product) : ?>
                             <div class="item_block col-4">
                                 <div class="catalog_item_wrapp item" style="height: 270px;">
-                                    <div class="catalog_item item_wrap" id="<?=$product->product_id?>" style="height: 300px;">
+                                    <div class="catalog_item item_wrap" id="<?=$product->product_id?>" style="padding-bottom: 30px;">
                                         <div>
                                             <div class="image_wrapper_block">
                                                 <div class="stickers">
@@ -110,8 +110,8 @@ if (Yii::$app->user->isGuest)
                                                     <img src="<?=Yii::getAlias('@web').'/'.$product->image?>" alt="<?=$product->title?>" title="<?=$product->title?>">
                                                 </a>
                                             </div>
-                                            <div class="item_info TYPE_1" style="height: 48px;">
-                                                <div class="item-title" style="height: 20px;">
+                                            <div class="item_info TYPE_1">
+                                                <div class="item-title">
                                                     <a href="<?php /*TODO: view item*/ ?>"><span><?=$product->title?></span></a>
                                                 </div>
                                                 <div class="cost prices clearfix" style="height: 30px;">

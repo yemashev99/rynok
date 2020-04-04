@@ -1615,7 +1615,7 @@ a:hover{text-decoration:none !important;}
 .rows_block:after, .rows_block:before {display: table;content: " ";}
 .rows_block:after{clear:both;}
 .rows_block *{box-sizing:border-box;-moz-box-sizing:border-box;-o-box-sizing:border-box;-webkit-box-sizing:border-box;}
-.rows_block .item_block{display:inline-block;vertical-align:top;padding:6px 6px;}
+.rows_block .item_block{display:inline-block;vertical-align:top;padding:20px 6px;}
 .rows_block .col-80{width:80%;}
 .rows_block .col-75{width:75%;}
 .rows_block .col-66{width:66.66%;}

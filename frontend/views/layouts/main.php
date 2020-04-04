@@ -108,7 +108,7 @@ switch (Yii::$app->controller->id) {
         {
             $navSideItems[] = [
                 'label' => $sidebarItem->title,
-                'url' => Url::to(['about/'.$sidebarItem->url]),
+                'url' => Url::to(['catalog/'.$sidebarItem->url]),
                 'linkOptions' => [
                     'class' => 'icons_fa',
                 ],

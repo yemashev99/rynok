@@ -20,7 +20,7 @@ $this->title = 'Управление сайтом - Каталог';
             [
                 'prompt' => 'Выберете категорию',
                 'onchange' => '
-                    $.post("/catalog/list?id='.'"+$(this).val(), function (data) {
+                    $.post("/admin/catalog/list?id='.'"+$(this).val(), function (data) {
                         $("select#sortform-subcategoryid").removeAttr("disabled");
                         $("select#sortform-subcategoryid").html(data);
                     });
