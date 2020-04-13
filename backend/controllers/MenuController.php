@@ -28,6 +28,10 @@ class MenuController extends Controller
 
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
         $dataProvider = new ActiveDataProvider([
             'query' => Menu::find(),
             'pagination' => [
@@ -40,6 +44,10 @@ class MenuController extends Controller
 
     public function actionUpdate($id)
     {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
         $model = Menu::findOne($id);
 
         if ($model->load(Yii::$app->request->post()))
@@ -55,6 +63,10 @@ class MenuController extends Controller
 
     public function actionCategory($id)
     {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
         $menu = Menu::findOne($id);
         $dataProvider = new ActiveDataProvider([
             'query' => Category::find()
@@ -70,6 +82,10 @@ class MenuController extends Controller
 
     public function actionCategoryCreate($id)
     {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
         $menu = Menu::findOne($id);
         $category = new Category();
         if ($category->load(Yii::$app->request->post()))
@@ -83,7 +99,7 @@ class MenuController extends Controller
                 {
                     $category->saveImage($category->uploadImage($file));
                 }
-                $this->redirect(['menu/category', 'id' => $id]);
+                return $this->redirect(['menu/category', 'id' => $id]);
             }
         }
         return $this->render('category-create', compact('menu', 'category'));
@@ -91,6 +107,10 @@ class MenuController extends Controller
 
     public function actionCategoryUpdate($id)
     {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
         $category = Category::findOne($id);
         $menu = Menu::findOne($category->menu_id);
         if ($category->load(Yii::$app->request->post()))
@@ -104,14 +124,32 @@ class MenuController extends Controller
                 {
                     $category->saveImage($category->uploadImage($file));
                 }
-                $this->redirect(['menu/category', 'id' => $category->menu_id]);
+                return $this->redirect(['menu/category', 'id' => $category->menu_id]);
             }
         }
         return $this->render('category-update', compact('menu', 'category'));
     }
 
+    public function actionCategoryDelete($id)
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        $category = Category::findOne($id);
+        if ($category->delete())
+        {
+            return $this->redirect(['menu/category', 'id' => $category->menu_id]);
+        }
+        return false;
+    }
+
     public function actionSubCategory($id)
     {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
         $category = Category::findOne($id);
         $menu = Menu::findOne($category->menu_id);
         $dataProvider = new ActiveDataProvider([
@@ -128,6 +166,10 @@ class MenuController extends Controller
 
     public function actionSubCategoryCreate($id)
     {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
         $category = Category::findOne($id);
         $menu = Menu::findOne($category->menu_id);
         $subCategory = new SubCategory();
@@ -139,7 +181,7 @@ class MenuController extends Controller
             if ($subCategory->save())
             {
                 $subCategory->saveImage($subCategory->uploadImage($file));
-                $this->redirect(['menu/sub-category', 'id' => $id]);
+                return $this->redirect(['menu/sub-category', 'id' => $id]);
             }
         }
         return $this->render('sub-category-create', compact('menu', 'category', 'subCategory'));
@@ -147,6 +189,10 @@ class MenuController extends Controller
 
     public function actionSubCategoryUpdate($id)
     {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
         $subCategory = SubCategory::findOne($id);
         $category = Category::findOne($subCategory->category_id);
         $menu = Menu::findOne($category->menu_id);
@@ -161,9 +207,23 @@ class MenuController extends Controller
                 {
                     $subCategory->saveImage($category->uploadImage($file));
                 }
-                $this->redirect(['menu/sub-category', 'id' => $subCategory->category_id]);
+                return $this->redirect(['menu/sub-category', 'id' => $subCategory->category_id]);
             }
         }
         return $this->render('sub-category-update', compact('menu', 'category', 'subCategory'));
+    }
+
+    public function actionSubCategoryDelete($id)
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        $subCategory = SubCategory::findOne($id);
+        if ($subCategory->delete())
+        {
+            return $this->redirect(['menu/sub-category', 'id' => $subCategory->category_id]);
+        }
+        return false;
     }
 }

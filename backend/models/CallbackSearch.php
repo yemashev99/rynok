@@ -13,6 +13,7 @@ class CallbackSearch extends Model
 {
     public $name;
     public $phone;
+    public $date;
 
     /**
      * {@inheritdoc}
@@ -20,7 +21,7 @@ class CallbackSearch extends Model
     public function rules()
     {
         return ArrayHelper::merge(parent::rules(), [
-            [['name', 'phone'],'string'],
+            [['name', 'phone', 'date'],'string'],
         ]);
     }
 
@@ -52,6 +53,7 @@ class CallbackSearch extends Model
 
         $query->andFilterWhere(['LIKE', 'name', $this->name]);
         $query->andFilterWhere(['LIKE', 'phone', $this->phone]);
+        $query->andFilterWhere(['LIKE', 'date', $this->date]);
 
         return $dataProvider;
     }

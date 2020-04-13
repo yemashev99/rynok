@@ -55,5 +55,14 @@ $this->params['breadcrumbs'][] = 'Подкатегории "'.$category->title.'
                     ['class' => 'glyphicon glyphicon-pencil']);
             }
         ],
+        [
+            'label'=>'Удалить',
+            'format' => 'raw',
+            'value' => function($data) {
+                return Html::a( '',
+                    Url::to(['menu/sub-category-delete', 'id' => $data->sub_category_id]),
+                    ['class' => 'glyphicon glyphicon-trash']);
+            }
+        ],
     ],
 ]); ?>

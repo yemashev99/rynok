@@ -32,6 +32,7 @@ $this->title = 'Обратные звонки';
         'callback_id',
         'name',
         'phone',
+        'date',
         [
             'format' => 'raw',
             'value' => function($data) {
