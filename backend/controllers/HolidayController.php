@@ -42,7 +42,7 @@ class HolidayController extends Controller
                 {
                     $model->saveImage($model->uploadImage($file));
                 }
-                return $this->redirect(['holidays/index']);
+                return $this->redirect(['holiday/index']);
             }
         }
         return $this->render('create', compact('model'));
@@ -68,7 +68,7 @@ class HolidayController extends Controller
                     $model->saveImage($model->uploadImage($file));
                 }
 
-                return $this->redirect(['holidays/index']);
+                return $this->redirect(['holiday/index']);
             }
         }
         return $this->render('update', compact('model'));
@@ -85,7 +85,7 @@ class HolidayController extends Controller
         {
             if ($model->save())
             {
-                return $this->redirect(['holidays/index']);
+                return $this->redirect(['holiday/index']);
             }
         }
         return $this->render('content', compact('model'));

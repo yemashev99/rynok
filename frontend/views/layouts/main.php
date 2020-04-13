@@ -3,12 +3,14 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use common\models\Callback;
 use common\models\Cart;
 use common\models\Menu;
 use common\models\Category;
 use common\models\News;
 use common\models\Product;
 use frontend\models\ProductSearch;
+use frontend\models\Site;
 use kartik\typeahead\Typeahead;
 use yii\bootstrap\Nav;
 use yii\helpers\Html;
@@ -120,6 +122,14 @@ switch (Yii::$app->controller->id) {
         break;
 }
 $newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(3)->all();
+//callback
+$callback = new Callback();
+if ($callback->load(Yii::$app->request->post()))
+{
+    $callback->date = date('d-m-Y');
+    $callback->processed = 'N';
+    $callback->save();
+}
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -145,7 +155,23 @@ $newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(3)->all();
     <div class="header_wrap ">
         <header id="header">
             <div class="wrapper_inner">
-                <div class="top_br"></div>
+                <div class="top_br">
+                    <table style="width: 100%;">
+                            <tbody>
+                                <tr class="header_info">
+                                    <td style="width: 28%">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                        Республика Хакасия<br>Абакан, Тельмана, 92к
+                                    </td>
+                                    <td style="width: 20%">
+                                        <i class="fa fa-phone" aria-hidden="true"></i>
+                                        <b>8 (800) 444-39-38</b><br>
+                                        телефон доставки<br>
+                                    </td>
+                                </tr>
+                            </tbody>
+                    </table>
+                </div>
                 <table class="middle-h-row">
                     <tbody>
                         <tr>
@@ -163,13 +189,16 @@ $newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(3)->all();
                                 <div class="slogan">
                                     <div class="h2" style="color: green; line-height: 1.15;">РЕСПУБЛИКАНСКИЙ СЕЛЬСКОХОЗЯЙСТВЕННЫЙ РЫНОК</div>
                                 </div>
+                                <div class="rent-places">
+                                    Свободных мест для аренды: <span style="border-bottom: 1px dashed;">10 мест</span>
+                                </div>
                             </td>
-                            <td>
+                            <td class="header_search">
                                 <table>
                                     <tbody>
                                         <tr>
                                             <td class="call_order">
-                                                <a href="#">Заказать звонок</a>  
+                                                <a href="#" id="open-button">Заказать звонок</a>
                                             </td>
                                             <td>
                                                 <div class="d1">
@@ -215,14 +244,29 @@ $newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(3)->all();
                                                 </td>
                                                 <td style="width: 30%">
                                                     <i class="fa fa-phone" aria-hidden="true"></i>
-                                                    <b>+7 (913) 441-14-85</b><br>
+                                                    <b>8 (800) 444-39-38</b><br>
                                                     телефон доставки<br>
                                                 </td>
                                             </tr>
-                                        </thead>
+                                        </tbody>
                                     </table>
                                 </div>
                             </td>
+                            <?php if(Site::isMobile()) :?>
+                            <?php $cart = Site::count(); ?>
+                            <td class="mobile-cart">
+                                <a href="<?=Url::to(['cabinet/index'])?>" class="cart" style="display: inline;">
+                                    <p class="cart-img">
+                                        <span class="count"><?=$cart['count']?></span>
+                                    </p>
+
+                                    <p class="cart-text">
+                                        <span class="cart-title">Ваша корзина</span>
+                                        <span> <span class="cart-sum"><?=$cart['price']?></span> руб.</span>
+                                    </p>
+                                </a>
+                            </td>
+                            <?php endif; ?>
                         </tr>
                     </tbody>
                 </table>
@@ -230,7 +274,7 @@ $newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(3)->all();
             <div class="catalog_menu menu_colored">
                 <div class="wrapper_inner">
                     <div class="wrapper_middle_menu wrap_menu" style="overflow: visible;">
-                        <ul class="menu adaptive">
+                        <ul class="menu adaptive" style="margin-bottom: 0px;">
                             <li class="menu_opener">
                                 <div class="text">
                                     Меню
@@ -288,7 +332,7 @@ $newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(3)->all();
                                         </div>
                                         <div class="info">
                                             <div class="date"><?=$item->date?></div>
-                                            <a class="name dark_link" href="<?=Url::to(['about/news-content', 'news' => $item->url])?>"><?=$item->title?></a>
+                                            <div class="info-text"><a class="name dark_link" href="<?=Url::to(['about/news-content', 'news' => $item->url])?>"><?=$item->title?></a></div>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -332,13 +376,13 @@ $newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(3)->all();
                             <div class="item_block col-75 menus">
                                 <div class="submenu_top rows_block">
                                     <div class="item_block col-3">
-                                        <div class="menu_item"><a href="/o-rynke/" class="dark_link">О рынке</a></div>
+                                        <div class="menu_item"><a href="<?=Url::to(['about/index'])?>" class="dark_link">О рынке</a></div>
                                     </div>
                                     <div class="item_block col-3">
-                                        <div class="menu_item"><a href="/arendatoram/" class="dark_link">Арендаторам</a></div>
+                                        <div class="menu_item"><a href="<?=Url::to(['tenants/index'])?>" class="dark_link">Арендаторам</a></div>
                                     </div>
                                     <div class="item_block col-3">
-                                        <div class="menu_item"><a href="/kak-kupit/" class="dark_link">Как купить</a></div>
+                                        <div class="menu_item"><a href="<?=Url::to(['delivery/index'])?>" class="dark_link">Как купить</a></div>
                                     </div>
                                 </div>
                                 <div class="rows_block">
@@ -348,18 +392,12 @@ $newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(3)->all();
                                                 <li class="menu_item"><a href="<?=Url::to(['about/'.$item->url])?>" class="dark_link"><?=$item->title?></a></li>
                                             <?php endforeach; ?>
                                         </ul>											</div>
+                                    <div class="item_block col-3"></div>
                                     <div class="item_block col-3">
                                         <ul class="submenu">
-                                            <li class="menu_item"><a href="/arendatoram/arenda/" class="dark_link">Аренда</a></li>
-                                            <li class="menu_item"><a href="/arendatoram/reklama/" class="dark_link">Реклама</a></li>
-                                        </ul>											</div>
-                                    <div class="item_block col-3">
-                                        <ul class="submenu">
-                                            <li class="menu_item"><a href="/kak-kupit/zakazat/" class="dark_link">Как заказать</a></li>
-                                            <li class="menu_item"><a href="/kak-kupit/oplata/" class="dark_link">Как оплатить</a></li>
-                                            <li class="menu_item"><a href="/kak-kupit/dostavka/" class="dark_link">Доставка продукции</a></li>
-                                            <li class="menu_item"><a href="/kak-kupit/garantii/" class="dark_link">Гарантии</a></li>
-                                            <li class="menu_item"><a href="/kak-kupit/vozvrat/" class="dark_link">Возврат товара</a></li>
+                                            <?php foreach ($about = Category::find()->where(['menu_id' => $menu->getIdByControllerName('delivery')])->all() as $item) : ?>
+                                                <li class="menu_item"><a href="<?=Url::to(['delivery/'.$item->url])?>" class="dark_link"><?=$item->title?></a></li>
+                                            <?php endforeach; ?>
                                         </ul>											</div>
                                 </div>
                             </div>
@@ -370,7 +408,7 @@ $newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(3)->all();
 													<span class="phone_wrap">
 														<span class="icons fa fa-phone"></span>
 														<span>
-															<span style="font-size: 14pt;"><span><b>+7 (913) 441-14-85</b></span></span><br>
+															<span style="font-size: 14pt;"><span><b>8 (800) 444-39-38</b></span></span><br>
  телефон доставки<br>
  <a style="font-size: 10pt; color: #7ba02e;" href="mailto:administrator@rynok72.ru">direkciya2011@yandex.ru</a>														</span>
 													</span>
@@ -385,16 +423,16 @@ $newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(3)->all();
                                             <div class="small_title">Мы в социальных сетях:</div>
                                             <div class="links rows_block soc_icons">
                                                 <div class="item_block">
-                                                    <a href="/go.php?url=https://vk.com/rynok_mikhaylovsky " target="_blank" title="ВКонтакте" class="vk"></a>
+                                                    <a href="#" target="_blank" title="ВКонтакте" class="vk"></a>
                                                 </div>
                                                 <div class="item_block">
-                                                    <a href="/go.php?url=https://ok.ru/profile/561006126537" target="_blank" title="Одноклассники" class="odn"></a>
+                                                    <a href="#" target="_blank" title="Одноклассники" class="odn"></a>
                                                 </div>
                                                 <div class="item_block">
-                                                    <a href="/go.php?url=https://ru-ru.facebook.com/people/%D0%9D%D0%B8%D0%BA%D0%B8%D1%82%D0%B0-%D0%9C%D0%B8%D1%85%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2/100012609671202" target="_blank" title="Facebook" class="fb"></a>
+                                                    <a href="#" target="_blank" title="Facebook" class="fb"></a>
                                                 </div>
                                                 <div class="item_block">
-                                                    <a href="/go.php?url=https://www.instagram.com/rynok_mikhaylovsky/" target="_blank" title="Instagram" class="inst"></a>
+                                                    <a href="#" target="_blank" title="Instagram" class="inst"></a>
                                                 </div>
                                             </div>												</div>
                                     </div>
@@ -407,7 +445,7 @@ $newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(3)->all();
             </div>
             <div class="mobile_copy">
                 <div class="copyright">
-                    2020 © Рынок "Михайловский"</div>
+                    <?=date('Y')?> © Республиканский Рынок</div>
                 <span class="pay_system_icons">
 	<i title="MasterCard" class="mastercard"></i>
 <i title="Visa" class="visa"></i>
@@ -418,20 +456,80 @@ $newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(3)->all();
     </div>
 </footer>
 
-<?php if(!Yii::$app->user->isGuest) :?>
-    <?php if(Cart::inCart(Yii::$app->user->identity->customer_id)) : ?>
-        <a href="<?=Url::to(['cabinet/index'])?>" class="cart floating" style="display: inline;">
-            <p class="cart-img">
-                <span class="count"><?=Cart::productCount(Yii::$app->user->identity->customer_id)?></span>
-            </p>
+<?php if(!Site::isMobile()) :?>
+    <?php if(!Yii::$app->user->isGuest) :?>
+        <?php if(Cart::inCart(Yii::$app->user->identity->customer_id)) : ?>
+            <a href="<?=Url::to(['cabinet/index'])?>" class="cart floating" style="display: inline;">
+                <p class="cart-img">
+                    <span class="count"><?=Cart::productCount(Yii::$app->user->identity->customer_id)?></span>
+                </p>
 
-            <p class="cart-text">
-                <span class="cart-title">Ваша корзина</span>
-                <span> <span class="cart-sum"><?=Cart::cartPrice(Yii::$app->user->identity->customer_id)?></span> руб.</span>
-            </p>
-        </a>
+                <p class="cart-text">
+                    <span class="cart-title">Ваша корзина</span>
+                    <span> <span class="cart-sum"><?=Cart::cartPrice(Yii::$app->user->identity->customer_id)?></span> руб.</span>
+                </p>
+            </a>
+        <?php endif; ?>
     <?php endif; ?>
 <?php endif; ?>
+
+<div class="modal-overlay closed" id="modal-overlay"></div>
+
+<div class="popup modal closed" id="modal" aria-hidden="true" aria-labelledby="modalTitle" aria-describedby="modalDescription" role="dialog">
+    <a href="#" class="close" id="close-button"><i></i></a>
+    <div class="modal-guts" role="document">
+        <label class="form CALLBACK" style="width: 385px;">
+            <!--noindex-->
+            <div class="form_head">
+                <h2>Заказать звонок</h2>
+            </div>
+
+            <?php $form = ActiveForm::begin() ?>
+
+            <div class="form_body">
+                <?=$form->field($callback, 'name')->textInput()->label('<span>Ваше имя&nbsp;<span class="star">*</span></span>')?>
+
+                <?=$form->field($callback, 'phone')->textInput()->label('<span>Телефон&nbsp;<span class="star">*</span></span>')?>
+
+                <div class="clearboth"></div>
+                <div class="clearboth"></div>
+
+            </div>
+
+            <div class="form_footer">
+                <?=Html::submitButton('Отправить', ['class' => 'button medium ff'])?>
+
+                <?=Html::resetButton('<span>Закрыть</span>', ['class' => 'button medium transparent', 'id' => 'reset'])?>
+            </div>
+
+            <?php ActiveForm::end() ?><!--/noindex-->
+        </label>
+    </div>
+</div>
+
+<script>
+    var modal = document.querySelector("#modal"),
+        modalOverlay = document.querySelector("#modal-overlay"),
+        closeButton = document.querySelector("#close-button"),
+        openButton = document.querySelector("#open-button");
+        resetButton = document.querySelector("#reset");
+
+    closeButton.addEventListener("click", function() {
+        modal.classList.toggle("closed");
+        modalOverlay.classList.toggle("closed");
+    });
+
+    resetButton.addEventListener("click", function() {
+        modal.classList.toggle("closed");
+        modalOverlay.classList.toggle("closed");
+    });
+
+    openButton.addEventListener("click", function() {
+        modal.classList.toggle("closed");
+        modalOverlay.classList.toggle("closed");
+    });
+
+</script>
 
 <?php $this->endBody() ?>
 </body>

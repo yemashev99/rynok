@@ -19,7 +19,7 @@ use yii\web\UploadedFile;
 class Holiday extends \yii\db\ActiveRecord
 {
 
-    const BACKEND_PATH = 'image/holidays/';
+    const BACKEND_PATH = 'image/holiday/';
 
     public $file;
 

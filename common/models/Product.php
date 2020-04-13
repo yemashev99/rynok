@@ -45,7 +45,8 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             [['category_id', 'title', 'price', 'measure'], 'required'],
-            [['category_id', 'sub_category_id', 'price', 'count'], 'integer'],
+            [['category_id', 'sub_category_id', 'price'], 'integer'],
+            [['count'], 'double'],
             [['description', 'image'], 'string'],
             [['title', 'measure'], 'string', 'max' => 255],
             [['file'], 'file', 'extensions' => ['png', 'jpg', 'jpeg']],

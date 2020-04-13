@@ -11,7 +11,7 @@ $this->title = 'Управление сайтом - Праздники';
     <h2>Праздники</h2>
 </div>
 
-<?=Html::a('+ Добавить', ['holidays/create'], ['class' => 'btn btn-primary'])?>
+<?=Html::a('+ Добавить', ['holiday/create'], ['class' => 'btn btn-primary'])?>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
@@ -47,13 +47,13 @@ $this->title = 'Управление сайтом - Праздники';
             'label' => 'Контент',
             'format' => 'raw',
             'value' => function($data) {
-                return Html::a('Перейти', ['holidays/content', 'id' => $data->holiday_id], ['class' => 'btn btn-primary']);
+                return Html::a('Перейти', ['holiday/content', 'id' => $data->holiday_id], ['class' => 'btn btn-primary']);
             }
         ],
         [
             'format' => 'raw',
             'value' => function($data) {
-                return Html::a('', ['holidays/update', 'id' => $data->holiday_id], ['class' => 'glyphicon glyphicon-pencil']);
+                return Html::a('', ['holiday/update', 'id' => $data->holiday_id], ['class' => 'glyphicon glyphicon-pencil']);
             }
         ],
     ],
