@@ -1,6 +1,7 @@
 <?php
 
 use backend\models\OrderSearch;
+use common\models\Callback;
 use common\models\Category;
 use common\models\Menu;
 $menu = new Menu();
@@ -138,6 +139,12 @@ foreach ($deliveryObjects as $item)
                                 'active' => $this->context->route == 'order/done',
                             ],
                         ],
+                    ],
+                    [
+                        'label' => 'Обратные звонки ('.Callback::callbackCount().')',
+                        'icon' => 'phone',
+                        'url' => ['/callback'],
+                        'active' => $this->context->route == 'callback/index',
                     ],
                     [
                         'label' => 'Пользователи',

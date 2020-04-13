@@ -48,4 +48,10 @@ class Callback extends \yii\db\ActiveRecord
             'processed' => 'Обработан',
         ];
     }
+
+    public static function callbackCount()
+    {
+        $count = Callback::find()->count();
+        return $count;
+    }
 }
