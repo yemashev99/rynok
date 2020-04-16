@@ -149,7 +149,6 @@ if ($callback->load(Yii::$app->request->post()))
 <body>
 <?php $this->beginBody() ?>
 
-<?php Pjax::begin() ?>
 <div class="wrapper front_page basket_fly colored banner_auto">
 <span id="gray-fon">
     <div class="header_wrap ">
@@ -355,7 +354,6 @@ if ($callback->load(Yii::$app->request->post()))
     </div>
 </span>
 </div>
-<?php Pjax::end() ?>
 
 <footer id="footer">
     <div class="footer_inner no_fill">

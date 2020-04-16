@@ -66,4 +66,31 @@ class FirstController extends Controller
         }
         return $this->render('create', compact('model'));
     }
+
+    public function actionUpdate($id)
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        $model = FirstPageGallery::findOne(['first_page_gallery_id' => $id]);
+        if ($model->load(Yii::$app->request->post()))
+        {
+
+            $file = UploadedFile::getInstance($model, 'file');
+
+            if ($model->save())
+            {
+
+                if (!is_null($file))
+                {
+                    $model->saveImage($model->uploadImage($file));
+                }
+
+                return $this->redirect(['first/index']);
+            }
+        }
+        return $this->render('update', compact('model'));
+    }
+
 }

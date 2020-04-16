@@ -215,15 +215,17 @@ class CabinetController extends Controller
             ])
             ->all();
 
-        $model = new Cart();
-        if($model->sendMail())
+        foreach ($items as $item)
         {
-            foreach ($items as $item)
-            {
-                $item->order_status_id = 2;
-                $item->save();
-            }
+            $item->order_status_id = 2;
+            $item->save();
+        }
+
+        $model = new Cart();
+        if($model->sendOrderLinkToMail())
+        {
             return $this->redirect(['cabinet/order']);
         }
+        return false;
     }
 }
