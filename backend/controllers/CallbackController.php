@@ -11,13 +11,13 @@ use yii\web\Controller;
 
 class CallbackController extends Controller
 {
-    public function actionIndex()
+    public function actionIndex($type)
     {
         if (Yii::$app->user->isGuest)
         {
             return $this->redirect(['site/login']);
         }
-        $searchModel = new CallbackSearch();
+        $searchModel = new CallbackSearch($type);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', compact('dataProvider', 'searchModel'));
     }

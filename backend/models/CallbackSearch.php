@@ -11,9 +11,17 @@ use yii\helpers\ArrayHelper;
 
 class CallbackSearch extends Model
 {
+
     public $name;
     public $phone;
     public $date;
+    public $type;
+
+    public function __construct($type, $config = [])
+    {
+        $this->type = $type;
+        parent::__construct($config);
+    }
 
     /**
      * {@inheritdoc}
@@ -33,7 +41,7 @@ class CallbackSearch extends Model
     public function search($params)
     {
 
-        $query = Callback::find();
+        $query = Callback::find()->where(['type' => $this->type]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

@@ -20,4 +20,9 @@ class TenantsController extends Controller
         $object = Tenants::findOne(['url' => $tenant]);
         return $this->render('content', compact('object'));
     }
+
+    public function actionDocs()
+    {
+        
+    }
 }

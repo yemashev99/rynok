@@ -51,7 +51,13 @@ class Callback extends \yii\db\ActiveRecord
 
     public static function callbackCount()
     {
-        $count = Callback::find()->count();
+        $count = Callback::find()->where(['type' => 'call'])->count();
+        return $count;
+    }
+
+    public static function rentCount()
+    {
+        $count = Callback::find()->where(['type' => 'rent'])->count();
         return $count;
     }
 }

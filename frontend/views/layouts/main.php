@@ -120,6 +120,23 @@ switch (Yii::$app->controller->id) {
             ];
         }
         break;
+    case 'tenants':
+        $navSideItems = array();
+        $sidebarItems = Category::find()->where('menu_id = :id', [':id' => $menu->getIdByControllerName('tenants')])->all();
+        foreach ($sidebarItems as $key => $sidebarItem)
+        {
+            $navSideItems[] = [
+                'label' => $sidebarItem->title,
+                'url' => Url::to(['tenants/'.$sidebarItem->url]),
+                'linkOptions' => [
+                    'class' => 'icons_fa',
+                ],
+                'options' => [
+                    'class' => 'item',
+                ],
+            ];
+        }
+        break;
 }
 $newsItems = News::find()->orderBy(['news_id' => SORT_DESC])->limit(3)->all();
 //callback
@@ -128,6 +145,7 @@ if ($callback->load(Yii::$app->request->post()))
 {
     $callback->date = date('d-m-Y');
     $callback->processed = 'N';
+    $callback->type = 'call';
     $callback->save();
 }
 ?>

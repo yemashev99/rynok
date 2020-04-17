@@ -104,8 +104,21 @@ foreach ($deliveryObjects as $item)
                             [
                                 'label' => 'Арендаторам',
                                 'icon' => 'usd',
-                                'url' => ['tenants/index'],
-                                'active' => in_array(Yii::$app->controller->id, ['tenants'])
+                                'url' => '#',
+                                'items' => [
+                                    [
+                                        'label' => 'Главная страница',
+                                        'icon' => 'file-text-o',
+                                        'url' => ['tenants/index'],
+                                        'active' => in_array('tenants', $arrayUrl),
+                                    ],
+                                    [
+                                        'label' => 'Документы',
+                                        'icon' => 'file-text-o',
+                                        'url' => ['tenants/docs'],
+                                        'active' => in_array('tenants/docs', $arrayUrl),
+                                    ],
+                                ],
                             ],
                             [
                                 'label' => 'Контакты',
@@ -143,8 +156,14 @@ foreach ($deliveryObjects as $item)
                     [
                         'label' => 'Обратные звонки ('.Callback::callbackCount().')',
                         'icon' => 'phone',
-                        'url' => ['/callback'],
-                        'active' => $this->context->route == 'callback/index',
+                        'url' => ['/callback', 'type' => 'call'],
+                        'active' => Yii::$app->request->pathInfo == 'callback/call',
+                    ],
+                    [
+                        'label' => 'Сотрудничество ('.Callback::rentCount().')',
+                        'icon' => 'suitcase',
+                        'url' => ['/callback', 'type' => 'rent'],
+                        'active' => Yii::$app->request->pathInfo == 'callback/rent',
                     ],
                     [
                         'label' => 'Пользователи',
