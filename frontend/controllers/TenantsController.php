@@ -5,6 +5,7 @@ namespace frontend\controllers;
 
 
 use common\models\Tenants;
+use common\models\TenantsDoc;
 use yii\web\Controller;
 
 class TenantsController extends Controller
@@ -23,6 +24,13 @@ class TenantsController extends Controller
 
     public function actionDocs()
     {
-        
+        $firstDocs = TenantsDoc::find()->orderBy(['doc_id' => SORT_ASC])->limit(2)->all();
+        $secondDocs = TenantsDoc::find()->orderBy(['doc_id' => SORT_ASC])->offset(2)->all();
+        return $this->render('docs', compact('firstDocs', 'secondDocs'));
+    }
+
+    public function actionCallback()
+    {
+
     }
 }

@@ -64,6 +64,8 @@ return [
                 'about/manufacturers/<manufacturer>' => 'about/manufacturers-content',
                 'about/gallery/<item>' => 'about/gallery-content',
                 'tenants' => 'tenants/index',
+                'tenants/docs' => 'tenants/docs',
+                'tenants/callback' => 'tenants/callback',
                 'tenants/<tenant>' => 'tenants/content',
                 'contact' => 'contact/index',
                 'holidays/<id>' => 'holidays/content',
