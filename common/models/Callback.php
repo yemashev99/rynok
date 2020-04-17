@@ -10,8 +10,10 @@ use Yii;
  * @property int $callback_id
  * @property string $name
  * @property string $phone
+ * @property string $production
  * @property string $date
  * @property string $processed
+ * @property string $type
  */
 class Callback extends \yii\db\ActiveRecord
 {
@@ -30,7 +32,7 @@ class Callback extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'phone', 'date', 'processed'], 'required'],
-            [['name', 'phone', 'date'], 'string', 'max' => 255],
+            [['name', 'phone', 'date', 'production', 'type'], 'string', 'max' => 255],
             [['processed'], 'string', 'max' => 1],
         ];
     }
@@ -46,6 +48,7 @@ class Callback extends \yii\db\ActiveRecord
             'phone' => 'Телефон',
             'date' => 'Дата',
             'processed' => 'Обработан',
+            'production' => 'Продукция',
         ];
     }
 

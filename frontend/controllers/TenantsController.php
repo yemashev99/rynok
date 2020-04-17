@@ -4,8 +4,10 @@
 namespace frontend\controllers;
 
 
+use common\models\Callback;
 use common\models\Tenants;
 use common\models\TenantsDoc;
+use Yii;
 use yii\web\Controller;
 
 class TenantsController extends Controller
@@ -31,6 +33,17 @@ class TenantsController extends Controller
 
     public function actionCallback()
     {
-
+        $callback = new Callback();
+        if ($callback->load(Yii::$app->request->post()))
+        {
+            $callback->date = date('d-m-Y');
+            $callback->processed = 'N';
+            $callback->type = 'rent';
+            if ($callback->save())
+            {
+                return $this->redirect(['tenants/index']);
+            }
+        }
+        return $this->render('callback', compact('callback'));
     }
 }

@@ -19,7 +19,7 @@ class CallbackController extends Controller
         }
         $searchModel = new CallbackSearch($type);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        return $this->render('index', compact('dataProvider', 'searchModel'));
+        return $this->render('index', compact('dataProvider', 'searchModel', 'type'));
     }
 
     public function actionDelete($id)
