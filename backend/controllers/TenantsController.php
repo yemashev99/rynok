@@ -127,7 +127,7 @@ class TenantsController extends Controller
             {
                 if (!is_null($file))
                 {
-                    $model->saveFile($model->uploadFile($file));
+                    $model->saveFile($model->uploadFile($file, $model->title));
                 }
                 return $this->redirect(['tenants/docs']);
             }
@@ -151,7 +151,7 @@ class TenantsController extends Controller
             {
                 if (!is_null($file))
                 {
-                    $model->saveFile($model->uploadFile($file));
+                    $model->saveFile($model->uploadFile($file, $model->title));
                 }
                 return $this->redirect(['tenants/docs']);
             }

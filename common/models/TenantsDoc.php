@@ -55,16 +55,15 @@ class TenantsDoc extends \yii\db\ActiveRecord
 
     /**
      * @param UploadedFile $file
+     * @param $title
      * @return string
-     * @throws \yii\base\Exception
      */
-    public function uploadFile(UploadedFile $file)
+    public function uploadFile(UploadedFile $file, $title)
     {
 
         $this->deleteCurrentFile($this->doc);
 
-        $fileName = Yii::$app->security->generateRandomString(12);
-        $filePath = self::BACKEND_PATH.$fileName.'.'.$file->extension;
+        $filePath = self::BACKEND_PATH.$title.'.'.$file->extension;
 
         $file->saveAs($filePath);
 
