@@ -46,7 +46,7 @@ class CallbackController extends Controller
         $model->processed = "Y";
         if ($model->save())
         {
-            $this->redirect(['callback/index']);
+            $this->redirect(['callback/'.$model->type]);
         }
         return false;
     }

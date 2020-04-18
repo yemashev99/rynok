@@ -63,6 +63,7 @@ return [
                 'tenants' => 'tenants/index',
                 'contact' => 'contact/index',
                 'holidays' => 'holidays/index',
+                'callback/processed/<id:\d+>' => 'callback/processed',
                 'callback/<type>' => 'callback',
             ],
         ],
