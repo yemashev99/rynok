@@ -185,4 +185,13 @@ class CatalogController extends Controller
             return $this->redirect(['catalog/index']);
         }
     }
+
+    public function actionTranslate($text)
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        echo Product::translit($text);
+    }
 }

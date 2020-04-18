@@ -34,7 +34,17 @@ $path = explode('/', Yii::$app->request->pathInfo);
         </div>
     </div>
 
-    <?=$form->field($model, 'title')->textInput()?>
+    <div class="row">
+        <div class="col-md-6">
+            <?=$form->field($model, 'title')->textInput(['onchange' => '
+                    $.post("/admin/catalog/translate?text='.'"+$(this).val(), function (data) {
+                        $("input#product-url").val(data);
+                    });'])?>
+        </div>
+        <div class="col-md-6">
+            <?=$form->field($model, 'url')->textInput()?>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-6">

@@ -85,6 +85,23 @@ class CatalogController extends Controller
         return $this->render('item', compact('category', 'subCategory', 'products', 'display', 'orderBy', 'sort', 'pages', 'cartForm'));
     }
 
+    public function actionView($category, $subCategory, $item)
+    {
+        $cartForm = new CartForm();
+        if (Yii::$app->request->post())
+        {
+            $cartForm->attributes = Yii::$app->request->post('CartForm');
+            if ($cartForm->validate() && $cartForm->save())
+            {
+                return $this->redirect(['catalog/item', 'category' => $category, 'subCategory' => $subCategory, 'display' => $display]);
+            }
+        }
+        $category = Category::findOne(['url' => $category]);
+        $subCategory = SubCategory::findOne(['url' => $subCategory]);
+        $product = Product::findOne(['url' => $item]);
+        return $this->render('view', compact('category', 'subCategory', 'product', 'cartForm'));
+    }
+
     public function actionSearch($sort = null, $display = 'block', $orderBy = SORT_ASC, $search = null)
     {
         if (Yii::$app->request->post())

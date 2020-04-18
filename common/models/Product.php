@@ -19,6 +19,7 @@ use yii\web\UploadedFile;
  * @property int $price
  * @property int $count
  * @property string $measure
+ * @property string $url
  *
  * @property Category $category
  * @property SubCategory $subCategory
@@ -44,10 +45,11 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'title', 'price', 'measure'], 'required'],
+            [['category_id', 'title', 'price', 'measure', 'url'], 'required'],
             [['category_id', 'sub_category_id', 'price'], 'integer'],
             [['count'], 'double'],
-            [['description', 'image'], 'string'],
+            [['description', 'image', 'url'], 'string'],
+            ['url', 'unique', 'targetClass' => 'common\models\Product'],
             [['title', 'measure'], 'string', 'max' => 255],
             [['file'], 'file', 'extensions' => ['png', 'jpg', 'jpeg']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'category_id']],
@@ -71,6 +73,7 @@ class Product extends \yii\db\ActiveRecord
             'count' => 'Кол-во',
             'measure' => 'Ед. измерения',
             'file' => 'Изображение',
+            'url' => 'Ссылка',
         ];
     }
 
@@ -157,4 +160,10 @@ class Product extends \yii\db\ActiveRecord
             return false;
         }
     }
+
+    public static function translit($str) {
+    $rus = array('А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я', 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я', ' ', ',');
+    $lat = array('a', 'b', 'v', 'g', 'd', 'e', 'e', 'gh', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'c', 'ch', 'sh', 'sch', 'y', 'y', 'y', 'e', 'yu', 'ya', 'a', 'b', 'v', 'g', 'd', 'e', 'e', 'gh', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'c', 'ch', 'sh', 'sch', 'y', 'y', 'y', 'e', 'yu', 'ya', '-', '');
+    return str_replace($rus, $lat, $str);
+  }
 }

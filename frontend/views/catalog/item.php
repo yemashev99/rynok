@@ -106,13 +106,13 @@ if (Yii::$app->user->isGuest)
                                             <div class="image_wrapper_block">
                                                 <div class="stickers">
                                                 </div>
-                                                <a href="#" class="thumb" id="product_<?=$product->product_id?>_pic">
+                                                <a href="<?=Url::to(['catalog/view', 'category' => $product->category->url, 'subCategory' => $product->subCategory->url, 'item' => $product->url])?>" class="thumb" id="product_<?=$product->product_id?>_pic">
                                                     <img src="<?=Yii::getAlias('@web').'/'.$product->image?>" alt="<?=$product->title?>" title="<?=$product->title?>">
                                                 </a>
                                             </div>
                                             <div class="item_info TYPE_1">
                                                 <div class="item-title">
-                                                    <a href="<?php /*TODO: view item*/ ?>"><span><?=$product->title?></span></a>
+                                                    <a href="<?=Url::to(['catalog/view', 'category' => $product->category->url, 'subCategory' => $product->subCategory->url, 'item' => $product->url])?>"><span><?=$product->title?></span></a>
                                                 </div>
                                                 <div class="cost prices clearfix" style="height: 30px;">
                                                     <div class="price only_price">
@@ -177,7 +177,7 @@ if (Yii::$app->user->isGuest)
                             <table class="list_item" id="<?=$product->product_id?>" cellspacing="0" cellpadding="0" border="0" width="100%">
                                 <tbody><tr class="adaptive_name">
                                     <td colspan="2">
-                                        <div class="desc_name"><a href="<?php /*TODO: view item*/ ?>"><span><?=$product->title?></span></a></div>
+                                        <div class="desc_name"><a href="<?=Url::to(['catalog/view', 'category' => $product->category->url, 'subCategory' => $product->subCategory->url, 'item' => $product->url])?>"><span><?=$product->title?></span></a></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -185,7 +185,7 @@ if (Yii::$app->user->isGuest)
                                         <div class="image_wrapper_block">
                                             <div class="stickers">
                                             </div>
-                                            <a href="<?php /*TODO: view item*/ ?>" class="thumb" id="product_<?=$product->product_id?>_pic">
+                                            <a href="<?=Url::to(['catalog/view', 'category' => $product->category->url, 'subCategory' => $product->subCategory->url, 'item' => $product->url])?>" class="thumb" id="product_<?=$product->product_id?>_pic">
                                                 <img src="<?=Yii::getAlias('@web').'/'.$product->image?>" alt="<?=$product->title?>" title="<?=$product->title?>">
                                             </a>
                                         </div>
@@ -194,7 +194,7 @@ if (Yii::$app->user->isGuest)
                                     <td class="description_wrapp">
                                         <div class="description">
                                             <div class="item-title">
-                                                <a href="<?php /*TODO: view item*/ ?>"><span><?=$product->title?></span></a>
+                                                <a href="<?=Url::to(['catalog/view', 'category' => $product->category->url, 'subCategory' => $product->subCategory->url, 'item' => $product->url])?>"><span><?=$product->title?></span></a>
                                             </div>
                                             <div class="wrapp_stockers">
                                                 <div class="article_block">
@@ -269,13 +269,13 @@ if (Yii::$app->user->isGuest)
                             <tr class="item" id="<?=$product->product_id?>">
                                 <td class="foto-cell">
                                     <div class="image_wrapper_block">
-                                        <a class="popup_image fancy" href="<?php /*TODO: view item*/ ?>" title="<?=$product->title?>">
+                                        <a class="popup_image fancy" href="<?=Url::to(['catalog/view', 'category' => $product->category->url, 'subCategory' => $product->subCategory->url, 'item' => $product->url])?>" title="<?=$product->title?>">
                                             <img src="<?=Yii::getAlias('@web').'/'.$product->image?>" alt="<?=$product->title?>" title="<?=$product->title?>">
                                         </a>
                                     </div>
                                 </td>
                                 <td class="item-name-cell">
-                                    <div class="title"><a href="<?php /*TODO: view item*/ ?>"><?=$product->title?></a></div>
+                                    <div class="title"><a href="<?=Url::to(['catalog/view', 'category' => $product->category->url, 'subCategory' => $product->subCategory->url, 'item' => $product->url])?>"><?=$product->title?></a></div>
                                 </td>
                                 <td class="price-cell">
                                     <div class="cost prices clearfix">
