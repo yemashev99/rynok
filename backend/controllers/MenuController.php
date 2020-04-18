@@ -8,6 +8,7 @@ use common\models\SubCategory;
 use common\models\Menu;
 use common\models\Category;
 use himiklab\sortablegrid\SortableGridAction;
+use richardfan\sortable\SortableAction;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -16,13 +17,14 @@ use yii\web\UploadedFile;
 class MenuController extends Controller
 {
 
-    public function actions()
-    {
+    public function actions(){
         return [
-            'sort' => [
-                'class' => SortableGridAction::className(),
-                'modelName' => Menu::className(),
+            'sortItem' => [
+                'class' => SortableAction::className(),
+                'activeRecordClassName' => Category::className(),
+                'orderColumn' => 'sort',
             ],
+            // your other actions
         ];
     }
 
@@ -72,7 +74,8 @@ class MenuController extends Controller
             'query' => Category::find()
                 ->where('menu_id = :id', [
                     ':id' => $id,
-                ]),
+                ])
+                ->orderBy(['sort' => SORT_ASC]),
             'pagination' => [
                 'pageSize' => 9,
             ],

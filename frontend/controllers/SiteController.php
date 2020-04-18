@@ -11,6 +11,15 @@ use yii\web\Controller;
  */
 class SiteController extends Controller
 {
+    public function actions()
+    {
+        return [
+            'error' => [
+                // объявляем действие error и задаем имя класса
+                'class' => 'yii\web\ErrorAction',
+            ],
+        ];
+    }
     /**
      * Displays homepage.
      *

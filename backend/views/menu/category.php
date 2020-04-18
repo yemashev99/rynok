@@ -4,6 +4,7 @@
 
 $this->title = 'Управление сайтом - Меню';
 
+use richardfan\sortable\SortableGridView;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -19,8 +20,13 @@ $this->params['breadcrumbs'][] = 'Категории "'.$menu->title.'"';
 
 <?=Html::a('+ Добавить новую', ['menu/category-create', 'id' => $menu->menu_id], ['class' => 'btn btn-primary'])?>
 
-<?= GridView::widget([
+<?= SortableGridView::widget([
     'dataProvider' => $dataProvider,
+
+    // you can choose how the URL look like,
+    // but it must match the one you put in the array of controller's action()
+    'sortUrl' => Url::to(['sortItem']),
+
     'tableOptions' => [
         'class' => 'table table-striped table-bordered',
     ],

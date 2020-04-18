@@ -55,7 +55,7 @@ foreach ($menuItems as $key => $menuItem)
     }
 }
 $menu = new Menu();
-$sidebarItems = Category::find()->where('menu_id = :id', [':id' => $menu->getIdByControllerName(Yii::$app->controller->id)])->all();
+$sidebarItems = Category::find()->where('menu_id = :id', [':id' => $menu->getIdByControllerName(Yii::$app->controller->id)])->orderBy(['sort' => SORT_ASC])->all();
 $navSideItems = array();
 foreach ($sidebarItems as $key => $sidebarItem)
 {
@@ -105,7 +105,7 @@ switch (Yii::$app->controller->id) {
         break;
     case 'cabinet':
         $navSideItems = array();
-        $sidebarItems = Category::find()->where('menu_id = :id', [':id' => $menu->getIdByControllerName('catalog')])->all();
+        $sidebarItems = Category::find()->where('menu_id = :id', [':id' => $menu->getIdByControllerName('catalog')])->orderBy(['sort' => SORT_ASC])->all();
         foreach ($sidebarItems as $key => $sidebarItem)
         {
             $navSideItems[] = [
@@ -122,7 +122,7 @@ switch (Yii::$app->controller->id) {
         break;
     case 'tenants':
         $navSideItems = array();
-        $sidebarItems = Category::find()->where('menu_id = :id', [':id' => $menu->getIdByControllerName('tenants')])->all();
+        $sidebarItems = Category::find()->where('menu_id = :id', [':id' => $menu->getIdByControllerName('tenants')])->orderBy(['sort' => SORT_ASC])->all();
         foreach ($sidebarItems as $key => $sidebarItem)
         {
             $navSideItems[] = [
@@ -404,14 +404,14 @@ if ($callback->load(Yii::$app->request->post()))
                                 <div class="rows_block">
                                     <div class="item_block col-3">
                                         <ul class="submenu">
-                                            <?php foreach ($about = Category::find()->where(['menu_id' => $menu->getIdByControllerName('about')])->all() as $item) : ?>
+                                            <?php foreach ($about = Category::find()->where(['menu_id' => $menu->getIdByControllerName('about')])->orderBy(['sort' => SORT_ASC])->all() as $item) : ?>
                                                 <li class="menu_item"><a href="<?=Url::to(['about/'.$item->url])?>" class="dark_link"><?=$item->title?></a></li>
                                             <?php endforeach; ?>
                                         </ul>											</div>
                                     <div class="item_block col-3"></div>
                                     <div class="item_block col-3">
                                         <ul class="submenu">
-                                            <?php foreach ($about = Category::find()->where(['menu_id' => $menu->getIdByControllerName('delivery')])->all() as $item) : ?>
+                                            <?php foreach ($about = Category::find()->where(['menu_id' => $menu->getIdByControllerName('delivery')])->orderBy(['sort' => SORT_ASC])->all() as $item) : ?>
                                                 <li class="menu_item"><a href="<?=Url::to(['delivery/'.$item->url])?>" class="dark_link"><?=$item->title?></a></li>
                                             <?php endforeach; ?>
                                         </ul>											</div>
