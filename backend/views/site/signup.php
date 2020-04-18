@@ -1,6 +1,7 @@
 <?php
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
+    $this->title = 'Добавление нового пользователя';
 ?>
 <h1>Регистрация</h1>
 
@@ -13,7 +14,7 @@
 <?= $form->field($model, 'password')->passwordInput() ?>
 
 <div>
-    <?=Html::submitButton('Submit', ['class' => 'btn btn-primary'])?>
+    <?=Html::submitButton('Добавить', ['class' => 'btn btn-primary'])?>
 </div>
 
 <?php ActiveForm::end(); ?>

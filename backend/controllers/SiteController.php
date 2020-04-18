@@ -48,7 +48,7 @@ class SiteController extends Controller
 
             if ($model->validate() && $model->signup())
             {
-                return $this->goHome();
+                return $this->redirect(['user/index']);
             }
         }
 
