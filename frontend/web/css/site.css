@@ -285,9 +285,9 @@ a.wish_item i, a.compare_item i { background: url("../img/like_icons.png") no-re
 .right_side { width: 200px; float: right; box-sizing: border-box; -moz-box-sizing: border-box; -o-box-sizing: border-box; -webkit-box-sizing: border-box; padding-left: 20px; }
 
 .catalog_detail .item_main_info .buttons_block { border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px; width: 100%; }
-.catalog_detail .item_main_info { margin: 20px 0 30px; padding: 0px; border: 1px solid #eaebec; position: relative; }
+.catalog_detail .item_main_info { margin: 20px 0 30px; padding: 0px; border: 1px solid #eaebec; position: relative; display: -webkit-inline-box;}
 .catalog_detail .item_main_info .item_slider { width: 50%; box-sizing: border-box; -moz-box-sizing: border-box; -o-box-sizing: border-box; -webkit-box-sizing: border-box; padding: 29px 56px 29px 56px;  float: left; position: relative; z-index: 1;text-align:center; }
-.catalog_detail .item_main_info .right_info { padding: 0px 0px 0px 50%; position: relative; }
+.catalog_detail .item_main_info .right_info { padding: 0px 0px 2% 5%; position: relative; }
 .catalog_detail .item_main_info .right_info .info_item { position: relative;padding:0px 21px 0px 11px;}
 #order_form_div .info_block  .l_block:after, #order_form_div .info_block .r_block:before { position: absolute; top: 0px; background: #F2F2F2; width: 1px; height: 100%; content: ""; }
 #order_form_div .info_block  .l_block:after { right: 0px; }
@@ -3413,7 +3413,7 @@ div[id^=smartFilterDropDown] .popup-window-top-row, div[id^=smartFilterDropDown]
 
 .catalog_detail .element_detail_text { font-size: 12px; line-height: 15px; padding: 0px 0px 39px; }
 .catalog_detail .element_detail_text .sh {width: 120px;float: left;}
-.catalog_detail .element_detail_text .price_txt { padding-left: 129px; color: #b3b3b3; font-size: 12px;}
+.catalog_detail .element_detail_text .price_txt { padding-left: 129px; color: #b3b3b3; font-size: 12px; width: 50%;}
 
 .catalog_detail .props_list{width:100%;margin:0px 0px 0px;color:#555;}
 .catalog_detail .tabs_content .char_block{margin-bottom:30px;}
