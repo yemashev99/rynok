@@ -2497,7 +2497,8 @@ body .flexslider li, body .flex-direction-nav li{padding:0px;}
 /*tabs*/
 .specials_slider_wrapp, .tab_slider_wrapp, .specials.tab_slider_wrapp{padding:20px 0px 2px;clear: both;font-size: 0px;}
 .tab_slider_wrapp{padding-top:20px;}
-.catalog_detail + .tab_slider_wrapp, .catalog_detail + .clearfix + .tab_slider_wrapp {border-top: 1px solid #eaebec;padding-top: 21px;}
+.catalog_detail + .clearfix + .tab_slider_wrapp {border-top: 1px solid #eaebec;padding-top: 21px;}
+.catalog_detail + .tab_slider_wrapp {padding-top: 21px;}
 .catalog_detail .form .form_footer{margin:0;}
 .specials_slider_wrapp ul.tabs, .tab_slider_wrapp  ul.tabs{margin:0px 0px 0px;}
 .specials_slider_wrapp ul.tabs > li, .tab_slider_wrapp ul.tabs > li{margin:10px 14px 0 0;-moz-border-radius:0px;border-radius:0px;height:auto;}

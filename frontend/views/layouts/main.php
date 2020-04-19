@@ -523,15 +523,53 @@ if ($callback->load(Yii::$app->request->post()))
     </div>
 </div>
 
+<div class="popup modal closed" id="modal-one-click" aria-hidden="true" aria-labelledby="modalTitle" aria-describedby="modalDescription" role="dialog">
+    <a href="#" class="close" id="close-button-one-click"><i></i></a>
+    <div class="modal-guts" role="document">
+        <label class="form CALLBACK" style="width: 385px;">
+            <!--noindex-->
+            <div class="form_head">
+                <h2>Купить в 1 клик</h2>
+            </div>
+
+            <?php $form = ActiveForm::begin() ?>
+
+            <div class="form_body">
+                <?=$form->field($callback, 'name')->textInput()->label('<span>Ваше имя&nbsp;<span class="star">*</span></span>')?>
+
+                <?=$form->field($callback, 'phone')->textInput()->label('<span>Телефон&nbsp;<span class="star">*</span></span>')?>
+
+                <div class="clearboth"></div>
+                <div class="clearboth"></div>
+
+            </div>
+
+            <div class="form_footer">
+                <?=Html::submitButton('Отправить', ['class' => 'button medium ff'])?>
+            </div>
+
+            <?php ActiveForm::end() ?><!--/noindex-->
+        </label>
+    </div>
+</div>
+
 <script>
     var modal = document.querySelector("#modal"),
+        modalOneClick = document.querySelector("#modal-one-click"),
         modalOverlay = document.querySelector("#modal-overlay"),
         closeButton = document.querySelector("#close-button"),
-        openButton = document.querySelector("#open-button");
+        openButton = document.querySelector("#open-button"),
+        closeButtonOneClick = document.querySelector("#close-button-one-click"),
+        openButtonOneClick = document.querySelector("#open-button-one-click"),
         resetButton = document.querySelector("#reset");
 
     closeButton.addEventListener("click", function() {
         modal.classList.toggle("closed");
+        modalOverlay.classList.toggle("closed");
+    });
+
+    closeButtonOneClick.addEventListener("click", function() {
+        modalOneClick.classList.toggle("closed");
         modalOverlay.classList.toggle("closed");
     });
 
@@ -542,6 +580,11 @@ if ($callback->load(Yii::$app->request->post()))
 
     openButton.addEventListener("click", function() {
         modal.classList.toggle("closed");
+        modalOverlay.classList.toggle("closed");
+    });
+
+    openButtonOneClick.addEventListener("click", function() {
+        modalOneClick.classList.toggle("closed");
         modalOverlay.classList.toggle("closed");
     });
 
