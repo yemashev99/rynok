@@ -14,7 +14,7 @@ $this->title = 'Управление сайтом - Каталог';
 </div>
 
 <div class="row">
-    <?php $form = ActiveForm::begin() ?>
+    <?php $form = ActiveForm::begin(['action' => [''], 'method' => 'get']) ?>
     <div class="col-md-3">
         <?= $form->field($sortForm, 'categoryId')->dropDownList($category,
             [
@@ -49,6 +49,24 @@ $this->title = 'Управление сайтом - Каталог';
             'style' => 'margin-top: 24px;',
         ])?>
     </div>
+</div>
+
+<div class="page-header">
+    <h2>Поиск</h2>
+</div>
+
+<div class="row">
+    <?php $search = ActiveForm::begin() ?>
+    <div class="col-md-3">
+        <?=$search->field($searchForm, 'title')->textInput()?>
+    </div>
+    <div class="col-sm-1">
+        <?=Html::submitButton('<i class="fa fa-search"></i> Поиск', [
+            'class' => 'btn btn-primary',
+            'style' => 'margin-top: 24px;',
+        ])?>
+    </div>
+    <?php ActiveForm::end() ?>
 </div>
 
 <div class="page-header">

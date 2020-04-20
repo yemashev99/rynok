@@ -4,6 +4,7 @@
 namespace backend\controllers;
 
 
+use backend\models\SearchForm;
 use backend\models\SortForm;
 use common\models\Category;
 use common\models\Menu;
@@ -19,7 +20,7 @@ use yii\web\UploadedFile;
 
 class CatalogController extends Controller
 {
-    public function actionIndex()
+    public function actionIndex($categoryId = null, $subCategoryId = null)
     {
 
         if (Yii::$app->user->isGuest)
@@ -30,6 +31,7 @@ class CatalogController extends Controller
         //сортировка по категориям
         $menu = new Menu();
         $sortForm = new SortForm();
+        $searchForm = new SearchForm();
         $category = ArrayHelper::map(
             Category::find()
                 ->where('menu_id = :id', [
@@ -39,20 +41,33 @@ class CatalogController extends Controller
         $subCategory = [];
 
         //вывод товаров
-        if (Yii::$app->request->post())
+        if (Yii::$app->request->get())
         {
-            $sortForm->attributes = Yii::$app->request->post('SortForm');
-            if (empty($sortForm->subCategoryId))
+            $sortForm->attributes = Yii::$app->request->get('SortForm');
+            $categoryId = $sortForm->categoryId;
+            $subCategoryId = $sortForm->subCategoryId;
+        }
+
+        if (!is_null($categoryId))
+        {
+            if (is_null($subCategoryId))
             {
                 $query = Product::find()
-                    ->where(['category_id' => $sortForm->categoryId]);
+                    ->where(['category_id' => $categoryId]);
             } else {
                 $query = Product::find()
-                    ->where(['category_id' => $sortForm->categoryId])
-                    ->andWhere(['sub_category_id' => $sortForm->subCategoryId]);
+                    ->where(['category_id' => $categoryId])
+                    ->andWhere(['sub_category_id' => $subCategoryId]);
             }
         } else {
             $query = Product::find();
+        }
+
+        if (Yii::$app->request->post())
+        {
+            $searchForm->attributes = Yii::$app->request->post('SearchForm');
+            $query = Product::find()
+                ->where(['like', 'title', $searchForm->title]);
         }
 
         $dataProvider = new ActiveDataProvider([
@@ -62,7 +77,7 @@ class CatalogController extends Controller
             ],
         ]);
 
-        return $this->render('index', compact('category', 'sortForm', 'subCategory', 'dataProvider'));
+        return $this->render('index', compact('category', 'sortForm', 'subCategory', 'dataProvider', 'searchForm'));
     }
 
     public function actionList($id)
