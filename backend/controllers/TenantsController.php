@@ -5,6 +5,7 @@ namespace backend\controllers;
 
 
 use backend\models\TenantsSearch;
+use common\models\FreePlace;
 use common\models\Tenants;
 use common\models\TenantsDoc;
 use Yii;
@@ -170,5 +171,22 @@ class TenantsController extends Controller
         {
             return $this->redirect(['tenants/docs']);
         }
+    }
+    
+    public function actionFree()
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        $model = FreePlace::findOne(['free_place_id' => 1]);
+        if ($model->load(Yii::$app->request->post()))
+        {
+            if ($model->save())
+            {
+                return $this->redirect(['tenants/free']);
+            }
+        }
+        return $this->render('free', compact('model'));
     }
 }

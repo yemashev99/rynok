@@ -5,6 +5,7 @@
 
 use common\models\Callback;
 use common\models\Cart;
+use common\models\FreePlace;
 use common\models\Menu;
 use common\models\Category;
 use common\models\News;
@@ -207,7 +208,7 @@ if ($callback->load(Yii::$app->request->post()))
                                     <div class="h2" style="color: green; line-height: 1.15;">РЕСПУБЛИКАНСКИЙ СЕЛЬСКОХОЗЯЙСТВЕННЫЙ РЫНОК</div>
                                 </div>
                                 <div class="rent-places">
-                                    Свободных мест для аренды: <span style="border-bottom: 1px dashed;">10 мест</span>
+                                    <a href="<?=Url::to(['tenants/index'])?>" style="color: #888888;">Свободных мест для аренды: <span style="border-bottom: 1px dashed;"><?=FreePlace::getFreePlaces()?></span></a>
                                 </div>
                             </td>
                             <td class="header_search">

@@ -118,6 +118,12 @@ foreach ($deliveryObjects as $item)
                                         'url' => ['tenants/docs'],
                                         'active' => in_array('tenants/docs', $arrayUrl),
                                     ],
+                                    [
+                                        'label' => 'Свободные места',
+                                        'icon' => 'file-text-o',
+                                        'url' => ['tenants/free'],
+                                        'active' => in_array('tenants/free', $arrayUrl),
+                                    ],
                                 ],
                             ],
                             [
