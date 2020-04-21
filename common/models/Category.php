@@ -4,6 +4,7 @@ namespace common\models;
 
 use common\models\SubCategory;
 use Yii;
+use yii\helpers\Url;
 use yii\web\UploadedFile;
 
 /**
@@ -135,5 +136,66 @@ class Category extends \yii\db\ActiveRecord
     public function getFirstPageIcon()
     {
         return $this->hasMany(FirstPageIcon::className(), ['category_id' => 'category_id']);
+    }
+
+    public static function itemsExists($menuId, $url)
+    {
+        $items = Category::find()->where(['menu_id' => $menuId])->all();
+        if ($items) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function getItems($menuId, $url)
+    {
+        $items = Category::find()->where(['menu_id' => $menuId])->all();
+        $navSideItems = array();
+        switch($url)
+        {
+            case 'catalog/index':
+                foreach ($items as $item)
+                {
+                    $navSideItems[] = [
+                        'label' => $item->title,
+                        'icon' => 'none',
+                        'url' => Url::to(['catalog/category', 'category' => $item->url]),
+                        'active' => in_array(Yii::$app->controller->id, ['menu'])
+                    ];
+                }
+                break;
+            case 'about/index':
+                foreach ($items as $item)
+                {
+                    $navSideItems[] = [
+                        'label' => $item->title,
+                        'icon' => 'none',
+                        'url' => Url::to(['about/'.$item->url]),
+                    ];
+                }
+                break;
+            case 'delivery/index':
+                foreach ($items as $item)
+                {
+                    $navSideItems[] = [
+                        'label' => $item->title,
+                        'icon' => 'none',
+                        'url' => Url::to(['delivery/'.$item->url]),
+                    ];
+                }
+                break;
+            case 'tenants/index':
+                foreach ($items as $item)
+                {
+                    $navSideItems[] = [
+                        'label' => $item->title,
+                        'icon' => 'none',
+                        'url' => Url::to(['tenants/'.$item->url]),
+                    ];
+                }
+                break;
+        }
+        return $navSideItems;
     }
 }

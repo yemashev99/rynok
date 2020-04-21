@@ -4,3 +4,6 @@
 #mobile-menu > .menu_opener > .text {
     background: #5cb85c;
 }
+.treeview-menu > li {
+    padding-left: 30px;
+}
