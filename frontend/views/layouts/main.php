@@ -48,6 +48,9 @@ foreach ($menuItems as $key => $menuItem)
             'label' => $menuItem->title,
             'url' => [$menuItem->url],
             'active' => in_array(Yii::$app->controller->id, [$menuItem->controller_name]),
+            'options' => [
+                'class' => 'icons_fa has-child ',
+            ],
         ];
     } else {
         $navItems[] = [
