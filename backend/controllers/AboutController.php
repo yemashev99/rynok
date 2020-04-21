@@ -355,4 +355,22 @@ class AboutController extends Controller
         $gallery = Gallery::findOne(['gallery_id' => $id]);
         return $this->render('gallery-item-update', compact('model', 'gallery', 'type'));
     }
+
+    public function action1Floor()
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        return $this->render('1-floor');
+    }
+
+    public function action2Floor()
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        return $this->render('2-floor');
+    }
 }

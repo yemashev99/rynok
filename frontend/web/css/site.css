@@ -1905,7 +1905,7 @@ header .menu_dark ul.menu > li:not(.catalog):hover > a{background-color: #556170
 
 .menu_top_block {margin: 0;padding: 0;position: relative;white-space: nowrap;font-size: 0;}
 header .menu_top_block {border-radius: 4px;z-index: 101;}
-header .wrapper_middle_menu *, .menu_top_block *{box-sizing:border-box; background: #5cb85c;}
+header .wrapper_middle_menu *, .menu_top_block *{box-sizing:border-box;}
 header .menu_top_block>li {display: inline-block;vertical-align: top;font-size: 16px;font-weight: 500;line-height: 22px;}
 .menu_top_block li{margin: 0;padding: 0;position: relative;white-space: normal;}
 .menu_top_block>li>a, .menu_top_block.catalog_block .dropdown>li.full>a {/*overflow: hidden;*/position: relative;display: block;padding: 12px 22px 13px;color: #FFF;white-space: normal;}

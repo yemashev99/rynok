@@ -77,4 +77,14 @@ class AboutController extends Controller
         $category = Category::findOne(['url' => $path[1]]);
         return $this->render('manufacturers-content', compact('manufacturer', 'category'));
     }
+
+    public function action1Floor()
+    {
+        return $this->render('1-floor');
+    }
+
+    public function action2Floor()
+    {
+        return $this->render('2-floor');
+    }
 }

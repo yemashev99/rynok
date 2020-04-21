@@ -29,7 +29,7 @@ $productSearchModel = new ProductSearch();
 
 
 $menuItems = Menu::find()->orderBy('sort')->all();
-$navItems = array();
+$navItems = array(); $mobileNavItems = array();
 foreach ($menuItems as $key => $menuItem)
 {
     if ($menuItem->controller_name == 'catalog') {
@@ -44,6 +44,11 @@ foreach ($menuItems as $key => $menuItem)
                 'class' => 'catalog icons_fa',
             ],
         ];
+        $mobileNavItems[] = [
+            'label' => $menuItem->title,
+            'url' => [$menuItem->url],
+            'active' => in_array(Yii::$app->controller->id, [$menuItem->controller_name]),
+        ];
     } else {
         $navItems[] = [
             'label' => $menuItem->title,
@@ -52,6 +57,11 @@ foreach ($menuItems as $key => $menuItem)
             'linkOptions' => [
                 'style' => 'padding-left: 29px; padding-right: 30px',
             ],
+        ];
+        $mobileNavItems[] = [
+            'label' => $menuItem->title,
+            'url' => [$menuItem->url],
+            'active' => in_array(Yii::$app->controller->id, [$menuItem->controller_name]),
         ];
     }
 }
@@ -292,7 +302,7 @@ if ($callback->load(Yii::$app->request->post()))
             <div class="catalog_menu menu_colored">
                 <div class="wrapper_inner">
                     <div class="wrapper_middle_menu wrap_menu" style="overflow: visible;">
-                        <ul class="menu adaptive" style="margin-bottom: 0px;">
+                        <ul class="menu adaptive" id="mobile-menu" style="margin-bottom: 0px;">
                             <li class="menu_opener">
                                 <div class="text">
                                     Меню
@@ -306,8 +316,8 @@ if ($callback->load(Yii::$app->request->post()))
                             ]) ?>
                             <div class="mobile_menu_wrapper">
                                 <?= Nav::widget([
-                                    'options' => ['class' => 'mobile_menu'],
-                                    'items' => $navItems,
+                                    'options' => ['class' => 'mobile_menu', 'style' => 'display: none'],
+                                    'items' => $mobileNavItems,
                                 ]) ?>
                             </div>
                         </div>
@@ -550,6 +560,17 @@ if ($callback->load(Yii::$app->request->post()))
     openButton1.addEventListener("click", function() {
         modal.classList.toggle("closed");
         modalOverlay.classList.toggle("closed");
+    });
+
+    $(document).ready(function () {
+        $('#mobile-menu').on('click',function () {
+            if($('.mobile_menu').css('display') == 'none')
+            {
+                $('.mobile_menu').css({display: 'block'});
+            } else {
+                $('.mobile_menu').css({display: 'none'});
+            }
+        });
     });
 
 </script>
