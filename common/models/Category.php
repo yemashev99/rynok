@@ -151,47 +151,75 @@ class Category extends \yii\db\ActiveRecord
     public static function getItems($menuId, $url)
     {
         $items = Category::find()->where(['menu_id' => $menuId])->all();
+        $arrayUrl[] = Yii::$app->request->pathInfo;
         $navSideItems = array();
         switch($url)
         {
             case 'catalog/index':
+                $navSideItems[] = [
+                    'label' => 'Каталог',
+                    'icon' => 'none',
+                    'url' => Url::to(['catalog/index']),
+                    'active' => in_array(Yii::$app->controller->id, $arrayUrl)
+                ];
                 foreach ($items as $item)
                 {
                     $navSideItems[] = [
                         'label' => $item->title,
                         'icon' => 'none',
                         'url' => Url::to(['catalog/category', 'category' => $item->url]),
-                        'active' => in_array(Yii::$app->controller->id, ['menu'])
+                        'active' => in_array($item->url, explode('/', Yii::$app->request->pathInfo))
                     ];
                 }
                 break;
             case 'about/index':
+                $navSideItems[] = [
+                    'label' => 'О рынке',
+                    'icon' => 'none',
+                    'url' => Url::to(['about/index']),
+                    'active' => in_array(Yii::$app->controller->id, $arrayUrl)
+                ];
                 foreach ($items as $item)
                 {
                     $navSideItems[] = [
                         'label' => $item->title,
                         'icon' => 'none',
                         'url' => Url::to(['about/'.$item->url]),
+                        'active' => in_array($item->url, explode('/', Yii::$app->request->pathInfo))
                     ];
                 }
                 break;
             case 'delivery/index':
+                $navSideItems[] = [
+                    'label' => 'Доставка и оплата',
+                    'icon' => 'none',
+                    'url' => Url::to(['delivery/index']),
+                    'active' => in_array(Yii::$app->controller->id, $arrayUrl)
+                ];
                 foreach ($items as $item)
                 {
                     $navSideItems[] = [
                         'label' => $item->title,
                         'icon' => 'none',
                         'url' => Url::to(['delivery/'.$item->url]),
+                        'active' => in_array($item->url, explode('/', Yii::$app->request->pathInfo))
                     ];
                 }
                 break;
             case 'tenants/index':
+                $navSideItems[] = [
+                    'label' => 'Арендаторам',
+                    'icon' => 'none',
+                    'url' => Url::to(['tenants/index']),
+                    'active' => in_array(Yii::$app->controller->id, $arrayUrl)
+                ];
                 foreach ($items as $item)
                 {
                     $navSideItems[] = [
                         'label' => $item->title,
                         'icon' => 'none',
                         'url' => Url::to(['tenants/'.$item->url]),
+                        'active' => in_array($item->url, explode('/', Yii::$app->request->pathInfo))
                     ];
                 }
                 break;
