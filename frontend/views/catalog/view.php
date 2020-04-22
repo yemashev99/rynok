@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Product;
+use frontend\models\Site;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
@@ -114,6 +115,7 @@ if (Yii::$app->user->isGuest)
 				</div>
 			</div>
 		</div>
+    <?php if (!Site::isMobile()) : ?>
     <div class="bottom_slider specials tab_slider_wrapp">
         <div class="top_blocks">
             <ul class="tabs">
@@ -150,6 +152,7 @@ if (Yii::$app->user->isGuest)
             </ul>
         </div>
     </div>
+    <?php endif; ?>
 </div>
 
 <script type="text/javascript">

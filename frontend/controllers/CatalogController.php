@@ -9,6 +9,7 @@ use common\models\Menu;
 use common\models\Product;
 use common\models\SubCategory;
 use frontend\models\CartForm;
+use frontend\models\Site;
 use Yii;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
@@ -37,6 +38,11 @@ class CatalogController extends Controller
 
     public function actionItem($category, $subCategory, $sort = null, $display = 'block', $orderBy = SORT_ASC)
     {
+
+        if(Site::isMobile())
+        {
+            $display = 'list';
+        }
 
         $cartForm = new CartForm();
         if (Yii::$app->request->post())

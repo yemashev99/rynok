@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $category->title;
                         ['class' => 'thumb']
                     )?>
                 </div>
-                <div class="catalog_name">
+                <div class="catalog_name category_catalog_name">
                     <?=Html::a(
                         '<span>'.$subCategory->title.'</span>',
                         Url::to(['catalog/item', 'category' => $subCategory->category->url, 'subCategory' => $subCategory->url])
