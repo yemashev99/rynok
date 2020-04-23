@@ -150,7 +150,7 @@ class Category extends \yii\db\ActiveRecord
 
     public static function getItems($menuId, $url)
     {
-        $items = Category::find()->where(['menu_id' => $menuId])->all();
+        $items = Category::find()->where(['menu_id' => $menuId])->orderBy(['sort' => SORT_ASC])->all();
         $arrayUrl[] = Yii::$app->request->pathInfo;
         $navSideItems = array();
         switch($url)

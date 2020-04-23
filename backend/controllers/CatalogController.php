@@ -75,6 +75,9 @@ class CatalogController extends Controller
             'pagination' => [
                 'pageSize' => 10,
             ],
+            'sort' => [
+                'defaultOrder' => ['product_id' => SORT_DESC]
+            ]
         ]);
 
         return $this->render('index', compact('category', 'sortForm', 'subCategory', 'dataProvider', 'searchForm'));

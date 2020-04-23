@@ -51,23 +51,29 @@ $this->params['breadcrumbs'][] = 'Праздники';
 </div>
 
 <script type="text/javascript">
+    var isMobile = false;
     $(document).ready(function(){
-        $('.masonry_area').masonry({
+        if ($('body').width() <= 470) {
+            isMobile = true;
+        }
+        if (!isMobile) {
+            $('.masonry_area').masonry({
 // указываем элемент-контейнер в котором расположены блоки для динамической верстки
-            itemSelector: '.masonry-brick',
+                itemSelector: '.masonry-brick',
 // указываем класс элемента являющегося блоком в нашей сетке
-            singleMode: false,
+                singleMode: false,
 // true - если у вас все блоки одинаковой ширины
-            isResizable: true,
+                isResizable: true,
 // перестраивает блоки при изменении размеров окна
-            isAnimated: true,
+                isAnimated: true,
 // анимируем перестроение блоков
-            animationOptions: {
-                queue: false,
-                duration: 500
-            }
+                animationOptions: {
+                    queue: false,
+                    duration: 500
+                }
 // опции анимации - очередь и продолжительность анимации
-        });
+            });
+        }
     });
 </script>
 

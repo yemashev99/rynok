@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Cart;
+use frontend\models\Site;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -36,6 +37,7 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                         <div class="basket-checkout-container">
                             <div class="basket-checkout-section">
                                 <div class="basket-checkout-section-inner">
+                                    <?php if(!Site::isMobile()) :?>
                                     <div class="basket-checkout-block basket-checkout-block-total">
                                         <div class="basket-checkout-block-total-inner">
                                             <div class="basket-checkout-block-total-title">
@@ -46,6 +48,7 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                                             </div>
                                         </div>
                                     </div>
+                                    <?php endif; ?>
                                     <div class="basket-checkout-block basket-checkout-block-total-price">
                                         <div class="basket-checkout-block-total-price-inner">
                                             <div class="basket-coupon-block-total-price-current">

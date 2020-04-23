@@ -84,7 +84,7 @@ $this->title = 'Республиканский Селькохозяйствен�
 <script type="text/javascript">
     var isMobile = false;
     $(document).ready(function(){
-        if ($('body').width() <= 412) {
+        if ($('body').width() <= 470) {
             isMobile = true;
         }
         if (!isMobile) {
