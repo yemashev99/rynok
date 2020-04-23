@@ -48,4 +48,16 @@
         width: 92%;
         float: left;
     }
+    .basket-items-list-item-container>td {
+        padding-bottom: 15px;
+    }
+    .basket-item-info-name-link > span {
+        font-size: 13px;
+    }
+    .basket-item-price-current-text {
+        font: 400 15px/24px "Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+    .basket-item-amount-filed-block {
+        width: 50%;
+    }
 }

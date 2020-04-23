@@ -37,17 +37,17 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                         <div class="basket-checkout-container">
                             <div class="basket-checkout-section">
                                 <div class="basket-checkout-section-inner">
-                                    <?php if(!Site::isMobile()) :?>
-                                    <div class="basket-checkout-block basket-checkout-block-total">
-                                        <div class="basket-checkout-block-total-inner">
-                                            <div class="basket-checkout-block-total-title">
-                                                Итого:
-                                            </div>
-                                            <div class="basket-checkout-block-total-description">
-                                                Сумма НДС: 0 ₽
+                                    <?php if (!Site::isMobile()) : ?>
+                                        <div class="basket-checkout-block basket-checkout-block-total">
+                                            <div class="basket-checkout-block-total-inner">
+                                                <div class="basket-checkout-block-total-title">
+                                                    Итого:
+                                                </div>
+                                                <div class="basket-checkout-block-total-description">
+                                                    Сумма НДС: 0 ₽
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                     <?php endif; ?>
                                     <div class="basket-checkout-block basket-checkout-block-total-price">
                                         <div class="basket-checkout-block-total-price-inner">
@@ -88,17 +88,19 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                                                             </a>
                                                         </div>
                                                         <div class="basket-item-block-info">
-                                                            <span class="basket-item-actions-remove visible-xs"></span>
+                                                            <?=Html::a('', ['cabinet/delete', 'product_id' => $cartItem->product_id], ['class' => 'basket-item-actions-remove visible-xs'])?>
                                                             <h2 class="basket-item-info-name">
                                                                 <?=Html::a('<span>'.$cartItem->product->title.'</span>', '#', ['class' => 'basket-item-info-name-link'])?>
                                                             </h2>
-                                                            <div class="basket-item-block-comment">
-                                                                <div class="basket-item-property-custom-name">
-                                                                    Комментарий к заказу
-                                                                </div>
+                                                            <?php if (!Site::isMobile()) : ?>
+                                                                <div class="basket-item-block-comment">
+                                                                    <div class="basket-item-property-custom-name">
+                                                                        Комментарий к заказу
+                                                                    </div>
 
-                                                                <textarea class="comment" id="<?=$cartItem->product_id?>" style="width: 90%; min-height: 65px;"><?=$cartItem->comment?></textarea>
-                                                            </div>
+                                                                    <textarea class="comment" id="<?=$cartItem->product_id?>" style="width: 90%; min-height: 65px;"><?=$cartItem->comment?></textarea>
+                                                                </div>
+                                                            <?php endif; ?>    
                                                         </div>
                                                     </div>
                                                 </td>
@@ -110,7 +112,7 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                                                             </span>
                                                         </div>
                                                         <div class="basket-item-price-title">
-                                                            цена за 1 <?=$cartItem->product->measure?>
+                                                            цена за <?php if (is_null($cartItem->product->count)) echo '1'; else echo $cartItem->product->count;?> <?=$cartItem->product->measure?>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -125,7 +127,7 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                                                         </div>
                                                         <?=Html::a('', ['cabinet/up', 'product_id' => $cartItem->product_id], ['class' => 'basket-item-amount-btn-plus plus', 'id' => $cartItem->product_id])?>
                                                         <div class="basket-item-amount-field-description">
-                                                            <?=$cartItem->product->measure?>
+                                                            <?php if (is_null($cartItem->product->count)) echo '1'; else echo $cartItem->product->count;?> <?=$cartItem->product->measure?>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -180,7 +182,7 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                                                         </a>
                                                     </div>
                                                     <div class="basket-item-block-info">
-                                                        <span class="basket-item-actions-remove visible-xs"></span>
+                                                        <?=Html::a('', ['cabinet/delete', 'product_id' => $cartItem->product_id], ['class' => 'basket-item-actions-remove visible-xs'])?>
                                                         <h2 class="basket-item-info-name">
                                                             <?=Html::a('<span>'.$cartItem->product->title.'</span>', '#', ['class' => 'basket-item-info-name-link'])?>
                                                         </h2>
@@ -202,7 +204,7 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                                                             </span>
                                                     </div>
                                                     <div class="basket-item-price-title">
-                                                        цена за 1 <?=$cartItem->product->measure?>
+                                                        цена за <?php if (is_null($cartItem->product->count)) echo '1'; else echo $cartItem->product->count;?> <?=$cartItem->product->measure?>
                                                     </div>
                                                 </div>
                                             </td>
@@ -217,7 +219,7 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                                                     </div>
                                                     <?=Html::a('', ['cabinet/up', 'product_id' => $cartItem->product_id], ['class' => 'basket-item-amount-btn-plus plus', 'id' => $cartItem->product_id])?>
                                                     <div class="basket-item-amount-field-description">
-                                                        <?=$cartItem->product->measure?>
+                                                        <?php if (is_null($cartItem->product->count)) echo '1'; else echo $cartItem->product->count;?> <?=$cartItem->product->measure?>
                                                     </div>
                                                 </div>
                                             </td>

@@ -155,7 +155,7 @@ class Cart extends \yii\db\ActiveRecord
     public function sendOrderLinkToMail()
     {
         $result = Yii::$app->mailer->compose()
-            ->setFrom('noreply-rynok19@mail.ru')
+            ->setFrom('noreply-rynok19@yandex.ru')
             ->setTo('resp.rynok19@gmail.com')
             ->setSubject('Новый заказ!')
             ->setHtmlBody('TEST1TEST111')

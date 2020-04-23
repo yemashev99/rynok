@@ -76,9 +76,6 @@ class MenuController extends Controller
                     ':id' => $id,
                 ])
                 ->orderBy(['sort' => SORT_ASC]),
-            'pagination' => [
-                'pageSize' => 9,
-            ],
         ]);
         return $this->render('category', compact('dataProvider', 'menu'));
     }
