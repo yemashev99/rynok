@@ -8,6 +8,10 @@
     padding-left: 30px;
 }
 
+ul.main-list li:before {
+    content:"\2022";
+}
+
 @media (max-width: 470px){
     .category_catalog_name {
         margin-top: 8%;

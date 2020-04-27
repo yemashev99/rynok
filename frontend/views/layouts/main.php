@@ -173,6 +173,13 @@ if ($callback->load(Yii::$app->request->post()))
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <META name="DC.Language" content="ru">
+    <META Name="Resource-type" content ="Document">
+    <META name="DC.Title" content="Республиканский рынок в Абакане, республика Хакасия">
+    <META name="copyright" Content="АО ДИРЕКЦИЯ РЕСПУБЛИКАНСКИХ РЫНКОВ">
+    <META name="Publisher-URL" Content="https://rynok19.ru/">
+    <META name="keywords" Content="рынок, сельхоз, фермерский, агрорынок, кфх, хакасия, абакан, социальный, зимин, зиминский, губернаторский, дирекция рынков, тельмана">
+    <META name="description" Content="Республиканский (фермерский) рынок в городе Абакан. Создан для продвижения товаров местного производства среди жителей республики Хакасия">
 </head>
 <body>
 <?php $this->beginBody() ?>

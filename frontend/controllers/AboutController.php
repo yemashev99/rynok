@@ -80,11 +80,15 @@ class AboutController extends Controller
 
     public function action1Floor()
     {
-        return $this->render('1-floor');
+        $path = explode('/', Yii::$app->request->pathInfo);
+        $model = Category::findOne(['url' => $path[1]]);
+        return $this->render('1-floor', compact('model'));
     }
 
     public function action2Floor()
     {
-        return $this->render('2-floor');
+        $path = explode('/', Yii::$app->request->pathInfo);
+        $model = Category::findOne(['url' => $path[1]]);
+        return $this->render('2-floor', compact('model'));
     }
 }
