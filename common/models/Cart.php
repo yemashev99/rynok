@@ -124,7 +124,7 @@ class Cart extends \yii\db\ActiveRecord
         }
     }
 
-    public static function cartPrice($id, $admin = null, $status = null)
+    public static function cartPrice($id, $admin = null, $status = null, $deliveryPrice = null)
     {
         if (is_null($admin))
         {
@@ -148,7 +148,13 @@ class Cart extends \yii\db\ActiveRecord
         {
             $total += $cartItem->quantity * $cartItem->product->price;
         }
-        $total = number_format($total, 0, '.', ' ');
+        if (is_null($deliveryPrice))
+        {
+            $total = number_format($total, 0, '.', ' ');
+        } else {
+            $total += 200;
+            $total = number_format($total, 0, '.', ' ');
+        }
         return $total;
     }
 

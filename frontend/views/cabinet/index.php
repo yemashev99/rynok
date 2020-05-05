@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                                                     Итого:
                                                 </div>
                                                 <div class="basket-checkout-block-total-description">
-                                                    Сумма НДС: 0 ₽
+                                                    Стоимость доставки: 200 ₽
                                                 </div>
                                             </div>
                                         </div>
@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                                     <div class="basket-checkout-block basket-checkout-block-total-price">
                                         <div class="basket-checkout-block-total-price-inner">
                                             <div class="basket-coupon-block-total-price-current">
-                                                <span class="total"><?=Cart::cartPrice(Yii::$app->user->identity->customer_id)?></span> ₽
+                                                <span class="total"><?=Cart::cartPrice(Yii::$app->user->identity->customer_id, null, null, 'Y')?></span> ₽
                                             </div>
                                         </div>
                                     </div>

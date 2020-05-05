@@ -28,7 +28,8 @@ class Customer extends ActiveRecord implements IdentityInterface
     {
         return [
             [['email', 'password', 'fio', 'address', 'phone'], 'required'],
-            [['email', 'password', 'fio', 'address'], 'string', 'max' => 255],
+            [['password', 'fio', 'address'], 'string', 'max' => 255],
+            ['email', 'email'],
             [['postcode'], 'string', 'max' => 9],
             [['phone'], 'string', 'max' => 20],
             ['email', 'unique', 'targetClass' => 'common\models\Customer'],

@@ -34,7 +34,6 @@ use yii\helpers\Url;
                             </a>
                         </div>
                         <div class="info">
-                            <div class="date"><?=$item->date?></div>
                             <div class="info-text"><a class="name dark_link" href="<?=Url::to(['about/news-content', 'news' => $item->url])?>"><?=$item->title?></a></div>
                         </div>
                         <div class="clearfix"></div>
