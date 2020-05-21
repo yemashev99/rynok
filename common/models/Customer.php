@@ -91,4 +91,14 @@ class Customer extends ActiveRecord implements IdentityInterface
     {
         return $this->hasOne(Cart::className(), ['customer_id' => 'customer_id']);
     }
+
+    public static function getNewOrders()
+    {
+        $orders = Customer::find()
+            ->join("INNER JOIN", "cart", "cart.customer_id = customer.customer_id")
+            ->where('cart.order_status_id = 2')
+            ->orderBy('cart.created_at')
+            ->all();
+        return $orders;
+    }
 }

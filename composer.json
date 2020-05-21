@@ -26,7 +26,10 @@
         "kartik-v/yii2-widget-typeahead": "dev-master",
         "mihaildev/yii2-ckeditor": "*",
         "mihaildev/yii2-elfinder": "*",
-        "richardfan1126/yii2-sortable-gridview": "*"
+        "richardfan1126/yii2-sortable-gridview": "*",
+        "kartik-v/yii2-export": "dev-master",
+        "kartik-v/yii2-mpdf": "*",
+        "kartik-v/yii2-grid": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

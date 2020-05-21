@@ -63,7 +63,7 @@ class CatalogController extends Controller
             $query = Product::find();
         }
 
-        if (Yii::$app->request->post())
+        if (Yii::$app->request->post('SearchForm'))
         {
             $searchForm->attributes = Yii::$app->request->post('SearchForm');
             $query = Product::find()

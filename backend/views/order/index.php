@@ -1,5 +1,6 @@
 <?php
 
+use kartik\export\ExportMenu;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -11,6 +12,21 @@ $this->title = 'Заказы - Клиенты';
 <div class="page-header">
     <h2>Новые заказы</h2>
 </div>
+
+<?=ExportMenu::widget([
+    'dataProvider' => $dataProvider,
+    'exportConfig' => [
+        ExportMenu::FORMAT_EXCEL => false,
+    ],
+    'columns' => [
+        'customer_id',
+        'fio:ntext',
+        'phone',
+        'address:ntext',
+        'cart.created_at:datetime',
+    ],
+    'showConfirmAlert' => false
+])?>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,

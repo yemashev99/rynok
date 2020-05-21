@@ -1,8 +1,8 @@
 <?php
 
+use kartik\export\ExportMenu;
 use yii\grid\GridView;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 $this->title = 'Управление сайтом - Каталог';
@@ -74,6 +74,24 @@ $this->title = 'Управление сайтом - Каталог';
 </div>
 
 <?=Html::a('+ Добавить новый товар', ['catalog/create'], ['class' => 'btn btn-primary'])?>
+
+<?=ExportMenu::widget([
+    'dataProvider' => $dataProvider,
+    'exportConfig' => [
+        ExportMenu::FORMAT_EXCEL => false,
+    ],
+    'columns' => [
+        'product_id',
+        'category_id',
+        'sub_category_id',
+        'title',
+        'description',
+        'price',
+        'count',
+        'measure'
+    ],
+    'showConfirmAlert' => false
+])?>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
