@@ -28,8 +28,9 @@
         "mihaildev/yii2-elfinder": "*",
         "richardfan1126/yii2-sortable-gridview": "*",
         "kartik-v/yii2-export": "dev-master",
-        "kartik-v/yii2-mpdf": "*",
-        "kartik-v/yii2-grid": "@dev"
+        "kartik-v/yii2-mpdf": "dev-master",
+        "kartik-v/yii2-grid": "@dev",
+        "dompdf/dompdf": "^0.8.5"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

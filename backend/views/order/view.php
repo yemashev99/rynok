@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
             if ($status == 'new')
             {
                 echo Html::a('Отправлено', ['order/view', 'id' => $customer->customer_id, 'status' => 'new', 'action' => 'delivered'], ['class' => 'btn btn-primary']);
+                echo ' '.Html::a('Печать', ['order/print', 'id' => $customer->customer_id], ['class' => 'btn btn-success']);
             } elseif ($status == 'delivered') {
                 echo Html::a('Доставлено', ['order/view', 'id' => $customer->customer_id, 'status' => 'delivered', 'action' => 'done'], ['class' => 'btn btn-success']);
             }
