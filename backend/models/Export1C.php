@@ -67,7 +67,7 @@ class Export1C extends Model
 <Описание>".$product->description."</Описание>
 <Картинка>".$product->image."</Картинка>
 <Цена>".$product->price."</Цена>
-<Количество>".$product->count."</Количество>
+<Величина>".$product->count."</Величина>
 <ЕденицаИзмерения>".$product->measure."</ЕденицаИзмерения>
 </Товар>
 ";
@@ -100,7 +100,9 @@ class Export1C extends Model
 <Наименование>".$item->product->title."</Наименование>
 <Картинка>".$item->product->image."</Картинка>
 <Комментарий>".$item->comment."</Комментарий>
-<Колличество>".$item->quantity."</Колличество>
+<Количество>".$item->quantity."</Количество>
+<Величина>".$item->product->count."</Величина>
+<ЕденицаИзмерения>".$item->product->measure."</ЕденицаИзмерения>
 <Сумма>".$item->product->price * $item->quantity."</Сумма>
 </Товар>";
             }
