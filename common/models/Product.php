@@ -153,8 +153,14 @@ class Product extends \yii\db\ActiveRecord
 
     public static function inCart($customer_id, $product_id)
     {
-        $cartItem = Cart::find()->where(['customer_id' => $customer_id, 'product_id' => $product_id])->orderBy(['cart_id' => SORT_DESC])->one();
-        if (is_null($cartItem) || $cartItem->order_status_id != 1){
+        $order = Order::getOrder($customer_id);
+        if ($order)
+        {
+            $cartItem = Cart::find()->where(['order_id' => $order->order_id, 'product_id' => $product_id])->orderBy(['cart_id' => SORT_DESC])->one();
+        } else {
+            $cartItem = null;
+        }
+        if (is_null($cartItem)){
             return true;
         } else {
             return false;

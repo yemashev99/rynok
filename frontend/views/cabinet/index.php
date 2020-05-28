@@ -73,8 +73,11 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                                 </div>
                             </div>
                             <div class="basket-items-list-container">
-                                <table class="basket-items-list-table">
-                                    <tbody>
+                                <?php if (is_null($cartItems)) : ?>
+                                    <h1>Нет товаров в корзине</h1>
+                                <?php else: ?>
+                                    <table class="basket-items-list-table">
+                                        <tbody>
                                         <?php foreach ($cartItems as $cartItem) : ?>
                                             <tr class="basket-items-list-item-container">
                                                 <td class="basket-items-list-item-descriptions">
@@ -82,8 +85,8 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                                                         <div class="basket-item-block-image">
                                                             <a href="" class="basket-item-image-link">
                                                                 <?=Html::img(Yii::getAlias('@web').'/'.$cartItem->product->image, [
-                                                                        'class' => 'basket-item-image',
-                                                                        'alt' => $cartItem->product->title
+                                                                    'class' => 'basket-item-image',
+                                                                    'alt' => $cartItem->product->title
                                                                 ])?>
                                                             </a>
                                                         </div>
@@ -100,7 +103,7 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
 
                                                                     <textarea class="comment" id="<?=$cartItem->product_id?>" style="width: 90%; min-height: 65px;"><?=$cartItem->comment?></textarea>
                                                                 </div>
-                                                            <?php endif; ?>    
+                                                            <?php endif; ?>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -147,8 +150,9 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -165,79 +169,83 @@ $this->params['breadcrumbs'][] = 'Личный кабинет';
             <div class="bx-basket bx-blue bx-step-opacity" style="opacity: 1;">
                 <div class="row">
                     <div class="col-xs-12">
+                        <?php if (is_null($inProcessingCartItems)) : ?>
+                            <h2 style="color: #bbbbbb">Нет товаров в обработке</h2>
+                        <?php else: ?>
                         <div class="basket-items-list-wrapper basket-items-list-wrapper-height-fixed">
                             <div class="basket-items-list-container">
-                                <table class="basket-items-list-table">
-                                    <tbody>
-                                    <?php foreach ($inProcessingCartItems as $cartItem) : ?>
-                                        <tr class="basket-items-list-item-container">
-                                            <td class="basket-items-list-item-descriptions">
-                                                <div class="basket-items-list-item-descriptions-inner">
-                                                    <div class="basket-item-block-image">
-                                                        <a href="" class="basket-item-image-link">
-                                                            <?=Html::img(Yii::getAlias('@web').'/'.$cartItem->product->image, [
-                                                                'class' => 'basket-item-image',
-                                                                'alt' => $cartItem->product->title
-                                                            ])?>
-                                                        </a>
-                                                    </div>
-                                                    <div class="basket-item-block-info">
-                                                        <?=Html::a('', ['cabinet/delete', 'product_id' => $cartItem->product_id], ['class' => 'basket-item-actions-remove visible-xs'])?>
-                                                        <h2 class="basket-item-info-name">
-                                                            <?=Html::a('<span>'.$cartItem->product->title.'</span>', '#', ['class' => 'basket-item-info-name-link'])?>
-                                                        </h2>
-                                                        <div class="basket-item-block-comment">
-                                                            <div class="basket-item-property-custom-name">
-                                                                Комментарий к заказу
-                                                            </div>
+                                    <table class="basket-items-list-table">
+                                        <tbody>
+                                        <?php foreach ($inProcessingCartItems as $cartItem) : ?>
+                                            <tr class="basket-items-list-item-container">
+                                                <td class="basket-items-list-item-descriptions">
+                                                    <div class="basket-items-list-item-descriptions-inner">
+                                                        <div class="basket-item-block-image">
+                                                            <a href="" class="basket-item-image-link">
+                                                                <?=Html::img(Yii::getAlias('@web').'/'.$cartItem->product->image, [
+                                                                    'class' => 'basket-item-image',
+                                                                    'alt' => $cartItem->product->title
+                                                                ])?>
+                                                            </a>
+                                                        </div>
+                                                        <div class="basket-item-block-info">
+                                                            <?=Html::a('', ['cabinet/delete', 'product_id' => $cartItem->product_id], ['class' => 'basket-item-actions-remove visible-xs'])?>
+                                                            <h2 class="basket-item-info-name">
+                                                                <?=Html::a('<span>'.$cartItem->product->title.'</span>', '#', ['class' => 'basket-item-info-name-link'])?>
+                                                            </h2>
+                                                            <div class="basket-item-block-comment">
+                                                                <div class="basket-item-property-custom-name">
+                                                                    Комментарий к заказу
+                                                                </div>
 
-                                                            <textarea class="comment" id="<?=$cartItem->product_id?>" style="width: 90%; min-height: 65px;"><?=$cartItem->comment?></textarea>
+                                                                <textarea class="comment" id="<?=$cartItem->product_id?>" style="width: 90%; min-height: 65px;"><?=$cartItem->comment?></textarea>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td class="basket-items-list-item-price basket-items-list-item-price-for-one hidden-xs">
-                                                <div class="basket-item-block-price">
-                                                    <div class="basket-item-price-current">
+                                                </td>
+                                                <td class="basket-items-list-item-price basket-items-list-item-price-for-one hidden-xs">
+                                                    <div class="basket-item-block-price">
+                                                        <div class="basket-item-price-current">
                                                             <span class="basket-item-price-current-text">
                                                                 <?=$cartItem->product->price?> ₽
                                                             </span>
+                                                        </div>
+                                                        <div class="basket-item-price-title">
+                                                            цена за <?php if (is_null($cartItem->product->count)) echo '1'; else echo $cartItem->product->count;?> <?=$cartItem->product->measure?>
+                                                        </div>
                                                     </div>
-                                                    <div class="basket-item-price-title">
-                                                        цена за <?php if (is_null($cartItem->product->count)) echo '1'; else echo $cartItem->product->count;?> <?=$cartItem->product->measure?>
+                                                </td>
+                                                <td class="basket-items-list-item-amount">
+                                                    <div class="basket-item-block-amount">
+                                                        <?=Html::a('', ['cabinet/down', 'product_id' => $cartItem->product_id], ['class' => 'basket-item-amount-btn-minus minus', 'id' => $cartItem->product_id])?>
+                                                        <div class="basket-item-amount-filed-block">
+                                                            <?=Html::input('text', 'quantity', $cartItem->quantity, [
+                                                                'class' => 'basket-item-amount-filed',
+                                                                'readonly' => 'readonly',
+                                                            ])?>
+                                                        </div>
+                                                        <?=Html::a('', ['cabinet/up', 'product_id' => $cartItem->product_id], ['class' => 'basket-item-amount-btn-plus plus', 'id' => $cartItem->product_id])?>
+                                                        <div class="basket-item-amount-field-description">
+                                                            <?php if (is_null($cartItem->product->count)) echo '1'; else echo $cartItem->product->count;?> <?=$cartItem->product->measure?>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td class="basket-items-list-item-amount">
-                                                <div class="basket-item-block-amount">
-                                                    <?=Html::a('', ['cabinet/down', 'product_id' => $cartItem->product_id], ['class' => 'basket-item-amount-btn-minus minus', 'id' => $cartItem->product_id])?>
-                                                    <div class="basket-item-amount-filed-block">
-                                                        <?=Html::input('text', 'quantity', $cartItem->quantity, [
-                                                            'class' => 'basket-item-amount-filed',
-                                                            'readonly' => 'readonly',
-                                                        ])?>
-                                                    </div>
-                                                    <?=Html::a('', ['cabinet/up', 'product_id' => $cartItem->product_id], ['class' => 'basket-item-amount-btn-plus plus', 'id' => $cartItem->product_id])?>
-                                                    <div class="basket-item-amount-field-description">
-                                                        <?php if (is_null($cartItem->product->count)) echo '1'; else echo $cartItem->product->count;?> <?=$cartItem->product->measure?>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="basket-items-list-item-price">
-                                                <div class="basket-item-block-price">
-                                                    <div class="basket-item-price-current">
+                                                </td>
+                                                <td class="basket-items-list-item-price">
+                                                    <div class="basket-item-block-price">
+                                                        <div class="basket-item-price-current">
                                                             <span class="basket-item-price-current-text">
                                                                <?=Cart::totalProduct($cartItem->quantity, $cartItem->product->price)?> ₽
                                                             </span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                    </tbody>
-                                </table>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
                             </div>
                         </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
