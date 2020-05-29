@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="page-header">
-    <h2>Заказ на сумму <?=Cart::cartPrice($customer->customer_id, 'admin', OrderStatus::getStatusIdByTitle($status))?> ₽
+    <h2>Заказ на сумму <?=Cart::cartPrice($customer->customer_id, 'admin', $status)?> ₽
         <?php
             if ($status == 'new')
             {

@@ -5,6 +5,8 @@ namespace backend\models;
 
 
 use common\models\Customer;
+use common\models\Order;
+use common\models\OrderStatus;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
@@ -26,25 +28,12 @@ class OrderSearch extends Model
 
     /**
      * @param $params
-     * @param null $id
+     * @param $status
      * @return ActiveDataProvider
      */
     public function search($params, $status)
     {
-        $query = Customer::find()
-            ->join("INNER JOIN", "cart", "cart.customer_id = customer.customer_id");
-
-        switch ($status){
-            case 'new':
-                $query = $query->where('cart.order_status_id = 2')->orderBy('cart.created_at');
-                break;
-            case 'delivered':
-                $query = $query->where('cart.order_status_id = 3')->orderBy('cart.created_at');
-                break;
-            case 'done':
-                $query = $query->where('cart.order_status_id = 4')->orderBy('cart.created_at');
-                break;
-        }
+        $query = Order::find()->where(['order_status_id' => OrderStatus::getStatusIdByTitle($status)])->orderBy('created_at');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -59,29 +48,14 @@ class OrderSearch extends Model
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['LIKE', 'fio', $this->fio]);
-        $query->andFilterWhere(['LIKE', 'phone', $this->phone]);
+        $query->andFilterWhere(['LIKE', 'customer.fio', $this->fio]);
+        $query->andFilterWhere(['LIKE', 'customer.phone', $this->phone]);
 
         return $dataProvider;
     }
 
     public static function orderCount($status)
     {
-        $query = Customer::find()
-            ->join("INNER JOIN", "cart", "cart.customer_id = customer.customer_id");
-
-        switch ($status){
-            case 'new':
-                $query = $query->where('cart.order_status_id = 2');
-                break;
-            case 'delivered':
-                $query = $query->where('cart.order_status_id = 3');
-                break;
-            case 'done':
-                $query = $query->where('cart.order_status_id = 4');
-                break;
-        }
-        $count = $query->groupBy('fio')->count();
-        return $count;
+        return Order::find()->where(['order_status_id' => $status])->count();
     }
 }

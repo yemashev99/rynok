@@ -19,11 +19,11 @@ $this->title = 'Заказы - Клиенты';
         'class' => 'table table-striped table-bordered',
     ],
     'columns' => [
-        'customer_id',
-        'fio:ntext',
-        'phone',
-        'address:ntext',
-        'cart.created_at:datetime',
+        'order_id',
+        'customer.fio:ntext',
+        'customer.phone',
+        'customer.address:ntext',
+        'created_at:datetime',
         [
             'label'=> 'Действия',
             'format' => 'raw',

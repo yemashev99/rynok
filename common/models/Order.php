@@ -59,11 +59,11 @@ class Order extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'order_id' => 'Order ID',
+            'order_id' => 'Номер заказа',
             'customer_id' => 'Customer ID',
             'payed' => 'Payed',
             'order_status_id' => 'Order Status ID',
-            'created_at' => 'Created At',
+            'created_at' => 'Дата заказа',
             'updated_at' => 'Updated At',
         ];
     }

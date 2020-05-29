@@ -4,13 +4,11 @@
 namespace backend\controllers;
 
 
-use backend\models\OrderPrint;
 use backend\models\OrderSearch;
-use backend\models\Receipt;
 use common\models\Cart;
 use common\models\Customer;
+use common\models\Order;
 use common\models\OrderStatus;
-use Dompdf\Dompdf;
 use kartik\mpdf\Pdf;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -38,18 +36,10 @@ class OrderController extends Controller
             return $this->redirect(['site/login']);
         }
         $customer = Customer::findOne(['customer_id' => $id]);
-
-        switch ($status)
+        $order = Order::getOrder($id, $status); //получени заказа
+        if ($order)
         {
-            case 'new':
-                $query = Cart::find()->where(['customer_id' => $id, 'order_status_id' => 2]);
-                break;
-            case 'delivered':
-                $query = Cart::find()->where(['customer_id' => $id, 'order_status_id' => 3]);
-                break;
-            case 'done':
-                $query = Cart::find()->where(['customer_id' => $id, 'order_status_id' => 4]);
-                break;
+            $query = Cart::find()->where(['order_id' => $order->order_id]);
         }
 
         $dataProvider = new ActiveDataProvider([
@@ -60,12 +50,8 @@ class OrderController extends Controller
         ]);
         if(!is_null($action))
         {
-            $orders = $query->all();
-            foreach ($orders as $order)
-            {
-                $order->order_status_id = OrderStatus::getStatusIdByTitle($action);
-                $order->save();
-            }
+            $order->order_status_id = OrderStatus::getStatusIdByTitle($action);
+            $order->save();
             return $this->redirect(['order/'.$action]);
         }
         return $this->render('view', compact('customer', 'dataProvider', 'status'));
@@ -101,10 +87,9 @@ class OrderController extends Controller
         {
             return $this->redirect(['site/login']);
         }
-        $customer = Customer::findOne(['customer_id' => $id]);
-        $count = Receipt::find()->count() + 1;
-        $items = Cart::find()->where(['customer_id' => $id, 'order_status_id' => 2])->all();
-        $content = $this->renderPartial('_reportView', compact('customer', 'count', 'items'));
+        $order = Order::getOrder($id, 'new');
+        $items = Cart::find()->where(['order_id' => $order->order_id])->all();
+        $content = $this->renderPartial('_reportView', compact('order', 'items'));
         // setup kartik\mpdf\Pdf component
         $pdf = new Pdf([
             // set to use core fonts only
@@ -127,11 +112,6 @@ class OrderController extends Controller
 
             ]
         ]);
-        $receipt = new Receipt();
-        $receipt->customer = $customer->fio;
-        if ($receipt->save())
-        {
-            return $pdf->render();
-        }
+        return $pdf->render();
     }
 }
