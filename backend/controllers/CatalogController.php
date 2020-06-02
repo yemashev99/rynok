@@ -139,7 +139,7 @@ class CatalogController extends Controller
         return $this->render('create', compact('model', 'category', 'subCategory'));
     }
 
-    public function actionUpdate($id)
+    public function actionUpdate($id, $page = null)
     {
 
         if (Yii::$app->user->isGuest)
@@ -166,7 +166,12 @@ class CatalogController extends Controller
                 {
                     $model->saveImage($model->uploadImage($file));
                 }
-                return $this->redirect(['catalog/index']);
+                if (is_null($page))
+                {
+                    return $this->redirect(['catalog/index']);
+                } else {
+                    return $this->redirect(['catalog/index', 'page' => $page]);
+                }
             }
         }
         return $this->render('update', compact('model', 'category', 'subCategory'));
