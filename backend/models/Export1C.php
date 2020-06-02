@@ -5,6 +5,7 @@ namespace backend\models;
 
 
 use common\models\Cart;
+use common\models\Product;
 use common\models\SubCategory;
 use yii\base\Model;
 
@@ -14,9 +15,9 @@ class Export1C extends Model
     private $file_products = 'export/import.xml';
     private $file_orders = 'export/offers.xml';
 
-    public function export($products, $orders)
+    public function export($products, $orders, $categories)
     {
-        if ($this->createFile($products, $orders))
+        if ($this->createFile($products, $orders, $categories))
         {
             if ($orders)
             {
@@ -33,9 +34,9 @@ class Export1C extends Model
         }
     }
 
-    private function createFile($products, $orders)
+    private function createFile($products, $orders, $categories)
     {
-        $this->writeToFile($this->file_products, $this->createProductText($products));
+        $this->writeToFile($this->file_products, $this->createProductText($products, $categories));
         if (!is_null($orders))
         {
             $this->writeToFile($this->file_orders, $this->createOrderText($orders));
@@ -50,11 +51,48 @@ class Export1C extends Model
         fclose($fp);
     }
 
-    private function createProductText($products)
+    private function createProductText($products, $categories)
     {
         $text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <КоммерческаяИнформация xmlns=\"urn:1C.ru:commerceml_210\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ВерсияСхемы=\"2.08\" ДатаФормирования=\"".date('Y-m-d')."T".date('H:i:s', $this->setTime())."\">
-<Каталог>
+<Классификатор>
+<Ид>e3d2eef6-7a31-4984-ba2b-a92045ae066f</Ид>
+<Наименование>Классификатор (Основной каталог товаров)</Наименование>
+<Владелец>
+<Ид>114a9041-2f82-11e7-91a5-001e8c7b3dfd</Ид>
+<Наименование>ИП Маурер И. В.</Наименование>
+<ИНН>246201145512</ИНН>
+<ПолноеНаименование>ИП Маурер Ирина Викторовна</ПолноеНаименование>
+</Владелец>
+<Группы>";
+        foreach ($categories as $category)
+        {
+            $text.= "<Группа>
+<Ид>".$category->category_id."</Ид>
+<Наименование>".$category->title."</Наименование>
+<Группы>";
+        foreach (SubCategory::getSubCategoryByCategoryId($category->category_id) as $subCategory)
+        {
+            $text.= "<Группа>
+<Ид>".$subCategory->sub_category_id."</Ид>
+<Наименование>".$subCategory->title."</Наименование>
+</Группа>";
+        }
+            $text.= "</Группы>
+</Группа>";
+        }
+        $text.= "</Группы>
+</Классификатор>
+<Каталог СодержитТолькоИзменения=\"false\">
+<Ид>e3d2eef6-7a31-4984-ba2b-a92045ae066f</Ид>
+<ИдКлассификатора>e3d2eef6-7a31-4984-ba2b-a92045ae066f</ИдКлассификатора>
+<Наименование>Основной каталог товаров</Наименование>
+<Владелец>
+<Ид>114a9041-2f82-11e7-91a5-001e8c7b3dfd</Ид>
+<Наименование>ИП Маурер И. В.</Наименование>
+<ИНН>246201145512</ИНН>
+<ПолноеНаименование>ИП Маурер Ирина Викторовна</ПолноеНаименование>
+</Владелец>
 <Товары>
 ";
         foreach ($products as $product)
@@ -68,7 +106,10 @@ class Export1C extends Model
 <Картинка>".$product->image."</Картинка>
 <Цена>".$product->price."</Цена>
 <Величина>".$product->count."</Величина>
-<ЕденицаИзмерения>".$product->measure."</ЕденицаИзмерения>
+<ЕдиницаИзмерения>".$product->measure."</ЕдиницаИзмерения>
+<Группа>
+<Ид>$product->category_id</Ид>
+</Группа>
 </Товар>
 ";
         }
@@ -82,36 +123,61 @@ class Export1C extends Model
     {
         $text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <КоммерческаяИнформация xmlns=\"urn:1C.ru:commerceml_210\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ВерсияСхемы=\"2.08\" ДатаФормирования=\"".date('Y-m-d')."T".date('H:i:s', $this->setTime())."\">
-<ПакетПредложений>
-<Предложения>
 ";
         foreach ($orders as $order)
         {
-            $text.= "<Предложение>
-<Ид>$order->customer_id</Ид>
-<ФИО>".$order->fio."</ФИО>
-<Телефон>".$order->phone."</Телефон>
-<Адрес>".$order->address."</Адрес>
-<ДатаЗаказа>".date('j.m.Y H:i:s', $order->cart->created_at)."</ДатаЗаказа>
+            $text.="<Документ>
+<Ид>".$order->order_id."</Ид>
+<Номер>".$order->order_id."</Номер>
+<Дата>".date('Y-m-d', $order->created_at)."</Дата>
+<ХозОперация>Заказ товара</ХозОперация>
+<Роль>Продавец</Роль>
+<Валюта>руб</Валюта>
+<Курс>1</Курс>
+<Сумма>".Cart::cartPrice($order->customer->customer_id, 'admin', 'new', 'Y')."</Сумма>
+<Контрагенты>
+<Контрагент>
+<Ид>".$order->customer->customer_id."</Ид>
+<Наименование>".$order->customer->fio."</Наименование>
+<ПолноеНаименование>".$order->customer->fio."</ПолноеНаименование>
+<Роль>Покупатель</Роль>
+</Контрагент>
+</Контрагенты>
+<Налоги>
+<Налог>
+<Наименование>НДС</Наименование>
+<УчтеноВСумме>true</УчтеноВСумме>
+<Cумма>0</Cумма>
+</Налог>
+</Налоги>
 <Товары>";
-            foreach ($this->getCartItems($order->customer_id) as $item)
+            foreach (Cart::getCartItems($order->order_id) as $item)
             {
-                $text.= "<Товар>
+                $text.="<Товар>
+<Ид>".$item->cart_id."</Ид>
+<Артикул>".$item->cart_id."</Артикул>
 <Наименование>".$item->product->title."</Наименование>
-<Картинка>".$item->product->image."</Картинка>
-<Комментарий>".$item->comment."</Комментарий>
+<БазоваяЕдиница Наименование=\"".$item->product->measure."\" НаименованиеПолное=\"".Product::getMeasure($item->product->measure)."\" />
+<ЗначенияРеквизитов>
+<ЗначениеРеквизита>
+<Наименование>ВидНоменклатуры</Наименование>
+<Значение>Товар</Значение>
+</ЗначениеРеквизита>
+<ЗначениеРеквизита>
+<Наименование>ТипНоменклатуры</Наименование>
+<Значение>Запас</Значение>
+</ЗначениеРеквизита>
+</ЗначенияРеквизитов>
+<ЦенаЗаЕдиницу>".$item->product->price."</ЦенаЗаЕдиницу>
 <Количество>".$item->quantity."</Количество>
-<Величина>".$item->product->count."</Величина>
-<ЕденицаИзмерения>".$item->product->measure."</ЕденицаИзмерения>
-<Сумма>".$item->product->price * $item->quantity."</Сумма>
+<Сумма>".Cart::cartPrice($order->customer->customer_id, 'admin', 'new', 'Y')."</Сумма>
+<Единица>".$item->product->measure."</Единица>
+<Коэффициент>".$item->product->count."</Коэффициент>
 </Товар>";
             }
-            $text.= "</Товары>
-</Предложение>";
+            $text.="</Товары></Документ>";
         }
-        $text.= "</Предложения>
-</ПакетПредложений>
-</КоммерческаяИнформация>";
+        $text.="</КоммерческаяИнформация>";
         return $text;
     }
 

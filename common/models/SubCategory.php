@@ -114,4 +114,9 @@ class SubCategory extends \yii\db\ActiveRecord
             unlink($image);
         }
     }
+
+    public static function getSubCategoryByCategoryId($categoryId)
+    {
+        return SubCategory::find()->where(['category_id' => $categoryId])->all();
+    }
 }

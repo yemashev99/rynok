@@ -107,4 +107,9 @@ class Order extends \yii\db\ActiveRecord
             return Order::find()->where(['customer_id' => $id, 'payed' => 'N', 'order_status_id' => OrderStatus::getStatusIdByTitle($status)])->one();
         }
     }
+
+    public static function getNewOrders()
+    {
+        return Order::find()->where(['order_status_id' => OrderStatus::getStatusIdByTitle('new')])->all();
+    }
 }

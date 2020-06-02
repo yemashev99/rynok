@@ -167,4 +167,9 @@ class Cart extends \yii\db\ActiveRecord
             ->send();
         return $result;
     }
+
+    public static function getCartItems($order_id)
+    {
+        return $items = Cart::find()->where(['order_id' => $order_id])->all();
+    }
 }
