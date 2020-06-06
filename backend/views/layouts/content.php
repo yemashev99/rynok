@@ -37,7 +37,7 @@ use dmstr\widgets\Alert;
 
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <b>Версия</b> 1.24.1
+        <b>Версия</b> 1.24.2
     </div>
     <strong><?=date('Y')?> &copy;</strong> Республиканский Селькохозяйственный Рынок
 </footer>

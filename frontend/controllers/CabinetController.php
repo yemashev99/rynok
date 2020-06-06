@@ -129,10 +129,10 @@ class CabinetController extends Controller
         {
             return $this->goHome();
         }
+        $order = Order::getOrder(Yii::$app->user->identity->customer_id);
         $cartItem = Cart::findOne([
             'product_id' => $product_id,
-            'customer_id' => Yii::$app->user->identity->customer_id,
-            'order_status_id' => 1
+            'order_id' => $order->order_id
         ]);
         $cartItem->delete();
         return $this->redirect(['cabinet/index']);
@@ -145,10 +145,10 @@ class CabinetController extends Controller
             return $this->goHome();
         }
 
+        $order = Order::getOrder(Yii::$app->user->identity->customer_id);
         $cartItem = Cart::findOne([
             'product_id' => $product_id,
-            'customer_id' => Yii::$app->user->identity->customer_id,
-            'order_status_id' => 1
+            'order_id' => $order->order_id
         ]);
 
         $quantity = $cartItem->quantity;
@@ -175,10 +175,10 @@ class CabinetController extends Controller
             return $this->goHome();
         }
 
+        $order = Order::getOrder(Yii::$app->user->identity->customer_id);
         $cartItem = Cart::findOne([
             'product_id' => $product_id,
-            'customer_id' => Yii::$app->user->identity->customer_id,
-            'order_status_id' => 1
+            'order_id' => $order->order_id
         ]);
 
         $quantity = $cartItem->quantity;
@@ -199,10 +199,10 @@ class CabinetController extends Controller
             return $this->goHome();
         }
 
+        $order = Order::getOrder(Yii::$app->user->identity->customer_id);
         $cartItem = Cart::findOne([
             'product_id' => $product_id,
-            'customer_id' => Yii::$app->user->identity->customer_id,
-            'order_status_id' => 1
+            'order_id' => $order->order_id
         ]);
         $cartItem->comment = $comment;
         $cartItem->save();

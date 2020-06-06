@@ -37,5 +37,9 @@ $this->title = 'Заказы - Клиенты';
                 );
             }
         ],
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{delete}',
+        ],
     ],
 ]); ?>

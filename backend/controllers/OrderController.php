@@ -114,4 +114,15 @@ class OrderController extends Controller
         ]);
         return $pdf->render();
     }
+
+    public function actionDelete($id)
+    {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+        $order = Order::findOne(['order_id' => $id]);
+        $order->delete();
+        return $this->redirect(['order/new']);
+    }
 }
