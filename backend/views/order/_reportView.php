@@ -13,13 +13,13 @@ $i = 1;
                 Дата
             </td>
             <td style="border-bottom: 1px solid black;">
-                <?=date('j.m.Y H:i:s', $customer->cart->created_at)?>
+                <?=date('j.m.Y H:i:s', $order->created_at)?>
             </td>
             <td>
                 <b>Заявка №</b>
             </td>
             <td>
-                <?=$count?>
+                <?=$order->order_id?>
             </td>
         </tr>
     </table>
@@ -80,14 +80,14 @@ $i = 1;
 
             </td>
             <td>
-                <?=Cart::cartPrice($customer->customer_id, 'admin', OrderStatus::getStatusIdByTitle('new'), 'Y')?>
+                <?=Cart::cartPrice($order->customer_id, 'admin', 'new', 'Y')?>
             </td>
         </tr>
     </table>
     <br>
     <table border="0" style="border-bottom: 1px solid black;">
         <tr>
-            <td>Адрес доставки: <?=$customer->address?></td>
+            <td>Адрес доставки: <?=$order->customer->address?></td>
         </tr>
     </table>
 </div>
@@ -101,13 +101,13 @@ $i = 1;
                 Дата
             </td>
             <td style="border-bottom: 1px solid black;">
-                <?=date('j.m.Y H:i:s', $customer->cart->created_at)?>
+                <?=date('j.m.Y H:i:s', $order->created_at)?>
             </td>
             <td>
                 <b>Заявка №</b>
             </td>
             <td>
-                <?=$count?>
+                <?=$order->order_id?>
             </td>
         </tr>
     </table>
@@ -184,7 +184,7 @@ $i = 1;
 
             </td>
             <td>
-                <?=Cart::cartPrice($customer->customer_id, 'admin', OrderStatus::getStatusIdByTitle('new'), 'Y')?>
+                <?=Cart::cartPrice($order->customer_id, 'admin', 'new', 'Y')?>
             </td>
             <td></td>
             <td></td>
@@ -193,7 +193,7 @@ $i = 1;
     <br>
     <table border="0">
         <tr>
-            <td style="border-bottom: 1px solid black;">Адрес доставки: <?=$customer->address?></td>
+            <td style="border-bottom: 1px solid black;">Адрес доставки: <?=$order->customer->address?></td>
             <td style="padding-left: 5%">км</td>
             <td>_______________</td>
         </tr>
@@ -220,13 +220,13 @@ $i = 1;
                 Дата
             </td>
             <td style="border-bottom: 1px solid black;">
-                <?=date('j.m.Y H:i:s', $customer->cart->created_at)?>
+                <?=date('j.m.Y H:i:s', $order->created_at)?>
             </td>
             <td>
                 <b>Заявка №</b>
             </td>
             <td>
-                <?=$count?>
+                <?=$order->order_id?>
             </td>
         </tr>
     </table>
@@ -303,7 +303,7 @@ $i = 1;
 
             </td>
             <td>
-                <?=Cart::cartPrice($customer->customer_id, 'admin', OrderStatus::getStatusIdByTitle('new'), 'Y')?>
+                <?=Cart::cartPrice($order->customer_id, 'admin', 'new', 'Y')?>
             </td>
             <td></td>
             <td></td>
@@ -312,7 +312,7 @@ $i = 1;
     <br>
     <table border="0">
         <tr>
-            <td style="border-bottom: 1px solid black;">Адрес доставки: <?=$customer->address?></td>
+            <td style="border-bottom: 1px solid black;">Адрес доставки: <?=$order->customer->address?></td>
             <td style="padding-left: 5%">км</td>
             <td>_______________</td>
         </tr>

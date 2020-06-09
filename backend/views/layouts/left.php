@@ -4,6 +4,8 @@ use backend\models\OrderSearch;
 use common\models\Callback;
 use common\models\Category;
 use common\models\Menu;
+use common\models\OrderStatus;
+
 $menu = new Menu();
 $items = Category::find()->where(['menu_id' => $menu->getIdByControllerName('about')])->all();
 $arrayUrl[] = Yii::$app->request->pathInfo;
@@ -140,19 +142,19 @@ foreach ($deliveryObjects as $item)
                         'url' => '#',
                         'items' => [
                             [
-                                'label' => 'Новые ('.OrderSearch::orderCount('new').')',
+                                'label' => 'Новые ('.OrderSearch::orderCount(OrderStatus::getStatusIdByTitle('new')).')',
                                 'icon' => 'envelope-open-o',
                                 'url' => ['order/new'],
                                 'active' => $this->context->route == 'order/new',
                             ],
                             [
-                                'label' => 'Отправленные ('.OrderSearch::orderCount('delivered').')',
+                                'label' => 'Отправленные ('.OrderSearch::orderCount(OrderStatus::getStatusIdByTitle('delivered')).')',
                                 'icon' => 'truck',
                                 'url' => ['order/delivered'],
                                 'active' => $this->context->route == 'order/delivered',
                             ],
                             [
-                                'label' => 'Завершенные ('.OrderSearch::orderCount('done').')',
+                                'label' => 'Завершенные ('.OrderSearch::orderCount(OrderStatus::getStatusIdByTitle('done')).')',
                                 'icon' => 'check-square-o',
                                 'url' => ['order/done'],
                                 'active' => $this->context->route == 'order/done',

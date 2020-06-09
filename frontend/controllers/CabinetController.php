@@ -6,6 +6,8 @@ namespace frontend\controllers;
 
 use common\models\Cart;
 use common\models\Customer;
+use common\models\Order;
+use common\models\OrderStatus;
 use frontend\models\Login;
 use frontend\models\Signup;
 use Yii;
@@ -30,21 +32,34 @@ class CabinetController extends Controller
             }
         }
 
-        $cartItems = Cart::find()
-            ->where([
-                'customer_id' => Yii::$app->user->identity->customer_id,
-                'order_status_id' => 1
-            ])
-            ->all();
+        $order = Order::getOrder(Yii::$app->user->identity->customer_id);
+        if ($order) {
+            $cartItems = Cart::find()
+                ->where(['order_id' => $order->order_id])
+                ->all();
+        } else {
+            $cartItems = [];
+        }
+        $ordersInProcessing = Order::getOrder(Yii::$app->user->identity->customer_id, 'new');
+        if ($ordersInProcessing)
+        {
+            $inProcessingCartItems = Cart::find()
+                ->where(['order_id' => $ordersInProcessing->order_id])
+                ->all();
+        } else {
+            $inProcessingCartItems = null;
+        }
+        $ordersDone = Order::getOrder(Yii::$app->user->identity->customer_id, 'done');
+        if ($ordersDone)
+        {
+            $doneCartItems = Cart::find()
+                ->where(['order_id' => $ordersDone->order_id])
+                ->all();
+        } else {
+            $doneCartItems = null;
+        }
 
-        $inProcessingCartItems = Cart::find()
-            ->where([
-                'customer_id' => Yii::$app->user->identity->customer_id,
-                'order_status_id' => 2
-            ])
-            ->all();
-
-        return $this->render('index', compact('customer', 'cartItems', 'cabinet', 'inProcessingCartItems'));
+        return $this->render('index', compact('customer', 'cartItems', 'cabinet', 'inProcessingCartItems', 'doneCartItems'));
     }
 
     public function actionLogout()
@@ -114,10 +129,10 @@ class CabinetController extends Controller
         {
             return $this->goHome();
         }
+        $order = Order::getOrder(Yii::$app->user->identity->customer_id);
         $cartItem = Cart::findOne([
             'product_id' => $product_id,
-            'customer_id' => Yii::$app->user->identity->customer_id,
-            'order_status_id' => 1
+            'order_id' => $order->order_id
         ]);
         $cartItem->delete();
         return $this->redirect(['cabinet/index']);
@@ -130,10 +145,10 @@ class CabinetController extends Controller
             return $this->goHome();
         }
 
+        $order = Order::getOrder(Yii::$app->user->identity->customer_id);
         $cartItem = Cart::findOne([
             'product_id' => $product_id,
-            'customer_id' => Yii::$app->user->identity->customer_id,
-            'order_status_id' => 1
+            'order_id' => $order->order_id
         ]);
 
         $quantity = $cartItem->quantity;
@@ -160,10 +175,10 @@ class CabinetController extends Controller
             return $this->goHome();
         }
 
+        $order = Order::getOrder(Yii::$app->user->identity->customer_id);
         $cartItem = Cart::findOne([
             'product_id' => $product_id,
-            'customer_id' => Yii::$app->user->identity->customer_id,
-            'order_status_id' => 1
+            'order_id' => $order->order_id
         ]);
 
         $quantity = $cartItem->quantity;
@@ -184,10 +199,10 @@ class CabinetController extends Controller
             return $this->goHome();
         }
 
+        $order = Order::getOrder(Yii::$app->user->identity->customer_id);
         $cartItem = Cart::findOne([
             'product_id' => $product_id,
-            'customer_id' => Yii::$app->user->identity->customer_id,
-            'order_status_id' => 1
+            'order_id' => $order->order_id
         ]);
         $cartItem->comment = $comment;
         $cartItem->save();
@@ -210,17 +225,13 @@ class CabinetController extends Controller
             return $this->goHome();
         }
 
-        $items = Cart::find()
-            ->where([
-                'customer_id' => Yii::$app->user->identity->customer_id,
-                'order_status_id' => 1
-            ])
-            ->all();
-
-        foreach ($items as $item)
+        $order = Order::getOrder(Yii::$app->user->identity->customer_id);
+        if ($order)
         {
-            $item->order_status_id = 2;
-            $item->save();
+            $order->order_status_id = OrderStatus::getStatusIdByTitle('new');
+            $order->save();
+        } else {
+            return false;
         }
 
         $model = new Cart();

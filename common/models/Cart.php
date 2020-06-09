@@ -11,16 +11,12 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "cart".
  *
  * @property int $cart_id
- * @property int $customer_id
+ * @property int $order_id
  * @property int $product_id
  * @property int $quantity
  * @property string $comment
- * @property string $payed
- * @property int $created_at
- * @property int $updated_at
- * @property int $order_status_id
  *
- * @property Customer $customer
+ * @property Order $order
  * @property Product $product
  */
 class Cart extends \yii\db\ActiveRecord
@@ -34,28 +30,16 @@ class Cart extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return array
-     */
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-        ];
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['customer_id', 'product_id', 'quantity', 'payed'], 'required'],
-            [['customer_id', 'product_id', 'quantity', 'order_status_id'], 'integer'],
+            [['order_id', 'product_id', 'quantity'], 'required'],
+            [['order_id', 'product_id', 'quantity'], 'integer'],
             [['comment'], 'string', 'max' => 255],
-            [['payed'], 'string', 'max' => 1],
-            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'customer_id']],
+            [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Order::className(), 'targetAttribute' => ['order_id' => 'order_id']],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'product_id']],
-            [['order_status_id'], 'exist', 'skipOnError' => true, 'targetClass' => OrderStatus::className(), 'targetAttribute' => ['order_status_id' => 'order_status_id']],
         ];
     }
 
@@ -66,24 +50,21 @@ class Cart extends \yii\db\ActiveRecord
     {
         return [
             'cart_id' => 'Cart ID',
-            'customer_id' => 'Customer ID',
+            'order_id' => 'Номер заказа',
             'product_id' => 'Product ID',
             'quantity' => 'Количество',
-            'comment' => 'Комментарий',
-            'payed' => 'Payed',
-            'created_at' => 'Создан',
-            'updated_at' => 'Updated At',
+            'comment' => 'Комментарий'
         ];
     }
 
     /**
-     * Gets query for [[Customer]].
+     * Gets query for [[Order]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCustomer()
+    public function getOrder()
     {
-        return $this->hasOne(Customer::className(), ['customer_id' => 'customer_id']);
+        return $this->hasOne(Order::className(), ['order_id' => 'order_id']);
     }
 
     /**
@@ -109,8 +90,12 @@ class Cart extends \yii\db\ActiveRecord
 
     public static function productCount($id)
     {
-        $count = Cart::find()->where(['customer_id' => $id, 'order_status_id' => 1])->count();
-        return $count;
+        $order = Order::getOrder($id);
+        if ($order) {
+            $count = Cart::find()->where(['order_id' => $order->order_id])->count();
+            return $count;
+        }
+        return null;
     }
 
     public static function inCart($id)
@@ -128,26 +113,40 @@ class Cart extends \yii\db\ActiveRecord
     {
         if (is_null($admin))
         {
-            $cartItems = Cart::find()
-                ->where([
-                    'customer_id' => $id,
-                    'order_status_id' => 1
-                ])
-                ->all();
+            $order = Order::getOrder($id);
+            if ($order)
+            {
+                $cartItems = Cart::find()
+                    ->where([
+                        'order_id' => $order->order_id
+                    ])
+                    ->all();
+            } else {
+                $cartItems = null;
+            }
         } else {
-            $cartItems = Cart::find()
-                ->where([
-                    'customer_id' => $id,
-                    'order_status_id' => $status
-                ])
-                ->all();
+            $order = Order::getOrder($id, $status);
+            if ($order)
+            {
+                $cartItems = Cart::find()
+                    ->where([
+                        'order_id' => $order->order_id
+                    ])
+                    ->all();
+            } else {
+                $cartItems = null;
+            }
         }
 
         $total = 0;
-        foreach ($cartItems as $cartItem)
+        if (!is_null($cartItems))
         {
-            $total += $cartItem->quantity * $cartItem->product->price;
+            foreach ($cartItems as $cartItem)
+            {
+                $total += $cartItem->quantity * $cartItem->product->price;
+            }
         }
+
         if (is_null($deliveryPrice))
         {
             $total = number_format($total, 0, '.', ' ');
@@ -169,8 +168,8 @@ class Cart extends \yii\db\ActiveRecord
         return $result;
     }
 
-    public function getOrderStatus()
+    public static function getCartItems($order_id)
     {
-        return $this->hasOne(OrderStatus::className(), ['order_status_id' => 'order_status_id']);
+        return $items = Cart::find()->where(['order_id' => $order_id])->all();
     }
 }

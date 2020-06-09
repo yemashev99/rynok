@@ -6,6 +6,7 @@ namespace frontend\models;
 
 use common\models\Cart;
 use common\models\Customer;
+use common\models\Order;
 use common\models\OrderStatus;
 use common\models\Product;
 use yii\base\Model;
@@ -36,14 +37,40 @@ class CartForm extends Model
 
     public function save()
     {
-        $cart = new Cart();
-        $cart->customer_id = $this->customer_id;
-        $cart->product_id = $this->product_id;
-        $cart->quantity = $this->quantity;
-        $cart->payed = $this->payed;
-        $cart->order_status_id = $this->order_status_id;
-        $cart->comment = $this->comment;
-        return $cart->save();
+        $order_id = $this->getOrder($this->customer_id);
+        if ($order_id)
+        {
+            $cart = new Cart();
+            $cart->order_id = $order_id;
+            $cart->product_id = $this->product_id;
+            $cart->quantity = $this->quantity;
+            $cart->comment = $this->comment;
+            return $cart->save();
+        }
+        return false;
+    }
+
+    private function getOrder($customer_id)
+    {
+        $order = Order::find()
+            ->where(['customer_id' => $customer_id])
+            ->andWhere(['payed' => 'N'])
+            ->andWhere(['order_status_id' => OrderStatus::getStatusIdByTitle('cart')])
+            ->one();
+        if ($order)
+        {
+            return $order->order_id;
+        } else {
+            $model = new Order();
+            $model->customer_id = $this->customer_id;
+            $model->payed = $this->payed;
+            $model->order_status_id = $this->order_status_id;
+            if ($model->save())
+            {
+                return $model->order_id;
+            }
+        }
+        return false;
     }
 
 }

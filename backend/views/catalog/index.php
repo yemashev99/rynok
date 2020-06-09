@@ -150,8 +150,14 @@ $this->title = 'Управление сайтом - Каталог';
         'count',
         'measure',
         [
+            'format' => 'raw',
+            'value' => function($data) {
+                return Html::a('', ['catalog/update', 'id' => $data->product_id,'page' => Yii::$app->request->get('page')], ['class' => 'glyphicon glyphicon-pencil']);
+            }
+        ],
+        [
             'class' => 'yii\grid\ActionColumn',
-            'template' => '{update} {delete}',
+            'template' => '{delete}',
         ],
     ],
 ]); ?>
