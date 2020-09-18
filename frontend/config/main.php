@@ -16,7 +16,7 @@ return [
             'csrfParam' => '_csrf-frontend',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\models\Customer',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
@@ -36,14 +36,40 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.yandex.ru',
+                'username' => 'noreply-rynok19@yandex.ru',
+                'password' => 'Abakan2020',
+                'port' => '465',
+                'encryption' => 'ssl',
+            ],
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '' => 'site/index',
+                'catalog' => 'catalog/index',
+                'catalog/search' => 'catalog/search',
+                'catalog/<category>/<subCategory>/<item>' => 'catalog/view',
+                'catalog/<category>/<subCategory>' => 'catalog/item',
+                'catalog/<category>' => 'catalog/category',
+                'about/news/<news>' => 'about/news-content',
+                'about/manufacturers/<manufacturer>' => 'about/manufacturers-content',
+                'about/gallery/<item>' => 'about/gallery-content',
+                'tenants' => 'tenants/index',
+                'tenants/docs' => 'tenants/docs',
+                'tenants/callback' => 'tenants/callback',
+                'tenants/<tenant>' => 'tenants/content',
+                'contact' => 'contact/index',
+                'holidays/<id>' => 'holidays/content',
+                'holidays' => 'holidays/index',
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

@@ -1,0 +1,67 @@
+.img_wrapper {
+    padding: 2% 0 0 2%;
+}
+#mobile-menu > .menu_opener > .text {
+    background: #5cb85c;
+}
+.treeview-menu > li {
+    padding-left: 30px;
+}
+
+ul.main-list li:before {
+    content:"\2022";
+}
+
+@media (max-width: 470px){
+    .category_catalog_name {
+        margin-top: 8%;
+        margin-left: -8%;
+    }
+    .image_wrapper_block, .image_wrapper_block a {
+        max-width: 170px;
+        min-width: 70px;
+        height: 50px;
+        line-height: 170px;
+        margin: 0 auto;
+        padding: 0;
+        vertical-align: middle;
+        text-align: center;
+        zoom: 1;
+        display: block;
+    }
+    .sort_header.view_block{
+        display: none;
+    }
+    .display_list
+    {
+        margin-top: 0px;
+        padding: 25px 0px 30px;
+    }
+    .catalog_detail .item_main_info {
+        display: block;
+    }
+    .img_wrapper> img{
+        width: 98%;
+        height: 100%;
+    }
+    h1.entry-title {
+        width: 100%;
+        margin-left: -16%;
+    }
+    .col-xs-12 {
+        width: 92%;
+        float: left;
+    }
+    .basket-items-list-item-container>td {
+        padding-bottom: 15px;
+    }
+    .basket-item-info-name-link > span {
+        font-size: 13px;
+    }
+    .basket-item-price-current-text {
+        font: 400 15px/24px "Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+    .basket-item-amount-filed-block {
+        width: 50%;
+    }
+}

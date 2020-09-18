@@ -1,11 +1,12 @@
 <?php
 namespace backend\controllers;
 
+use backend\models\Login;
+use common\models\Menu;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use common\models\LoginForm;
+use backend\models\Signup;
 
 /**
  * Site controller
@@ -13,88 +14,67 @@ use common\models\LoginForm;
 class SiteController extends Controller
 {
     /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout', 'index'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-        ];
-    }
-
-    /**
      * Displays homepage.
      *
      * @return string
      */
     public function actionIndex()
     {
+
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['site/login']);
+        }
+
         return $this->render('index');
     }
 
-    /**
-     * Login action.
-     *
-     * @return string
-     */
-    public function actionLogin()
+    public function actionLogout()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            $model->password = '';
-
-            return $this->render('login', [
-                'model' => $model,
-            ]);
+        if (!Yii::$app->user->isGuest)
+        {
+            Yii::$app->user->logout();
+            return $this->redirect(['site/login']);
         }
     }
 
-    /**
-     * Logout action.
-     *
-     * @return string
-     */
-    public function actionLogout()
+    public function actionSignup()
     {
-        Yii::$app->user->logout();
+        $model = new Signup();
 
-        return $this->goHome();
+        if (Yii::$app->request->post())
+        {
+            $model->attributes = Yii::$app->request->post('Signup');
+
+            if ($model->validate() && $model->signup())
+            {
+                return $this->redirect(['user/index']);
+            }
+        }
+
+        return $this->render('signup', compact('model'));
+    }
+
+    public function actionLogin()
+    {
+        if (!Yii::$app->user->isGuest)
+        {
+            return $this->goHome();
+        }
+
+        $login_model = new Login();
+
+        if (Yii::$app->request->post())
+        {
+            $login_model->attributes = Yii::$app->request->post('Login');
+
+            if($login_model->validate())
+            {
+                Yii::$app->user->login($login_model->getUser());
+                return $this->goHome();
+            }
+        }
+
+        return $this->render('login', compact('login_model'));
     }
 }
