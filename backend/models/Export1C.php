@@ -170,7 +170,7 @@ class Export1C extends Model
 </ЗначенияРеквизитов>
 <ЦенаЗаЕдиницу>".$item->product->price."</ЦенаЗаЕдиницу>
 <Количество>".$item->quantity."</Количество>
-<Сумма>".Cart::cartPrice($order->customer->customer_id, 'admin', 'new', 'Y')."</Сумма>
+<Сумма>".$item->quantity * $item->product->price."</Сумма>
 <Единица>".$item->product->measure."</Единица>
 <Коэффициент>".$item->product->count."</Коэффициент>
 </Товар>";

@@ -48,7 +48,7 @@ $i = 1;
                     <?=$item->product->title ?>
                 </td>
                 <td>
-                    <?=$item->quantity?> <?=$item->product->measure?>
+                    <?=$item->quantity * $item->product->count?> <?=$item->product->measure?>
                 </td>
                 <td>
                     <?=$item->product->price * $item->quantity?>
@@ -148,7 +148,7 @@ $i = 1;
                     <?=$item->product->title ?>
                 </td>
                 <td>
-                    <?=$item->quantity?> <?=$item->product->measure?>
+                    <?=$item->quantity * $item->product->count?> <?=$item->product->measure?>
                 </td>
                 <td>
                     <?=$item->product->price * $item->quantity?>
@@ -267,7 +267,7 @@ $i = 1;
                     <?=$item->product->title ?>
                 </td>
                 <td>
-                    <?=$item->quantity?> <?=$item->product->measure?>
+                    <?=$item->quantity * $item->product->count?> <?=$item->product->measure?>
                 </td>
                 <td>
                     <?=$item->product->price * $item->quantity?>
